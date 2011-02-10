@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" ?>
+<document>
+	<properties>
+		<title>Plugin Quicklinks</title>
+	</properties>
+	<body>
+		<section name="Création d'un Quicklinks">
+			<p>Le plugin Quicklinks fournit une interface back office
+				permettant de gérer la liste des Quicklinks disponibles sur le site.
+				La fonctionnalité d'administration des Quicklinks se nomme "Gestion
+				des Quicklinks".</p>
+			<p>
+				Dans la page de gestion des Quicklinks, cliquer sur le bouton "Créer
+				un Quicklinks" (attention, il faut disposer des droits nécessaires,
+				voir le chapitre
+				<a href="#Back_office">Accès back office</a>
+				). Un formulaire de saisie apparait, indiquant les champs génériques
+				du Quicklinks :
+				<ul>
+					<li>Titre : le titre du Quicklinks</li>
+					<li>Type : Include (PageInclude) ou Rubrique (Portlet)</li>
+					<li>Groupe de travail : Restreint la vue du Quicklinks (back
+						office) aux seuls utilisateurs inscrits au groupe de travail
+						spécifié</li>
+					<li>Rôle : Restreint la vue du Quicklinks (front office) aux
+						seuls utilisateurs inscrits au rôle spécifié</li>
+					<li>
+						Style CSS : permet de préciser le style CSS à utiliser pour ce
+						Quicklinks.
+						<br />
+						Par défaut trois styles sont disponibles :
+						<ul>
+							<li><em>quicklinks</em> (liste verticale simple)</li>
+							<li><em>sf-menu</em> (menu jQuery Superfish horizontal)</li>
+							<li><em>sf-menu sf-vertical</em> (menu jQuery Superfish vertical)
+							</li>
+						</ul>
+					</li>
+					<li>État : activé (publié sur le site) ou désactivé.</li>
+				</ul>
+				<center>
+					<a href="user/images/create_quicklinks_fr.png" title="Création d'un Quicklinks">
+						<img alt="Création d'un Quicklinks" src="user/images/create_quicklinks_fr_small.png" />
+					</a>
+				</center>
+			</p>
+			<subsection name="Les types de Quicklinks">
+				<p>
+					On distingue deux types d'affichage d'un Quicklinks sur le site :
+					l'affichage par rubrique (ou portlet) et par PageInclude. Un
+					Quicklinks ne peut pas simultanément être affiché dans une rubrique
+					et en PageInclude :
+					<ul>
+						<li>L'affichage par Rubrique : Une rubrique (ou
+							portlet) correspond à un bloc de page. Elle peut être insérée
+							dans une page du site avec l'interface d'"administration du
+							site". Un Quicklinks de type Rubrique peut être affiché 0 ou n
+							fois dans chaque page et sur plusieurs pages.</li>
+						<li>L'affichage par PageInclude : Un "PageInclude" est
+							référencé par un markeur insérable dans les templates de
+							structure du coeur.</li>
+					</ul>
+				</p>
+			</subsection>
+		</section>
+		<section name="Ajout d'un attribut">
+			<p>
+				Un Quicklinks peut comporter un nombre indéfinit d'attributs. Les
+				attributs sont organisés sous la forme d'une arborescence (la
+				profondeur de l'arbre n'est pas limitée).
+				<center>
+					<a href="user/images/attributes_list_fr.png" title="Liste d'attributs">
+						<img alt="Liste d'attributs" src="user/images/attributes_list_fr_small.png" />
+					</a>
+				</center>
+			</p>
+			<p>L'ajout d'un attribut s'effectue dans la page de
+				modification d'un Quicklinks. Choisir le type d'attribut souhaité et
+				cliquer sur "Ajouter".</p>
+			<p>
+				Différentes actions sont disponibles pour chaque attribut :
+				<ul>
+					<li>Remonter l'attribut</li>
+					<li>Descendre l'attribut</li>
+					<li>Déplacer l'attribut dans l'attribut suivant</li>
+					<li>Sortir l'attribut de son attribut parent</li>
+					<li>Dupliquer l'attribut (et ses sous-attributs)</li>
+					<li>Supprimer l'attribut</li>
+				</ul>
+			</p>
+			<p>Les différents types d'attributs sont listés ci-dessous.</p>
+			<subsection name="Texte">
+				<p>
+					L'attribut de type Texte offre la possibilité au webmestre
+					d'insérer du texte riche à l'aide de l'éditeur WYSIWYG du back
+					office.
+					<center>
+						<a href="user/images/create_entry_text_fr.png" title="Création d'un attribut de type Texte">
+							<img alt="Création d'un attribut de type Texte" src="user/images/create_entry_text_fr_small.png" />
+						</a>
+					</center>
+				</p>
+			</subsection>
+			<subsection name="Lien">
+				<p>
+					L'attribut de type Lien offre la possibilité au webmestre d'insérer
+					un lien dont l'affichage peut être personnalisé.
+					<ul>
+						<li>Libellé : texte du lien</li>
+						<li>Description : attribut "title" du lien</li>
+						<li>Url : url du lien. Attention, la validité de l'url n'est
+							pas validée</li>
+						<li>Image : image à lier au lien</li>
+						<li>
+							Propriété d'affichage
+							<ul>
+								<li>Lien simple : seul le lien au format texte est affiché
+								</li>
+								<li>Lien + image : l'image suivie du texte est affichée</li>
+								<li>Image seule : seule l'image est affichée</li>
+							</ul>
+						</li>
+						<li>
+							Attributs du lien
+							<ul>
+								<li>Lien sur image et texte : le texte et l'image sont
+									cliquable</li>
+								<li>Lien sur texte : le texte est cliquable</li>
+								<li>Lien sur image : l'image est cliquable</li>
+							</ul>
+						</li>
+					</ul>
+					<center>
+						<a href="user/images/create_entry_link_fr.png" title="Création d'un attribut de type Lien">
+							<img alt="Création d'un attribut de type Lien" src="user/images/create_entry_link_fr_small.png" />
+						</a>
+					</center>
+				</p>
+			</subsection>
+			<subsection name="Liste de sélection">
+				<p>
+					L'attribut de type Liste de sélection offre la possibilité au
+					webmestre d'insérer une liste déroulante ("select") dont
+					l'affichage peut être personnalisé. L'interface de gestion des
+					listes de sélection propose la saisie du titre de l'attribut, puis
+					l'ajout successif des options (couple "titre/url"). Au niveau du
+					site, l'affichage de cet attribut se fera sous la forme d'un champ
+					select ("listbox") dont un clic sur une option chargera l'url
+					correspondante.
+					<center>
+						<a href="user/images/create_entry_select_fr.png" title="Création d'un attribut de type Select">
+							<img alt="Création d'un attribut de type Select" src="user/images/create_entry_select_fr_small.png" />
+						</a>
+					</center>
+				</p>
+			</subsection>
+			<subsection name="Lien interne">
+				<p>
+					L'attribut de type Lien interne offre la possibilité au webmestre
+					d'insérer un lien interne au site (un lien relatif le plus
+					souvent). Ce lien est généré grace au mécanisme d'InsertService.
+					L'attribut est constitué d'un champ "Titre" et d'un champ
+					"Contenu". Le champ "Contenu", par défaut en lecture seule est
+					renseigné via l'InsertService. Un bouton "Prévisualisation" affiche
+					le contenu HTML généré.
+					<center>
+						<a href="user/images/create_entry_internal_link_fr.png" title="Création d'un attribut de type Lien interne">
+							<img alt="Création d'un attribut de type Lien interne"
+								src="user/images/create_entry_internal_link_fr_small.png" />
+						</a>
+					</center>
+				</p>
+			</subsection>
+		</section>
+		<section name="Ajout du Quicklinks sur le site">
+			<p>Un Quicklinks peut être affiché de différentes manières. Deux
+				types d'affichage sont disponible : l'affichage sous la forme d'une
+				rubrique et celui avec un PageInclude.</p>
+			<subsection name="Rubrique de type Quicklinks">
+				<p>Le plugin Quicklinks fournit un type de portlet appellé
+					"Quicklinks". Il permet d'afficher un portlet de ce type sur
+					n'importe quelle page standard du site. La seule configuration
+					spécifique à ce type de portlet est le choix du Quicklinks. La
+					création d'un portlet Quicklinks ne présente pas de différence avec
+					les autres types de portlet. La gestion des portlets dans les pages
+					s'effectue dans l'interface d'administration du site.</p>
+			</subsection>
+			<subsection name="PageInclude">
+				<p>
+					Le PageInclude "Quicklinks" fournit, pour chaque Quicklinks de type
+					"Include" un markeur Freemarker à insérer dans les templates du
+					site :
+					<ul>
+						<li>page_frameset.html</li>
+						<li>page_header_home.html</li>
+						<li>page_header_internal.html</li>
+						<li>page_footer.html</li>
+						<li>...</li>
+					</ul>
+				</p>
+				<p>
+					Exemple d'insertion du markeur "quicklinks_1" correspondant au
+					Quicklinks d'identifiant 1 dans page_frameset.html :
+					<source>&#60;body onload=&#34;setHover( &#39;menu-main&#39; );&#34;&#62;
+	${page_header}
+	${page_main_menu}
+	&#60;hr /&#62;
+	&#60;div id=&#34;page&#34;&#62;
+		${page_path}
+		&#60;div id=&#34;Quicklinks&#34;&#62;
+			${quicklinks_1?default(&#34;&#60;!-- No Quicklinks 1--&#62;&#34;)}
+		&#60;/div&#62;
+		${page_content}
+	&#60;/div&#62;
+	&#60;div style=&#34;clear: both;&#34;&#62;&#160;&#60;/div&#62;
+	${page_footer}
+	${statistical_include}
+&#60;/body&#62;
+					</source>
+					Lorsque un Quicklinks de type PageInclude est créé, le nom du
+					markeur est disponible dans l'interface de gestion des Quicklinks.
+					Il reste au webmestre à ajouter le markeur dans la template
+					souhaitée. Le nom du markeur est constitué d'un préfixe
+					(personnalisable dans Quicklinks.properties) et d'un suffixe
+					correspondant à l'identifiant du Quicklinks (exemple
+					${quicklinks_3}, préfixe = "quicklinks_", identifiant = 3).
+				</p>
+			</subsection>
+		</section>
+		<section name="Accès">
+			<p>L'accès au plugin est soumit à restriction, aussi bien sur
+				le site que dans le back office.</p>
+			<subsection name="Site">
+				<p>Chaque Quicklinks peut se voir attribuer un Rôle Lutèce,
+					permettant de le restreindre aux seuls utilisateurs ayant accès à
+					ce rôle. Si le Quicklinks est de type Rubrique, l'utilisateur
+					n'ayant pas accès au rôle verra un portlet vide. Si le Quicklinks
+					est de type "Include", l'include sera vide, le quicklinks ne
+					s'affichera donc pas.</p>
+			</subsection>
+			<subsection name="Back office">
+				<p>L'interface d'administration des quicklinks est soumis
+					à resctriction d'accès. Le gestionnaire doit avoir le droit
+					"Gestion des Quicklinks" dans sa liste de droits.</p>
+				<p>La liste des quicklinks peut être restreinte par groupe de
+					travail. Le gestionnaire connecté ne verra que les quicklinks non
+					liés à un groupe de travail ou ceux qui correspondent aux groupes
+					de travail auxquel il est inscrit.</p>
+				<p>
+					Par ailleurs, chaque action sur un quicklinks peut être controlée
+					grâce aux Rôles. La liste des actions sur un quicklinks est
+					disponible ci-dessous :
+					<ul>
+						<li>CREATE (création d'un quicklinks)</li>
+						<li>DELETE (suppression d'un quicklinks)</li>
+						<li>MODIFY (modification d'un quicklinks)</li>
+						<li>COPY (duplication d'un quicklinks)</li>
+						<li>CHANGE_STATE (changement d'état d'un quiklinks)
+						</li>
+					</ul>
+				</p>
+			</subsection>
+		</section>
+	</body>
+</document>

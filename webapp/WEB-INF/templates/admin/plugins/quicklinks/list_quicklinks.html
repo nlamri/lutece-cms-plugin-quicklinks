@@ -1,0 +1,8 @@
+ <p>
+  <label for="quicklinks_id">#i18n{quicklinks.list_quicklinks.labelQuicklinks} * :</label>
+  <#if quicklinks_id?has_content>
+     <@combo name="quicklinks_id"  items=quicklinks_list default_value="${quicklinks_id}"/>
+  <#else>
+   	  <@combo name="quicklinks_id"  items=quicklinks_list default_value=-1 />
+   </#if>
+ </p>  	  

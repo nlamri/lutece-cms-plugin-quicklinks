@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project>
+	<version />
+	<body>
+		<links>
+			<item name="EN" href="../index.html" />
+		</links>
+		<menu name="Aperçu">
+			<item name="Introduction" href="index.html" />
+			<item name="Installation" href="install.html" />
+		</menu>
+		<menu name="Manuels">
+			<item name="Documentation utilisateur" href="usage.html" />
+		</menu>
+		<menu name="Téléchargements" inherit="bottom">
+			<item name="Versions stables" href="../../../stable_builds/plugins/plugin-quicklinks/" />
+			<item name="Nightly builds" href="../../../nightly_builds/plugins/plugin-quicklinks/" />
+		</menu>
+		<menu ref="reports" />
+	</body>
+</project>

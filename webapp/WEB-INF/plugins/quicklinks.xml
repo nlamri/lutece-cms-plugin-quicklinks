@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?><plug-in>
+
+    <!-- Plugin Informations -->
+    <name>quicklinks</name>
+    <class>fr.paris.lutece.plugins.quicklinks.service.QuicklinksPlugin</class>
+    <version>2.1.3</version>
+    <description>quicklinks.plugin.description</description>
+    <documentation/>
+    <installation/>
+    <changes/>
+    <user-guide/>
+    <provider>quicklinks.plugin.provider</provider>
+    <provider-url>http://lutece.paris.fr</provider-url>
+    <icon-url>images/admin/skin/plugins/quicklinks/quicklinks.png</icon-url>
+    <copyright>Copyright 2001-2009 Mairie de Paris</copyright>
+    <core-version-dependency>
+		<min-core-version>2.3.1</min-core-version>
+		<max-core-version/>	
+    </core-version-dependency>
+    <db-pool-required>1</db-pool-required>
+
+    <!--  Specific plugin CSS stylesheet   --> 
+    <css-stylesheets>
+          <css-stylesheet>quicklinks/quicklinks.css</css-stylesheet>
+          <css-stylesheet>quicklinks/superfish/superfish.css</css-stylesheet>
+          <css-stylesheet>quicklinks/superfish/superfish-vertical.css</css-stylesheet>
+    </css-stylesheets>
+    
+    <javascript-files>
+          <javascript-file>quicklinks/superfish/hoverIntent.js</javascript-file>
+          <javascript-file>quicklinks/superfish/superfish.js</javascript-file>
+          <javascript-file>quicklinks/superfish/supersubs.js</javascript-file>
+    </javascript-files>
+    
+    <!-- Page Include Service -->
+    <page-include-services>
+        <page-include-service>
+            <page-include-service-id>quicklinks.include.service.name</page-include-service-id>
+            <page-include-service-class>fr.paris.lutece.plugins.quicklinks.web.QuicklinksInclude</page-include-service-class>
+        </page-include-service>
+    </page-include-services>
+    
+    <!-- RBAC Resources -->
+    <rbac-resource-types>
+		<rbac-resource-type>
+			<rbac-resource-type-class>
+				fr.paris.lutece.plugins.quicklinks.service.QuicklinksResourceIdService
+			</rbac-resource-type-class>
+		</rbac-resource-type>
+	</rbac-resource-types>
+
+    <!-- Administration interface parameters -->
+    <admin-features>
+        <admin-feature>
+            <feature-id>QUICKLINKS_MANAGEMENT</feature-id>
+            <feature-title>quicklinks.adminFeature.quicklinks_management.name</feature-title>
+            <feature-description>quicklinks.adminFeature.quicklinks_management.description</feature-description>
+            <feature-level>2</feature-level>
+            <feature-url>jsp/admin/plugins/quicklinks/ManageQuicklinks.jsp</feature-url>
+        </admin-feature>
+    </admin-features>
+    
+    <portlets>
+     <portlet>
+       <portlet-class>fr.paris.lutece.plugins.quicklinks.business.portlet.QuicklinksPortletHome</portlet-class>
+	   <portlet-type-id>QUICKLINKS_PORTLET</portlet-type-id>
+       <portlet-type-name>quicklinks.portlet.name</portlet-type-name>
+       <portlet-creation-url>plugins/quicklinks/CreateQuicklinksPortlet.jsp</portlet-creation-url>
+       <portlet-update-url>plugins/quicklinks/ModifyQuicklinksPortlet.jsp</portlet-update-url>
+	   <portlet-create-action-url>plugins/quicklinks/DoCreateQuicklinksPortlet.jsp</portlet-create-action-url>
+       <portlet-modify-action-url>plugins/quicklinks/DoModifyQuicklinksPortlet.jsp</portlet-modify-action-url>
+       
+       <!-- optional entries -->
+       <portlet-create-script-template/>
+       <portlet-modify-script-template/>
+       <portlet-create-specific-template>/admin/plugins/quicklinks/list_quicklinks.html</portlet-create-specific-template>
+       <portlet-modify-specific-template>/admin/plugins/quicklinks/list_quicklinks.html</portlet-modify-specific-template>
+       <portlet-create-specific-form-template/>
+       <portlet-modify-specific-form-template/>
+     </portlet>
+   </portlets>	
+</plug-in>

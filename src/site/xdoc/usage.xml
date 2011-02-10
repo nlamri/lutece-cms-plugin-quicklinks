@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" ?>
+<document>
+	<properties>
+		<title>Plugin Quicklinks</title>
+	</properties>
+	<body>
+		<section name="Create a Quicklinks">
+			<p>Quicklinks plugin provides an back office interface to
+				manage the list of Quicklinks available on the site. The
+				administration feature of plugin Quicklinks called "Management of
+				Quicklinks".</p>
+			<p>
+				In the Quicklinks management page, click on "Create Quicklinks"
+				(warning, you must have the necessary rights, see
+				<a href="#Back_office">Back office access</a>
+				). An entry form appears, indicating the fields of generic
+				Quicklinks :
+				<ul>
+					<li>Title: The title of Quicklinks</li>
+					<li>Type: Include (PageInclude) or Portlet</li>
+					<li>Workgroup : Restricted view of Quicklinks (back
+						office) only to users registered with the specified workgroup</li>
+					<li>Role : Restricted view of Quicklinks (front office) only to
+						registered users with the specified role</li>
+					<li>
+						CSS Style : You can specify the CSS style to use for this
+						Quicklinks.
+						<br />
+						By default, three styles are available :
+						<ul>
+							<li>
+								<em>quicklinks</em>
+								(simple vertical list)
+							</li>
+							<li>
+								<em>sf-menu</em>
+								(jQuery Superfish horizontal menu)
+							</li>
+							<li>
+								<em>sf-menu sf-vertical</em>
+								(jQuery Superfish vertical menu)
+							</li>
+						</ul>
+					</li>
+					<li>State : enabled (published on the web site) or disabled.
+					</li>
+				</ul>
+				<center>
+					<a href="user/images/create_quicklinks_en.png" title="Create a Quicklinks">
+						<img alt="Create a Quicklinks" src="user/images/create_quicklinks_en_small.png" />
+					</a>
+				</center>
+			</p>
+			<subsection name="Quicklinks types">
+				<p>
+					There are two quicklinks display modes : the portlet display and
+					PageInclude display. A quicklinks cannot simultaneously be
+					displayed in a portlet and PageInclude:
+					<ul>
+						<li>The display by portlet : A portlet is a part of a page. It
+							can be inserted into a web page with the "Site administration"
+							interface. A quicklinks portlet can be displayed 0 or n times for
+							each page and on several pages.</li>
+						<li>The display by PageInclude: A "PageInclude" is referenced
+							by a Freemarker marker Insertable in the structure templates of
+							Lutece core.</li>
+					</ul>
+				</p>
+			</subsection>
+		</section>
+		<section name="Add an attribute">
+			<p>
+				A quicklinks can have an indefinite number of attributes. Attributes
+				are organized as a tree (the depth of the tree is not limited).
+				<center>
+					<a href="user/images/attributes_list_en.png" title="Attributes list">
+						<img alt="Attributes list" src="user/images/attributes_list_en_small.png" />
+					</a>
+				</center>
+			</p>
+			<p>Adding an attribute occurs in the Quicklinks modification
+				page. Choosing the type of attribute you want and click on "Add"
+				button.</p>
+			<p>
+				Various actions are available for each attribute :
+				<ul>
+					<li>Up attribute</li>
+					<li>down attribute</li>
+					<li>Move attribute in the following attribute</li>
+					<li>Remove the attribute of its parent attribute</li>
+					<li>Duplicate attribute (and its sub-attributes)</li>
+					<li>Delete attribute</li>
+				</ul>
+			</p>
+			<p>The different types of attributes are listed below.</p>
+			<subsection name="Text">
+				<p>
+					The text attribute type offers the webmaster to insert rich text
+					using the back office WYSIWYG editor.
+					<center>
+						<a href="user/images/create_entry_text_en.png" title="Create a text attribute type">
+							<img alt="Create a text attribute type" src="user/images/create_entry_text_en_small.png" />
+						</a>
+					</center>
+				</p>
+			</subsection>
+			<subsection name="Link">
+				<p>
+					The Link attribute type offers the webmaster to insert a link whose
+					display can be customized.
+					<ul>
+						<li>Label : text link</li>
+						<li>Description: attribute "title" of link</li>
+						<li>URL: URL of the link. Warning, the validity of the URL is
+							not validated</li>
+						<li>Image: picture of the link</li>
+						<li>
+							Display Properties
+							<ul>
+								<li>Simple link: only the text link is displayed</li>
+								<li>Link + image: the image followed by the text is
+									displayed</li>
+								<li>Single image: only the image is displayed</li>
+							</ul>
+						</li>
+						<li>
+							Attributes link
+							<ul>
+								<li>Link to image and text: the text and images are
+									clickable</li>
+								<li>Link to text: the text is clickable</li>
+								<li>Link to image: the image is clickable</li>
+							</ul>
+						</li>
+					</ul>
+					<center>
+						<a href="user/images/create_entry_link_en.png" title="Create a link attribute type">
+							<img alt="Create a link attribute type" src="user/images/create_entry_link_en_small.png" />
+						</a>
+					</center>
+				</p>
+			</subsection>
+			<subsection name="Select box">
+				<p>
+					The select box attribute type offers the webmaster to insert a
+					drop-down list ( "select") whose display can be customized. The
+					interface The management interface lists a selection of capturing
+					the title attribute, then adding successive options (couple "title
+					/ url"). On the site, showing this attribute will be displayed as a
+					select field ( "ListBox") with a click on an option load the URL.
+					<center>
+						<a href="user/images/create_entry_select_en.png" title="Create a select attribute type">
+							<img alt="Create a select attribute type" src="user/images/create_entry_select_en_small.png" />
+						</a>
+					</center>
+				</p>
+			</subsection>
+			<subsection name="Internal link">
+				<p>
+					The Internal Link attribute type offers the possibility to
+					WebMaster to inserting an internal link to the site (a relative
+					link). This link is generated through the mechanism of
+					InsertService. The attribute consists of a field "Title" and a
+					field "Content". The "Content" is read-only and filled via the
+					InsertService. A "Preview" button displays HTML generated content.
+					<center>
+						<a href="user/images/create_entry_internal_link_en.png" title="Create a text attribute type">
+							<img alt="Create a text attribute type"
+								src="user/images/create_entry_internal_link_en_small.png" />
+						</a>
+					</center>
+				</p>
+			</subsection>
+		</section>
+		<section name="Add a quicklinks on the site">
+			<p> A quicklinks can be displayed in different ways. Two display
+				modes are available : the display in a portlet and with a
+				PageInclude.</p>
+			<subsection name="Quicklinks portlet">
+				<p>Quicklinks plugin provides a type of portlet called
+					"Quicklinks". Quicklinks portlet types can be displayed on any
+					standard page of the site. The only specific configuration for this
+					type of portlet is the choice of quicklinks. The creation of a
+					portlet Quicklinks did not differ with other types of portlet. The
+					management portlets in the pages is done in the site administration
+					feature.</p>
+			</subsection>
+			<subsection name="PageInclude">
+				<p>
+					The quicklinks "PageInclude" provides for each type quicklinks
+					"Include" a Freemarker marker to insert it into templates site :
+					<ul>
+						<li>page_frameset.html</li>
+						<li>page_header_home.html</li>
+						<li>page_header_internal.html</li>
+						<li>page_footer.html</li>
+						<li>...</li>
+					</ul>
+				</p>
+				<p>
+					Example insertion of markeur "quicklinks_1" corresponds to
+					Quicklinks identifier number 1 in page_frameset.html:
+					<source>&#60;body onload=&#34;setHover( &#39;menu-main&#39; );&#34;&#62;
+	${page_header}
+	${page_main_menu}
+	&#60;hr /&#62;
+	&#60;div id=&#34;page&#34;&#62;
+		${page_path}
+		&#60;div id=&#34;Quicklinks&#34;&#62;
+			${quicklinks_1?default(&#34;&#60;!-- No Quicklinks 1--&#62;&#34;)}
+		&#60;/div&#62;
+		${page_content}
+	&#60;/div&#62;
+	&#60;div style=&#34;clear: both;&#34;&#62;&#160;&#60;/div&#62;
+	${page_footer}
+	${statistical_include}
+&#60;/body&#62;
+					</source>
+					When a type Quicklinks PageInclude is created, the marker name is
+					available in the Quicklinks management interface. It remains to the
+					webmaster to add the marker in the desired template. The marker
+					name consists of a prefix (customizable in quicklinks.properties)
+					and a suffix corresponding to the quicklinks identifier (example :
+					${quicklinks_3}, prefix = "quicklinks_", ID = 3).
+				</p>
+			</subsection>
+		</section>
+		<section name="Access">
+			<p>Access to the plugin is restricted on the web site and in
+				the back office.</p>
+			<subsection name="Web site">
+				<p>Each quicklinks can be given a Lutece role, to restrict
+					access only to authorized users linked with this role. If the type
+					is Quicklinks portlet, users without access to a portlet role will
+					empty. If the quicklinks type is "Include", the include will be
+					empty, the quicklinks will not appear.</p>
+			</subsection>
+			<subsection name="Back office">
+				<p>The quicklinks administration interface is subject to
+					resctriction access. The manager must have the right "management
+					Quicklinks" in its list of rights.</p>
+				<p>The quicklinks list may be restricted by workgroup. The
+					manager will see Quicklinks that not related to a workgroup or
+					those in relation with its workgroups.</p>
+				<p>
+					In addition, each actions on a Quicklinks can be controlled through
+					roles. The list of actions on a Quicklinks is available below :
+					<ul>
+						<li>CREATE (quicklinks creation)</li>
+						<li>DELETE (quicklinks deletion)</li>
+						<li>MODIFY (quicklinks modification)</li>
+						<li>COPY (quicklinks copy)</li>
+						<li>CHANGE_STATE (quiklinks state change)</li>
+					</ul>
+				</p>
+			</subsection>
+		</section>
+	</body>
+</document>

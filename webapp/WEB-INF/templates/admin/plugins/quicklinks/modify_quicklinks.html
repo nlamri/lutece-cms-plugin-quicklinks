@@ -1,0 +1,111 @@
+<#include "macro_quicklinks.html" />
+
+<div class="content-box" >
+<h2>#i18n{quicklinks.modify_quicklinks.adminTitle}</h2>
+<form method="post" action="jsp/admin/plugins/quicklinks/DoModifyQuicklinks.jsp">
+	<p>
+		<input type="hidden" name="quicklinks_id" value="${quicklinks.id}" />
+        <p>
+       		<label for="title">#i18n{quicklinks.modify_quicklinks.labelTitle} * :</label>
+            <input type="text" name="title" id="title" tabindex="1" size="50" maxlength="255" value="${quicklinks.title}"/>
+            <br />
+            <label>&nbsp;</label>#i18n{quicklinks.modify_quicklinks.descriptionTitle}
+        </p>
+        <p>
+       		<label for="type">#i18n{quicklinks.modify_quicklinks.labelType} * :</label>
+            <@combo name="type" default_value="${quicklinks.type.value}" items=type_list />
+            <br />
+            <label>&nbsp;</label>#i18n{quicklinks.modify_quicklinks.descriptionType}
+        </p>
+		<p>
+            <label for="workgroup_key">#i18n{quicklinks.modify_quicklinks.labelWorkgroupKey} * :</label>
+			<@combo name="workgroup_key" default_value="${quicklinks.workgroup}" items=workgroup_key_list />
+			<br />
+			<label>&nbsp;</label>#i18n{quicklinks.modify_quicklinks.descriptionWorkgroupKey}
+		</p>
+		<p>
+            <label for="role_key">#i18n{quicklinks.modify_quicklinks.labelRoleKey} * :</label>
+			<@combo name="role_key" default_value="${quicklinks.roleKey}" items=role_key_list />
+			<br />
+			<label>&nbsp;</label>#i18n{quicklinks.modify_quicklinks.descriptionRoleKey}
+		</p>
+        <p>
+       		<label for="css_style">#i18n{quicklinks.modify_quicklinks.labelCssStyle} :</label>
+            <input type="text" name="css_style" id="css_style" tabindex="5" size="50" maxlength="50" value="${quicklinks.cssStyle?if_exists}"/>
+            <br />
+            <label>&nbsp;</label>#i18n{quicklinks.modify_quicklinks.descriptionCssStyle}
+        </p>
+		<p>
+            <label for="state">#i18n{quicklinks.modify_quicklinks.labelState} * :</label>
+			<@combo name="state" default_value="${quicklinks.enabled?string}" items=state_list />
+			<br />
+			<label>&nbsp;</label>#i18n{quicklinks.modify_quicklinks.descriptionState}
+		</p>
+		<p>
+			<input type="submit" value="#i18n{quicklinks.modify_quicklinks.buttonLabelModify}" tabindex="10" class="button" name="modify" />
+			<input type="submit" value="#i18n{quicklinks.modify_quicklinks.buttonLabelApply}" tabindex="10" class="button" name="apply" />
+			<input type="submit" value="#i18n{portal.admin.message.buttonCancel}" tabindex="10" class="button" name="cancel" />
+		</p>
+	</p>
+</form>
+</div>
+
+
+<div class="content-box" >
+<a name="entry_list"></a>
+<h2>#i18n{quicklinks.modify_quicklinks.entry_list.adminTitle}</h2>
+
+<#if entry_type_list?has_content>
+<form name="create_entry" method="post" action="jsp/admin/plugins/quicklinks/CreateEntry.jsp" >
+	<div class="highlight-box">
+		<p>
+			<label for="title">#i18n{quicklinks.modify_quicklinks.create_entry.labelEntryTitle} * :</label>
+			<input type="text" name="title" id="title" size="50" maxlength="255" />
+		</p>
+		<p>
+			<label for="entry_type_id">#i18n{quicklinks.modify_quicklinks.create_entry.labelEntryType} * :</label>
+			<select name="entry_type_id" id="entry_type_id">
+				<#list entry_type_list as entryType>
+					<option value="${entryType.id}">#i18n{${entryType.titleI18nKey}}</option>
+				</#list>
+			</select>
+			
+			<input type="hidden" name="quicklinks_id" value="${quicklinks.id}" />
+			<input type="submit" value="#i18n{quicklinks.modify_quicklinks.create_entry.buttonLabelCreate}" tabindex="10" class="button" />
+		</p>
+		
+	</div>
+</form>
+</#if>
+
+<#if entry_list?has_content>
+     <form method="post" name="paginator_modify_quicklinks" action="jsp/admin/plugins/quicklinks/ModifyQuicklinks.jsp">
+     	<p>
+        <@pagination paginator=paginator />
+
+        <!-- Number of documents per page selector -->
+        #i18n{quicklinks.modify_quicklinks.entry_list.labelItemsPerPage} :
+        <select name="items_per_page">
+            <#list [ "10" , "20" , "50" , "100" ] as nb>
+            <#if nb_items_per_page = nb >
+            <option selected="selected" value="${nb}">${nb}</option>
+            <#else>
+            <option value="${nb}">${nb}</option>
+            </#if>
+            </#list>
+        </select>
+        <input type="hidden" name="quicklinks_id" value="${quicklinks.id}" />                           
+        <input type="submit" class="button" value="#i18n{quicklinks.modify_quicklinks.entry_list.buttonItemsPerPage}" />
+        </p>
+   	</form>    
+    
+	<table>
+		<tr>
+			<th>#i18n{quicklinks.modify_quicklinks.entry_list.labelTitle}</th>
+			<th>#i18n{quicklinks.modify_quicklinks.entry_list.labelType}</th>
+			<th>#i18n{quicklinks.modify_quicklinks.entry_list.labelActions}</th>
+		</tr>
+		<@commonListTable items=entry_list depth=0 jspRef="Entry" paramId="entry_id" />
+	</table>
+</#if>
+</div>

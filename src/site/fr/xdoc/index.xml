@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+	<properties>
+		<title>Plugin Quicklinks</title>
+	</properties>
+	<body>
+		<section name="Descriptif du plugin">
+			<subsection name="Introduction">
+				<p> Le plugin Quicklinks est un gestionnaire de liens utiles. Il est
+					destiné à simplifier l'exploration des pages d'un site via un
+					système ergonomique de liens. Cette liste peut être incluse sur
+					toutes les pages du site via un PageInclude ou sur une seule page,
+					sous la forme d'une rubrique de page.</p>
+			</subsection>
+			<subsection name="Caractéristiques du plugin">
+				<p>
+					Le plugin Quicklinks apporte les extensions suivantes :
+					<h4>Fonctionnalités d'administration</h4>
+					<p>
+						<ul>
+							<li>Gestion des Quicklinks</li>
+						</ul>
+					</p>
+					<h4>Portlets</h4>
+					<p>
+						<ul>
+							<li>Rubrique quicklinks</li>
+						</ul>
+					</p>
+				</p>
+			</subsection>
+		</section>
+	</body>
+</document>

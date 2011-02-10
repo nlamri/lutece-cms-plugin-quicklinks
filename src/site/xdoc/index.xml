@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+	<properties>
+		<title>Quicklinks plugin</title>
+	</properties>
+	<body>
+		<section name="Implementation details">
+			<subsection name="Introduction">
+				<p> Quicklinks plugin is a manager of useful links. It's intended to
+					simplify the exploration of pages of a site via a ergonomic system
+					links. This list can be included on all pages on the site via a
+					PageInclude or on a single page, as a section of the page.</p>
+			</subsection>
+			<subsection name="Plugin details">
+				<p>
+					Quicklinks plugin provides the following extensions :
+					<h4>Administration features</h4>
+					<p>
+						<ul>
+							<li>Quicklinks management (Quicklinks (shortcuts)
+								management plugin)</li>
+						</ul>
+					</p>
+					<h4>Portlets</h4>
+					<p>
+						<ul>
+							<li>Quicklinks portlet type</li>
+						</ul>
+					</p>
+				</p>
+			</subsection>
+		</section>
+	</body>
+</document>

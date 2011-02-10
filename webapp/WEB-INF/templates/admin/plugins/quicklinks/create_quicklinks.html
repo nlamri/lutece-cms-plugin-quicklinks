@@ -1,0 +1,47 @@
+<div class="content-box" >
+<h2>#i18n{quicklinks.create_quicklinks.adminTitle}</h2>
+<form method="post" name="create_quicklinks" action="jsp/admin/plugins/quicklinks/DoCreateQuicklinks.jsp">
+        <p>
+       		<label for="title">#i18n{quicklinks.create_quicklinks.labelTitle} * :</label>
+            <input type="text" name="title" id="title" tabindex="1" size="50" maxlength="255"/>
+            <br />
+            <label>&nbsp;</label>#i18n{quicklinks.create_quicklinks.descriptionTitle}
+        </p>
+        <p>
+       		<label for="type">#i18n{quicklinks.create_quicklinks.labelType} * :</label>
+            <@combo name="type" default_value="${type_default_value}" items=type_list />
+            <br />
+            <label>&nbsp;</label>#i18n{quicklinks.modify_quicklinks.descriptionType}
+        </p>
+		<p>
+            <label for="workgroup_key">#i18n{quicklinks.create_quicklinks.labelWorkgroupKey} * :</label>
+			<@combo name="workgroup_key" default_value="${workgroup_key_default_value}" items=workgroup_key_list />
+			<br />
+			<label>&nbsp;</label>#i18n{quicklinks.modify_quicklinks.descriptionWorkgroupKey}
+		</p>
+		<p>
+            <label for="role_key">#i18n{quicklinks.create_quicklinks.labelRoleKey} * :</label>
+			<@combo name="role_key" default_value="${role_key_default_value}" items=role_key_list />
+			<br />
+			<label>&nbsp;</label>#i18n{quicklinks.modify_quicklinks.descriptionRoleKey}
+		</p>
+        <p>
+       		<label for="css_style">#i18n{quicklinks.create_quicklinks.labelCssStyle} :</label>
+            <input type="text" name="css_style" id="css_style" tabindex="5" size="50" maxlength="50"/>
+            <br />
+            <label>&nbsp;</label>#i18n{quicklinks.create_quicklinks.descriptionCssStyle}
+        </p>
+		<p>
+            <label for="state">#i18n{quicklinks.create_quicklinks.labelState} * :</label>
+			<@combo name="state" default_value="${state_default_value}" items=state_list />
+			<br />
+			<label>&nbsp;</label>#i18n{quicklinks.modify_quicklinks.descriptionState}
+		</p>
+		<p>
+			<input type="submit" value="#i18n{quicklinks.create_quicklinks.buttonLabelCreate}" tabindex="10" class="button" />
+			<input class="button" type="button" onclick="javascript:history.go(-1)" value="#i18n{portal.admin.message.buttonCancel}" />
+		</p>
+</form>
+</div>
+
+

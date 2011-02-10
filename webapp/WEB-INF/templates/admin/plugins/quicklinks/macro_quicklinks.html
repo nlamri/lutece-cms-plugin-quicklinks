@@ -1,0 +1,61 @@
+<#macro commonListTable items depth jspRef paramId >
+	<#if items?has_content >
+	<#list items as entry >
+		<tr>
+            <td>
+          		<@indentation depth=depth />
+                <a href="jsp/admin/plugins/quicklinks/Modify${jspRef}.jsp?quicklinks_id=${quicklinks.id}&${paramId}=${entry.id}" class="bullet-link"> ${entry.title}</a>                
+            </td>
+            <td>
+            	#i18n{${entry.entryType.titleI18nKey}}
+           	</td>
+            <td>
+            	<#if entry.idOrder &gt; 0>
+            		<a href="jsp/admin/plugins/quicklinks/DoGoUp${jspRef}.jsp?quicklinks_id=${quicklinks.id}&${paramId}=${entry.id}" >
+                	<img src="images/admin/skin/actions/up.png" alt="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoUp}" title="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoUp}" />
+	                </a>
+                <#else>
+					<img src="images/admin/skin/plugins/quicklinks/actions/up_bw.png" alt="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoUp}" title="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoUp}" />                
+            	</#if>
+            	<#if items?seq_index_of(entry) != items?size-1>
+            		<a href="jsp/admin/plugins/quicklinks/DoGoDown${jspRef}.jsp?quicklinks_id=${quicklinks.id}&${paramId}=${entry.id}" >
+                	<img src="images/admin/skin/actions/down.png" alt="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoDown}" title="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoDown}" />
+	                </a>
+            		<a href="jsp/admin/plugins/quicklinks/DoGoIn${jspRef}.jsp?quicklinks_id=${quicklinks.id}&${paramId}=${entry.id}" >
+                	<img src="images/admin/skin/plugins/quicklinks/actions/in.png" alt="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoIn}" title="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoIn}" />
+	                </a>
+                <#else>
+	                <img src="images/admin/skin/plugins/quicklinks/actions/down_bw.png" alt="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoDown}" title="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoDown}" />
+                	<img src="images/admin/skin/plugins/quicklinks/actions/in_bw.png" alt="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoIn}" title="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoIn}" />
+            	</#if>
+            	<#if entry.idOrder == 0 && entry.idParent &gt; 0>
+            		<a href="jsp/admin/plugins/quicklinks/DoGoOut${jspRef}.jsp?quicklinks_id=${quicklinks.id}&${paramId}=${entry.id}" >
+                	<img src="images/admin/skin/plugins/quicklinks/actions/out.png" alt="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoOut}" title="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoOut}" />
+	                </a>
+            	<#else>
+                	<img src="images/admin/skin/plugins/quicklinks/actions/out_bw.png" alt="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoOut}" title="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoOut}" />            		
+            	</#if>
+                <a href="jsp/admin/plugins/quicklinks/DoCopy${jspRef}.jsp?quicklinks_id=${quicklinks.id}&${paramId}=${entry.id}" >
+                <img src="images/admin/skin/plugins/quicklinks/actions/editcopy.png" alt="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelDuplicate}" title="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelDuplicate}" />
+                </a>
+                <a href="jsp/admin/plugins/quicklinks/ConfirmRemove${jspRef}.jsp?quicklinks_id=${quicklinks.id}&${paramId}=${entry.id}" >
+                <img src="images/admin/skin/actions/delete.png" alt="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelDelete}" title="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelDelete}" />
+                </a>
+            </td>            
+        </tr>
+        <#assign child_entries_list = entry.getChilds(plugin) />
+        <#if child_entries_list?has_content>
+			<@commonListTable items=child_entries_list depth=depth+1 jspRef=jspRef paramId=paramId />
+        </#if>
+	</#list>
+	
+	</#if>
+</#macro>
+
+<#macro indentation depth >
+	<#if depth &gt; 0>
+		<#list 1..depth as i>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		</#list>
+	</#if>
+</#macro>

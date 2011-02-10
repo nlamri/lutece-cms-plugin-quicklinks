@@ -1,0 +1,36 @@
+ <#macro listEntries items depth >
+	<#if items?has_content >
+	<ul <#if depth=0>class="${(quicklinks.@cssStyle)?if_exists}" id="quicklinks_${quicklinks.@id}"</#if>>
+	<#list items as entry >
+		<li>
+			${entry.entry_content}
+        	<#assign child_entries_list = entry.entry />
+        	<#if child_entries_list?has_content>
+				<@listEntries items=child_entries_list depth=depth+1 />
+        	</#if>
+        </li>
+	</#list>
+	</ul>
+	</#if>
+</#macro> 
+
+<#assign quicklinks = quicklinks.quicklinks />
+<div id="quicklinks_${quicklinks.@id}_content">
+	<!--<h3>${quicklinks.@title}</h3>-->
+	<@listEntries items=quicklinks.entry depth=0 />
+</div>
+
+<#if quicklinks.@cssStyle?has_content>
+<#if quicklinks.@cssStyle?contains("sf-menu")>
+	<script type="text/javascript">
+	$("ul.sf-menu").supersubs({ 
+        minWidth:    12,   // minimum width of sub-menus in em units 
+        maxWidth:    27,   // maximum width of sub-menus in em units 
+        extraWidth:  1     // extra width can ensure lines don't sometimes turn over 
+                           // due to slight rounding differences and font-family 
+    }).superfish();  // call supersubs first, then superfish, so that subs are 
+                     // not display:none when measuring. Call before initialising 
+                     // containing tabs for same reason. 
+	</script>
+</#if>
+</#if>
