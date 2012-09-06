@@ -1,47 +1,57 @@
-<div class="content-box" >
-<h2>#i18n{quicklinks.create_quicklinks.adminTitle}</h2>
-<form method="post" name="create_quicklinks" action="jsp/admin/plugins/quicklinks/DoCreateQuicklinks.jsp">
-        <p>
-       		<label for="title">#i18n{quicklinks.create_quicklinks.labelTitle} * :</label>
-            <input type="text" name="title" id="title" tabindex="1" size="50" maxlength="255"/>
-            <br />
-            <label>&nbsp;</label>#i18n{quicklinks.create_quicklinks.descriptionTitle}
-        </p>
-        <p>
-       		<label for="type">#i18n{quicklinks.create_quicklinks.labelType} * :</label>
-            <@combo name="type" default_value="${type_default_value}" items=type_list />
-            <br />
-            <label>&nbsp;</label>#i18n{quicklinks.modify_quicklinks.descriptionType}
-        </p>
-		<p>
-            <label for="workgroup_key">#i18n{quicklinks.create_quicklinks.labelWorkgroupKey} * :</label>
-			<@combo name="workgroup_key" default_value="${workgroup_key_default_value}" items=workgroup_key_list />
-			<br />
-			<label>&nbsp;</label>#i18n{quicklinks.modify_quicklinks.descriptionWorkgroupKey}
-		</p>
-		<p>
-            <label for="role_key">#i18n{quicklinks.create_quicklinks.labelRoleKey} * :</label>
-			<@combo name="role_key" default_value="${role_key_default_value}" items=role_key_list />
-			<br />
-			<label>&nbsp;</label>#i18n{quicklinks.modify_quicklinks.descriptionRoleKey}
-		</p>
-        <p>
-       		<label for="css_style">#i18n{quicklinks.create_quicklinks.labelCssStyle} :</label>
-            <input type="text" name="css_style" id="css_style" tabindex="5" size="50" maxlength="50"/>
-            <br />
-            <label>&nbsp;</label>#i18n{quicklinks.create_quicklinks.descriptionCssStyle}
-        </p>
-		<p>
-            <label for="state">#i18n{quicklinks.create_quicklinks.labelState} * :</label>
-			<@combo name="state" default_value="${state_default_value}" items=state_list />
-			<br />
-			<label>&nbsp;</label>#i18n{quicklinks.modify_quicklinks.descriptionState}
-		</p>
-		<p>
-			<input type="submit" value="#i18n{quicklinks.create_quicklinks.buttonLabelCreate}" tabindex="10" class="button" />
-			<input class="button" type="button" onclick="javascript:history.go(-1)" value="#i18n{portal.admin.message.buttonCancel}" />
-		</p>
-</form>
+<div class="row" >
+	<div class="span12">
+	<fieldset>
+	<legend>#i18n{quicklinks.create_quicklinks.adminTitle}</legend>
+		<form class="form-horizontal" method="post" name="create_quicklinks" action="jsp/admin/plugins/quicklinks/DoCreateQuicklinks.jsp">
+			<div class="control-group">
+				<label class="control-label" for="title">#i18n{quicklinks.create_quicklinks.labelTitle} * :</label>
+					<div class="controls">
+					<input type="text" name="title" id="title" tabindex="1" maxlength="255"/>
+					<p class="help-block">#i18n{quicklinks.create_quicklinks.descriptionTitle}</p>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="type">#i18n{quicklinks.create_quicklinks.labelType} * :</label>
+					<div class="controls">
+					<@combo name="type" default_value="${type_default_value}" items=type_list />
+					<p class="help-block">#i18n{quicklinks.modify_quicklinks.descriptionType}</p>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="workgroup_key">#i18n{quicklinks.create_quicklinks.labelWorkgroupKey} * :</label>
+					<div class="controls">
+					<@combo name="workgroup_key" default_value="${workgroup_key_default_value}" items=workgroup_key_list />
+					<p class="help-block">#i18n{quicklinks.modify_quicklinks.descriptionWorkgroupKey}</p>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="role_key">#i18n{quicklinks.create_quicklinks.labelRoleKey} * :</label>
+					<div class="controls">
+					<@combo name="role_key" default_value="${role_key_default_value}" items=role_key_list />
+					<p class="help-block">#i18n{quicklinks.modify_quicklinks.descriptionRoleKey}</p>
+				</div>
+			</div>
+			<div class="control-group">
+			<label class="control-label" for="css_style">#i18n{quicklinks.create_quicklinks.labelCssStyle} :</label>
+				<div class="controls">
+					<input type="text" name="css_style" id="css_style" tabindex="5" maxlength="50"/>
+					<p class="help-block">#i18n{quicklinks.create_quicklinks.descriptionCssStyle}</p>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="state">#i18n{quicklinks.create_quicklinks.labelState} * :</label>
+					<div class="controls">
+					<@combo name="state" default_value="${state_default_value}" items=state_list />
+					<p class="help-block">#i18n{quicklinks.modify_quicklinks.descriptionState}</p>
+				</div>
+			</div>
+			<div class="form-actions">
+				<button class="btn btn-primary" type="submit" ><i class="icon-ok icon-white"></i>&nbsp;#i18n{quicklinks.create_quicklinks.buttonLabelCreate}</button>
+				<button class="btn btn-primary" onclick="javascript:window.history.back();"><i class="icon-remove-circle icon-white"></i>&nbsp;#i18n{portal.admin.message.buttonCancel}</button>
+			</div>
+		</form>
+	</fieldset>
+	</div>
 </div>
 
 

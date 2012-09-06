@@ -1,45 +1,55 @@
-<script language="javascript" type="text/javascript">
-function linkservice() 
-{
-	javascript:document.getElementById('show_preview').innerHTML = "&nbsp;";
+<div class="row" >
+	<div class="span12" >
+	<fieldset>
+	<legend>#i18n{quicklinks.create_entry_internal_link.adminTitle}</legend>
+	<form class="form-horizontal" method="post" name="create_entry_internal_link" action="jsp/admin/plugins/quicklinks/DoCreateEntry.jsp">
+	<input type="hidden" name="entry_type_id" id="entry_type_id" value="${entry.entryType.id}" />
+	<input type="hidden" name="quicklinks_id" id="quicklinks_id" value="${entry.idQuicklinks}" />
+    <div class="control-group">
+		<label class="control-label" for="title">#i18n{quicklinks.create_entry_internal_link.labelTitle} * :</label>
+            <div class="controls">
+				<input type="text" name="title" id="title" tabindex="1" maxlength="255" value="" />
+				<span class="help-text">#i18n{quicklinks.create_entry_internal_link.descriptionTitle}</span>
+			</div>
+	</div>
+    <div class="control-group">
+		<label class="control-label" > #i18n{quicklinks.create_entry_internal_link.labelContent} * :</label>
+			<div class="controls">
+			<textarea id="content" name="content" rows="5" class="span8" disabled></textarea>
+        	<p>
+				<a class="btn btn-inverse" id="img_linkservice" onclick="javascript:;" title="#i18n{quicklinks.create_entry_internal_link.labelLinkService}">
+					<i class="icon-wrench icon-white"></i>
+				</a>&nbsp;#i18n{quicklinks.create_entry_internal_link.descriptionContent}
+				<a id="btn-preview" class="btn btn-primary btn-small" >
+					<i class="icon-eye-open icon-white"></i> #i18n{quicklinks.create_entry_internal_link.buttonShowPreview}
+				</a>
+			</p>
+		</div>
+	</div>
+	<div id="show_preview" class="offset1 well well-small hide">&nbsp;</div>
+    <div class="form-actions">
+		<button class="btn btn-primary" type="submit" ><i class="icon-ok icon-white"></i>&nbsp;#i18n{quicklinks.create_entry_internal_link.buttonLabelCreate}</button>
+		<button class="btn btn-primary" onclick="javascript:window.history.back();" ><i class="icon-remove-circle icon-white"></i>&nbsp;#i18n{portal.admin.message.buttonCancel}</button>
+	</div>  	
+	</form>
+	</fieldset>
+	</div>
+</div>
+<script>
+$(document).ready( function () {
+	$("#show_preview").toggle();
+	$("#btn-preview").click( function(){ 
+		$("#show_preview").toggle().html( $("#content").val() );
+		return false;
+	});
+	$("#img_linkservice").click( function(){
+		linkservice()
+	});
+});
+
+function linkservice(){
+	$("#show_preview").html("");
 	fen=window.open("${base_url}/jsp/admin/insert/GetAvailableInsertServices.jsp?input=content&selected_text=","#i18n{quicklinks.create_entry_internal_link.labelLinkService}","toolbar=no, scrollbars=yes, status=yes, location=no, directories=no, menubar=no, width=550, height=450");
 	fen.focus();
 }
-</script>
-
-<div class="content-box" >
-<h2>#i18n{quicklinks.create_entry_internal_link.adminTitle}</h2>
-<form method="post" name="create_entry_internal_link" action="jsp/admin/plugins/quicklinks/DoCreateEntry.jsp">
-        <p>
-       		<label for="title">#i18n{quicklinks.create_entry_internal_link.labelTitle} * :</label>
-            <input type="text" name="title" id="title" tabindex="1" size="50" maxlength="255" value="${entry.title}" />
-            <br />
-            <label>&nbsp;</label>#i18n{quicklinks.create_entry_internal_link.descriptionTitle}
-        </p>
-		<p>
-    		<label>#i18n{quicklinks.create_entry_internal_link.labelContent} * :</label>
-		</p>
-		<p>
-       		<textarea id="content" name="content" rows="5" cols="60"></textarea>
-        	<img src="images/admin/skin/plugins/quicklinks/actions/linkservice.png" id="img_linkservice" onclick="javascript:linkservice();" style="border:none;display: none;" title="#i18n{quicklinks.create_entry_internal_link.labelLinkService}" />
-        	<br />
-        	<label>&nbsp;</label>#i18n{quicklinks.create_entry_internal_link.descriptionContent}
-		</p>
-		<p id="show_preview_section" style="display: none;">
-		<label for="show_preview"><input type="button" class="button" value="#i18n{quicklinks.create_entry_internal_link.buttonShowPreview}" onclick="javascript:document.getElementById('show_preview').innerHTML = document.getElementById('content').value + '&nbsp;'" /></label>
-       	<div id="show_preview">&nbsp;</div>
-       	</p>
-		<p>
-			<input type="hidden" name="entry_type_id" id="entry_type_id" value="${entry.entryType.id}" />
-			<input type="hidden" name="quicklinks_id" id="quicklinks_id" value="${entry.idQuicklinks}" />
-			<input type="submit" value="#i18n{quicklinks.create_entry_internal_link.buttonLabelCreate}" tabindex="10" class="button" />
-			<input class="button" type="button" onclick="javascript:history.go(-1)" value="#i18n{portal.admin.message.buttonCancel}" />
-		</p>
-</form>
-</div>
-
-<script language="javascript" type="text/javascript">
-	document.getElementById('content').readOnly = true;
-	document.getElementById('img_linkservice').style.display = "inline";
-	document.getElementById('show_preview_section').style.display = "block";
 </script>

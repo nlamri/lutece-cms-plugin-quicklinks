@@ -1,29 +1,30 @@
 <#include "/admin/util/editor/editor.html" />
-
-<div class="content-box" >
-<h2>#i18n{quicklinks.create_entry_text.adminTitle}</h2>
-<form method="post" name="create_entry_text" action="jsp/admin/plugins/quicklinks/DoCreateEntry.jsp">
-        <p>
-       		<label for="title">#i18n{quicklinks.create_entry_text.labelTitle} * :</label>
-            <input type="text" name="title" id="title" tabindex="1" size="50" maxlength="255" value="${entry.title}" />
-        </p>
-		<p>
-    		<label>#i18n{quicklinks.create_entry_text.labelDescription} * :</label>
-		</p>
-		<p>
-    		<div id="richtext" class="editor">
-       		<textarea id="description" class="richtext" name="description" style="width:100%;" rows="20" cols="90">
-       		
-        	</textarea>
-	    	</div>
-		</p>
-		<p>
-			<input type="hidden" name="entry_type_id" id="entry_type_id" value="${entry.entryType.id}" />
-			<input type="hidden" name="quicklinks_id" id="quicklinks_id" value="${entry.idQuicklinks}" />
-			<input type="submit" value="#i18n{quicklinks.create_entry_text.buttonLabelCreate}" tabindex="10" class="button" />
-			<input class="button" type="button" onclick="javascript:history.go(-1)" value="#i18n{portal.admin.message.buttonCancel}" />
-		</p>
-</form>
+<div class="row" >
+	<div class="span12" >
+	<fieldset>
+	<legend>#i18n{quicklinks.create_entry_text.adminTitle}</legend>
+		<form class="form-horizontal" method="post" name="create_entry_text" action="jsp/admin/plugins/quicklinks/DoCreateEntry.jsp">
+		<input type="hidden" name="entry_type_id" id="entry_type_id" value="${entry.entryType.id}" />
+		<input type="hidden" name="quicklinks_id" id="quicklinks_id" value="${entry.idQuicklinks}" />
+		<div class="control-group">
+			<label class="control-label" for="title">#i18n{quicklinks.create_entry_text.labelTitle} * :</label>
+				<div class="controls">
+					<input type="text" name="title" id="title" tabindex="1" maxlength="255" value="${entry.title}" />
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" > #i18n{quicklinks.create_entry_text.labelDescription} * :</label>
+			<div class="controls">
+				<textarea id="description" class="richtext span7" name="description" rows="20"></textarea>
+			</div>
+		</div>
+		<div class="form-actions">	
+			<button class="btn btn-primary" type="submit"><i class="icon-ok icon-white"></i>&nbsp;#i18n{quicklinks.create_entry_text.buttonLabelCreate}</button>
+			<button class="btn btn-primary" onclick="javascript:window.history.back();"><i class="icon-remove-circle icon-white"></i>&nbsp;#i18n{portal.admin.message.buttonCancel}</button>
+		</div>
+		</form>
+	</fieldset>
+	</div>
 </div>
 
 <@initEditor />

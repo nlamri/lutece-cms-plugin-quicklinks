@@ -1,45 +1,52 @@
 <#macro commonListTable items depth jspRef paramId >
 	<#if items?has_content >
 	<#list items as entry >
+		<@indentation depth=depth />
 		<tr>
+            <td>${entry.title!}</td>
+            <td>#i18n{${entry.entryType.titleI18nKey}}</td>
             <td>
-          		<@indentation depth=depth />
-                <a href="jsp/admin/plugins/quicklinks/Modify${jspRef}.jsp?quicklinks_id=${quicklinks.id}&${paramId}=${entry.id}" class="bullet-link"> ${entry.title}</a>                
-            </td>
-            <td>
-            	#i18n{${entry.entryType.titleI18nKey}}
-           	</td>
-            <td>
+				<a class="btn btn-primary btn-mini" href="jsp/admin/plugins/quicklinks/Modify${jspRef}.jsp?quicklinks_id=${quicklinks.id}&${paramId}=${entry.id}" title="#i18n{quicklinks.modify_quicklinks.entry_list.buttonModify}">
+					<i class="icon-edit icon-white"></i>
+				</a> 
             	<#if entry.idOrder &gt; 0>
-            		<a href="jsp/admin/plugins/quicklinks/DoGoUp${jspRef}.jsp?quicklinks_id=${quicklinks.id}&${paramId}=${entry.id}" >
-                	<img src="images/admin/skin/actions/up.png" alt="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoUp}" title="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoUp}" />
+            		<a class="btn btn-primary btn-mini" href="jsp/admin/plugins/quicklinks/DoGoUp${jspRef}.jsp?quicklinks_id=${quicklinks.id}&${paramId}=${entry.id}" title="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoUp}">
+						<i class="icon-chevron-up icon-white"></i>
 	                </a>
                 <#else>
-					<img src="images/admin/skin/plugins/quicklinks/actions/up_bw.png" alt="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoUp}" title="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoUp}" />                
+					<a class="btn btn-primary btn-mini btn disabled" href="javascript:return false;">
+						<i class="icon-chevron-up icon-white"></i>
+	                </a>
             	</#if>
             	<#if items?seq_index_of(entry) != items?size-1>
-            		<a href="jsp/admin/plugins/quicklinks/DoGoDown${jspRef}.jsp?quicklinks_id=${quicklinks.id}&${paramId}=${entry.id}" >
-                	<img src="images/admin/skin/actions/down.png" alt="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoDown}" title="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoDown}" />
+            		<a class="btn btn-primary btn-mini" href="jsp/admin/plugins/quicklinks/DoGoDown${jspRef}.jsp?quicklinks_id=${quicklinks.id}&${paramId}=${entry.id}" title="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoDown}">
+						<i class="icon-chevron-down icon-white"></i>
 	                </a>
-            		<a href="jsp/admin/plugins/quicklinks/DoGoIn${jspRef}.jsp?quicklinks_id=${quicklinks.id}&${paramId}=${entry.id}" >
-                	<img src="images/admin/skin/plugins/quicklinks/actions/in.png" alt="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoIn}" title="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoIn}" />
+            		<a class="btn btn-primary btn-mini" href="jsp/admin/plugins/quicklinks/DoGoIn${jspRef}.jsp?quicklinks_id=${quicklinks.id}&${paramId}=${entry.id}" title="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoIn}">
+						<i class="icon-chevron-left icon-white"></i>
 	                </a>
                 <#else>
-	                <img src="images/admin/skin/plugins/quicklinks/actions/down_bw.png" alt="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoDown}" title="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoDown}" />
-                	<img src="images/admin/skin/plugins/quicklinks/actions/in_bw.png" alt="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoIn}" title="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoIn}" />
+	                <a class="btn btn-primary btn-mini disabled" href="javascript:return false;" title="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoDown}">
+						<i class="icon-chevron-down icon-white"></i>
+	                </a>
+            		<a class="btn btn-primary btn-mini disabled" href="javascript:return false;" title="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoIn}">
+						<i class="icon-chevron-left icon-white"></i>
+	                </a>
             	</#if>
             	<#if entry.idOrder == 0 && entry.idParent &gt; 0>
-            		<a href="jsp/admin/plugins/quicklinks/DoGoOut${jspRef}.jsp?quicklinks_id=${quicklinks.id}&${paramId}=${entry.id}" >
-                	<img src="images/admin/skin/plugins/quicklinks/actions/out.png" alt="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoOut}" title="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoOut}" />
+            		<a href="jsp/admin/plugins/quicklinks/DoGoOut${jspRef}.jsp?quicklinks_id=${quicklinks.id}&${paramId}=${entry.id}" title="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoOut}">
+						<i class="icon-chevron-right icon-white"></i>
 	                </a>
             	<#else>
-                	<img src="images/admin/skin/plugins/quicklinks/actions/out_bw.png" alt="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoOut}" title="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoOut}" />            		
+                	<a class="btn btn-primary btn-mini disabled" href="javascript:return false;" title="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelGoOut}">
+						<i class="icon-chevron-right icon-white"></i>
+	                </a>
             	</#if>
-                <a href="jsp/admin/plugins/quicklinks/DoCopy${jspRef}.jsp?quicklinks_id=${quicklinks.id}&${paramId}=${entry.id}" >
-                <img src="images/admin/skin/plugins/quicklinks/actions/editcopy.png" alt="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelDuplicate}" title="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelDuplicate}" />
+                <a class="btn btn-primary btn-mini" href="jsp/admin/plugins/quicklinks/DoCopy${jspRef}.jsp?quicklinks_id=${quicklinks.id}&${paramId}=${entry.id}" title="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelDuplicate}" >
+					<i class="icon-move icon-white"></i>
                 </a>
-                <a href="jsp/admin/plugins/quicklinks/ConfirmRemove${jspRef}.jsp?quicklinks_id=${quicklinks.id}&${paramId}=${entry.id}" >
-                <img src="images/admin/skin/actions/delete.png" alt="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelDelete}" title="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelDelete}" />
+                <a class="btn btn-danger btn-mini" href="jsp/admin/plugins/quicklinks/ConfirmRemove${jspRef}.jsp?quicklinks_id=${quicklinks.id}&${paramId}=${entry.id}" >
+					<i class="icon-trash icon-white"></i>
                 </a>
             </td>            
         </tr>

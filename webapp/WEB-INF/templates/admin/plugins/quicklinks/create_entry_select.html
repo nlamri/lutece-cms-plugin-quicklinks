@@ -1,32 +1,51 @@
-<div class="content-box" >
-<h2>#i18n{quicklinks.create_entry_select.adminTitle}</h2>
-<form method="post" enctype="multipart/form-data" name="create_entry_select" action="jsp/admin/plugins/quicklinks/DoCreateEntry.jsp">
-        <p>
-       		<label for="title">#i18n{quicklinks.create_entry_select.labelTitle} * :</label>
-            <input type="text" name="title" id="title" tabindex="1" size="50" maxlength="255" value="${entry.title}" />
-        </p>
-        <p>
-       		<label for="target">#i18n{quicklinks.create_entry_select.labelTarget} * :</label>
-       		<#assign targetChecked = false />
-       		<input type="radio" name="target" id="target1" value="_blank" onchange="javascript:disableTargetFramename();" <#if target_default_value = "_blank"><#assign targetChecked = true />checked="checked"</#if> /> #i18n{quicklinks.create_entry_select.target.blank}
-       		<input type="radio" name="target" id="target2" value="_self" onchange="javascript:disableTargetFramename();" <#if target_default_value = "_self"><#assign targetChecked = true />checked="checked"</#if> /> #i18n{quicklinks.create_entry_select.target.self}
-       		<input type="radio" name="target" id="target3" value="_parent" onchange="javascript:disableTargetFramename();" <#if target_default_value = "_parent"><#assign targetChecked = true />checked="checked"</#if>/> #i18n{quicklinks.create_entry_select.target.parent}
-       		<input type="radio" name="target" id="target4" value="_top" onchange="javascript:disableTargetFramename();" <#if target_default_value = "_top"><#assign targetChecked = true />checked="checked"</#if> /> #i18n{quicklinks.create_entry_select.target.top}
-       		<input type="radio" name="target" id="target5" value="" onchange="javascript:document.getElementById('target_framename').disabled = false;" <#if !targetChecked>checked="checked"</#if> /> #i18n{quicklinks.create_entry_select.target.other}
-            <input type="text" name="target_framename" id="target_framename" tabindex="2" size="10"
-            onchange="javascript:document.getElementById('target5').checked = true;"
-             maxlength="255" value="<#if !targetChecked>${target_default_value}</#if>" />
-        </p>
-		<p>
-			<input type="hidden" name="entry_type_id" id="entry_type_id" value="${entry.entryType.id}" />
-			<input type="hidden" name="quicklinks_id" id="quicklinks_id" value="${entry.idQuicklinks}" />
-			<input type="hidden" name="next_step" id="next_step" value="modify" />
-			<input type="submit" value="#i18n{quicklinks.create_entry_select.buttonLabelCreate}" tabindex="8" class="button" />
-			<input class="button" type="button" onclick="javascript:history.go(-1)" value="#i18n{portal.admin.message.buttonCancel}" />
-		</p>
-</form>
+<div class="row" >
+	<div class="span12" >
+	<fieldset>
+	<legend>#i18n{quicklinks.create_entry_select.adminTitle}</legend>
+		<form class="form-horizontal" method="post" enctype="multipart/form-data" name="create_entry_select" action="jsp/admin/plugins/quicklinks/DoCreateEntry.jsp">
+		<input type="hidden" name="entry_type_id" id="entry_type_id" value="${entry.entryType.id}" />
+		<input type="hidden" name="quicklinks_id" id="quicklinks_id" value="${entry.idQuicklinks}" />
+		<input type="hidden" name="next_step" id="next_step" value="modify" />
+		<div class="control-group">
+		<label class="control-label" for="title">#i18n{quicklinks.create_entry_select.labelTitle} * :</label>
+			<div class="controls">
+				<input type="text" name="title" id="title" tabindex="1" maxlength="255" value="${entry.title}" />
+			</div>
+		</div>
+		<div class="control-group">
+		<label class="control-label" for="target">#i18n{quicklinks.create_entry_select.labelTarget} * :</label>
+		<#assign targetChecked = false />
+			<div class="controls">
+				<label class="radio inline">
+					<input type="radio" name="target" id="target1" value="_blank" onchange="javascript:disableTargetFramename();" <#if target_default_value = "_blank">checked="checked"</#if> /> #i18n{quicklinks.create_entry_select.target.blank}
+				</label>
+				<#assign targetChecked = true />
+				<label class="radio inline">
+					<input type="radio" name="target" id="target2" value="_self" onchange="javascript:disableTargetFramename();" <#if target_default_value = "_self">checked="checked"</#if> /> #i18n{quicklinks.create_entry_select.target.self}
+				</label>
+				<#assign targetChecked = true />
+				<label class="radio inline">
+					<input type="radio" name="target" id="target3" value="_parent" onchange="javascript:disableTargetFramename();" <#if target_default_value = "_parent">checked="checked"</#if>/> #i18n{quicklinks.create_entry_select.target.parent}
+				</label>
+				<#assign targetChecked = true />
+				<label class="radio inline">
+					<input type="radio" name="target" id="target4" value="_top" onchange="javascript:disableTargetFramename();" <#if target_default_value = "_top">checked="checked"</#if> /> #i18n{quicklinks.create_entry_select.target.top}
+				</label>
+				<#assign targetChecked = true />
+				<label class="radio inline">
+					<input type="radio" name="target" id="target5" value="" onchange="javascript:document.getElementById('target_framename').disabled = false;" <#if !targetChecked>checked="checked"</#if> /> #i18n{quicklinks.create_entry_select.target.other}
+				</label>
+				<input type="text" name="target_framename" id="target_framename" tabindex="2" class="input-small" onchange="javascript:document.getElementById('target5').checked = true;" maxlength="255" value="<#if !targetChecked>${target_default_value}</#if>" />
+			</div>
+		</div>
+		<div class="form-actions">	
+			<button class="btn btn-primary" type="submit" ><i class="icon-ok icon-white"></i>&nbsp;#i18n{quicklinks.create_entry_select.buttonLabelCreate}</button>
+			<button class="btn btn-primary" onclick="javascript:window.history.back();" ><i class="icon-remove-circle icon-white"></i>&nbsp;#i18n{portal.admin.message.buttonCancel}</button>
+		</div>
+		</form>
+	</fieldset>
+	</div>
 </div>
-
 <script language="javascript">
 if(!document.getElementById('target5').checked)
 {

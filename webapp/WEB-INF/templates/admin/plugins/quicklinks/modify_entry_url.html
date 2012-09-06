@@ -1,54 +1,84 @@
-<div class="content-box" >
-<h2>#i18n{quicklinks.modify_entry_url.adminTitle}</h2>
-<form method="post" enctype="multipart/form-data" name="modify_entry_url" action="jsp/admin/plugins/quicklinks/DoModifyEntry.jsp">
-        <p>
-       		<label for="title">#i18n{quicklinks.modify_entry_url.labelTitle} * :</label>
-            <input type="text" name="title" id="title" tabindex="1" size="50" maxlength="255" value="${entry.title}" />
-        </p>
-       	<p>
-       		<label for="target">#i18n{quicklinks.modify_entry_url.labelTarget} * :</label>
-       		<#assign targetChecked = false />
-       		<input type="radio" name="target" id="target1" value="_blank" onchange="javascript:disableTargetFramename();" <#if entry.target = "_blank"><#assign targetChecked = true />checked="checked"</#if> /> #i18n{quicklinks.modify_entry_url.target.blank}
-       		<input type="radio" name="target" id="target2" value="_self" onchange="javascript:disableTargetFramename();" <#if entry.target = "_self"><#assign targetChecked = true />checked="checked"</#if> /> #i18n{quicklinks.modify_entry_url.target.self}
-       		<input type="radio" name="target" id="target3" value="_parent" onchange="javascript:disableTargetFramename();" <#if entry.target = "_parent"><#assign targetChecked = true />checked="checked"</#if>/> #i18n{quicklinks.modify_entry_url.target.parent}
-       		<input type="radio" name="target" id="target4" value="_top" onchange="javascript:disableTargetFramename();" <#if entry.target = "_top"><#assign targetChecked = true />checked="checked"</#if> /> #i18n{quicklinks.modify_entry_url.target.top}
-       		<input type="radio" name="target" id="target5" value="" onchange="javascript:document.getElementById('target_framename').disabled = false;" <#if !targetChecked>checked="checked"</#if> /> #i18n{quicklinks.modify_entry_url.target.other}
-            <input type="text" name="target_framename" id="target_framename" tabindex="2" size="10"
-            onchange="javascript:document.getElementById('target5').checked = true;"
-             maxlength="255" value="<#if !targetChecked>${entry.target}</#if>" />
-        </p>
-        <p>
-       		<label for="description">#i18n{quicklinks.modify_entry_url.labelDescription} :</label>
-            <input type="text" name="description" id="description" tabindex="2" size="50" maxlength="255" value="${entry.description!}" />
-        </p>
-        <p>
-       		<label for="url">#i18n{quicklinks.modify_entry_url.labelUrl} * :</label>
-            <input type="text" name="url" id="url" tabindex="3" size="50" maxlength="255" value="${entry.url}" />
-        </p>
-        <p>
-       		<label for="image">#i18n{quicklinks.modify_entry_url.labelImage} :</label>
-            <input type="file" name="image" id="image" tabindex="4" /><input type="checkbox" name="update_image" id="update_image" tabindex="5" value="true" />#i18n{quicklinks.modify_entry_url.labelUpdateImage}
-        </p>
-        <p>
-       		<label for="display_properties">#i18n{quicklinks.modify_entry_url.labelDisplayProperties} * :</label>
-       		<#list display_properties_list as item>
-            	<input type="radio" tabindex="6"<#if item.code="${entry.entryUrlDisplayProperties.value}"> checked="checked"</#if> name="display_properties" value="${item.code}" />#i18n{${item.name}}
-           	</#list>
-       	</p>
-        <p>
-       		<label for="link_properties">#i18n{quicklinks.modify_entry_url.labelLinkProperties} * :</label>
-       		<#list link_properties_list as item>
-            	<input type="radio" tabindex="7"<#if item.code="${entry.entryUrlLinkProperties.value}"> checked="checked"</#if> name="link_properties" value="${item.code}" />#i18n{${item.name}}
-           	</#list>
-        </p>
-		<p>
+<div class="row" >
+	<div class="span12" >
+	<fieldset>
+	<legend>#i18n{quicklinks.modify_entry_url.adminTitle}</legend>
+		<form class="form-horizontal" method="post" enctype="multipart/form-data" name="modify_entry_url" action="jsp/admin/plugins/quicklinks/DoModifyEntry.jsp">
 			<input type="hidden" name="entry_id" id="entry_id" value="${entry.id}" />
-			<input type="submit" value="#i18n{quicklinks.modify_entry_url.buttonLabelModify}" tabindex="8" class="button" />
-			<input class="button" type="button" onclick="javascript:history.go(-1)" value="#i18n{portal.admin.message.buttonCancel}" />
-		</p>
-</form>
+			<div class="control-group">
+			<label class="control-label" for="title">#i18n{quicklinks.modify_entry_url.labelTitle} * :</label>
+				<div class="controls">
+					<input type="text" name="title" id="title" tabindex="1" size="50" maxlength="255" value="${entry.title}" />
+				</div>
+			</div>
+			<div class="control-group">
+			<label class="control-label" for="target">#i18n{quicklinks.modify_entry_url.labelTarget} * :</label>
+				<#assign targetChecked = false />
+				<div class="controls">
+					<label class="radio inline">
+						<input type="radio" name="target" id="target1" value="_blank" onchange="javascript:disableTargetFramename();" <#if entry.target = "_blank"><#assign targetChecked = true /> checked="checked"</#if> /> #i18n{quicklinks.modify_entry_url.target.blank}
+					</label>
+					<label class="radio inline">
+						<input type="radio" name="target" id="target2" value="_self" onchange="javascript:disableTargetFramename();" <#if entry.target = "_self"><#assign targetChecked = true /> checked="checked"</#if> /> #i18n{quicklinks.modify_entry_url.target.self}
+					</label>
+					<label class="radio inline">
+						<input type="radio" name="target" id="target3" value="_parent" onchange="javascript:disableTargetFramename();" <#if entry.target = "_parent"><#assign targetChecked = true /> checked="checked"</#if>/> #i18n{quicklinks.modify_entry_url.target.parent}
+					</label>
+					<label class="radio inline">
+						<input type="radio" name="target" id="target4" value="_top" onchange="javascript:disableTargetFramename();" <#if entry.target = "_top"><#assign targetChecked = true /> checked="checked"</#if> /> #i18n{quicklinks.modify_entry_url.target.top}
+					</label>
+					<label class="radio inline">
+						<input type="radio" name="target" id="target5" value="" onchange="javascript:document.getElementById('target_framename').disabled = false;" <#if !targetChecked> checked="checked"</#if> /> #i18n{quicklinks.modify_entry_url.target.other}
+					</label>
+					<input type="text" name="target_framename" id="target_framename" tabindex="2" placeholder="#i18n{quicklinks.modify_entry_url.labelTarget} *" class="input-mini" onchange="javascript:document.getElementById('target5').checked = true;"
+					 maxlength="255" value="<#if !targetChecked>${entry.target}</#if>" />
+					 <span class="help-text">#i18n{quicklinks.modify_entry_url.labelTarget}</span>
+				</div>
+			</div>
+			<div class="control-group">
+			<label class="control-label" for="description">#i18n{quicklinks.modify_entry_url.labelDescription} :</label>
+					<div class="controls">
+						<input type="text" name="description" id="description" tabindex="2" size="50" maxlength="255" value="${entry.description!}" />
+				</div>
+			</div>
+			<div class="control-group">
+			<label class="control-label" for="url">#i18n{quicklinks.modify_entry_url.labelUrl} * :</label>
+					<div class="controls">
+						<input type="text" name="url" id="url" tabindex="3" size="50" maxlength="255" value="${entry.url}" />
+				</div>
+			</div>
+			<div class="control-group">
+			<label class="control-label" for="image">#i18n{quicklinks.modify_entry_url.labelImage} :</label>
+				<div class="controls">
+						<input type="file" name="image" id="image" tabindex="4" />
+					<label class="checkbox">
+						<input type="checkbox" name="update_image" id="update_image" tabindex="5" value="true" />#i18n{quicklinks.modify_entry_url.labelUpdateImage}
+					</label>
+				</div>
+			</div>
+			<div class="control-group">
+			<label class="control-label" for="display_properties">#i18n{quicklinks.modify_entry_url.labelDisplayProperties} * :</label>
+				<#list display_properties_list as item>
+				<div class="controls">
+					<input type="radio" tabindex="6" <#if item.code="${entry.entryUrlDisplayProperties.value}">checked="checked"</#if> name="display_properties" value="${item.code}" />#i18n{${item.name}}
+				</div>
+				</#list>
+			</div>
+			<div class="control-group">
+			<label class="control-label" for="link_properties">#i18n{quicklinks.modify_entry_url.labelLinkProperties} * :</label>
+				<#list link_properties_list as item>
+				<div class="controls">
+					<input type="radio" tabindex="7" <#if item.code="${entry.entryUrlLinkProperties.value}">checked="checked"</#if> name="link_properties" value="${item.code}" />#i18n{${item.name}}
+				</div>
+				</#list>
+			</div> 
+			<div class="form-actions">	
+				<button class="btn btn-primary" type="submit" ><i class="icon-ok icon-white"></i>&nbsp;#i18n{quicklinks.modify_entry_url.buttonLabelModify}</button>
+				<button class="btn btn-primary" onclick="javascript:window.history.back();" ><i class="icon-remove-circle icon-white"></i>&nbsp;#i18n{portal.admin.message.buttonCancel}</button>
+			</div> 
+		</form>
+	</fieldset>
+	</div>
 </div>
-
 <script language="javascript">
 if(!document.getElementById('target5').checked)
 {

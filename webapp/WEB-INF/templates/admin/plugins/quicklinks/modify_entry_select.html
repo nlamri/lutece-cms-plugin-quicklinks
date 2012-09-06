@@ -1,109 +1,111 @@
 <#macro optionsTable items >
-	<#if items?has_content >
+<#if items?has_content >
 	<#list items as option >
-		<tr>
-            <td>
-                <a href="jsp/admin/plugins/quicklinks/ModifyEntrySelectOption.jsp?option_id=${option.id}&entry_id=${option.idEntry}" class="bullet-link"> ${option.title}</a>                
-            </td>
-            <td>
-            	${option.url}
-           	</td>
-            <td>
-            	<#if option.idOrder &gt; 0>
-            		<a href="jsp/admin/plugins/quicklinks/DoGoUpEntrySelectOption.jsp?option_id=${option.id}&entry_id=${option.idEntry}" >
-                	<img src="images/admin/skin/actions/up.png" alt="#i18n{quicklinks.modify_entry_select.option_list.buttonLabelGoUp}" title="#i18n{quicklinks.modify_entry_select.option_list.buttonLabelGoUp}" />
-	                </a>
-                <#else>
-					<img src="images/admin/skin/plugins/quicklinks/actions/up_bw.png" alt="#i18n{quicklinks.modify_entry_select.option_list.buttonLabelGoUp}" title="#i18n{quicklinks.modify_entry_select.option_list.buttonLabelGoUp}" />                
-            	</#if>
-            	<#if items?seq_index_of(option) != items?size-1>
-            		<a href="jsp/admin/plugins/quicklinks/DoGoDownEntrySelectOption.jsp?option_id=${option.id}&entry_id=${option.idEntry}" >
-                	<img src="images/admin/skin/actions/down.png" alt="#i18n{quicklinks.modify_entry_select.option_list.buttonLabelGoDown}" title="#i18n{quicklinks.modify_entry_select.option_list.buttonLabelGoDown}" />
-	                </a>
-                <#else>
-	                <img src="images/admin/skin/plugins/quicklinks/actions/down_bw.png" alt="#i18n{quicklinks.modify_entry_select.option_list.buttonLabelGoDown}" title="#i18n{quicklinks.modify_entry_select.option_list.buttonLabelGoDown}" />
-            	</#if>
-                <a href="jsp/admin/plugins/quicklinks/DoCopyEntrySelectOption.jsp?option_id=${option.id}&entry_id=${option.idEntry}" >
-                <img src="images/admin/skin/plugins/quicklinks/actions/editcopy.png" alt="#i18n{quicklinks.modify_entry_select.option_list.buttonLabelDuplicate}" title="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelDuplicate}" />
+	<tr>
+        <td>${option.title!}</td>
+        <td>${option.url!}</td>
+        <td>
+			<a class="btn btn-primary btn-mini" href="jsp/admin/plugins/quicklinks/ModifyEntrySelectOption.jsp?option_id=${option.id}&entry_id=${option.idEntry}" title=" ${option.title}">
+				<i class="icon-edit icon-white"></i>
+			</a>                
+            <#if option.idOrder &gt; 0>
+				<a class="btn btn-primary btn-mini" href="jsp/admin/plugins/quicklinks/DoGoUpEntrySelectOption.jsp?option_id=${option.id}&entry_id=${option.idEntry}" title="#i18n{quicklinks.modify_entry_select.option_list.buttonLabelGoUp}">
+					<i class="icon-chevron-up icon-white"></i>
+				</a>
+            <#else>
+				<a class="btn btn-primary btn-mini disabled" href="javascript:return false;" title="#i18n{quicklinks.modify_entry_select.option_list.buttonLabelGoUp}" >
+					<i class="icon-chevron-up icon-white"></i>
+				</a>
+            </#if>
+            <#if items?seq_index_of(option) != items?size-1>
+            	<a class="btn btn-primary btn-mini" href="jsp/admin/plugins/quicklinks/DoGoDownEntrySelectOption.jsp?option_id=${option.id}&entry_id=${option.idEntry}" title="#i18n{quicklinks.modify_entry_select.option_list.buttonLabelGoDown}">
+					<i class="icon-chevron-down icon-white"></i>
+	            </a>
+            <#else>
+				<a class="btn btn-primary btn-mini disabled" href="javascript:return false;" title="#i18n{quicklinks.modify_entry_select.option_list.buttonLabelGoDown}" >
+					<i class="icon-chevron-down icon-white"></i>
+				</a>
+            </#if>
+                <a class="btn btn-primary btn-mini" href="jsp/admin/plugins/quicklinks/DoCopyEntrySelectOption.jsp?option_id=${option.id}&entry_id=${option.idEntry}" title="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelDuplicate}" >
+					<i class="icon-move icon-white"></i>
                 </a>
-                <a href="jsp/admin/plugins/quicklinks/ConfirmRemoveEntrySelectOption.jsp?option_id=${option.id}&entry_id=${option.idEntry}" >
-                <img src="images/admin/skin/actions/delete.png" alt="#i18n{quicklinks.modify_entry_select.option_list.buttonLabelDelete}" title="#i18n{quicklinks.modify_entry_select.option_list.buttonLabelDelete}" />
+                <a class="btn btn-danger btn-mini" href="jsp/admin/plugins/quicklinks/ConfirmRemoveEntrySelectOption.jsp?option_id=${option.id}&entry_id=${option.idEntry}" >
+					<i class="icon-trash icon-white"></i>
                 </a>
             </td>            
         </tr>
 	</#list>
 	</#if>
 </#macro>
-
-<div class="content-box" >
-<h2>#i18n{quicklinks.modify_entry_select.adminTitle}</h2>
-<form method="post" enctype="multipart/form-data" name="modify_entry_select" action="jsp/admin/plugins/quicklinks/DoModifyEntry.jsp">
-        <p>
-       		<label for="title">#i18n{quicklinks.modify_entry_select.labelTitle} * :</label>
-            <input type="text" name="title" id="title" tabindex="1" size="50" maxlength="255" value="${entry.title}" />
-        </p>
-       	<p>
-       		<label for="target">#i18n{quicklinks.modify_entry_select.labelTarget} * :</label>
-       		<#assign targetChecked = false />
-       		<input type="radio" name="target" id="target1" value="_blank" onchange="javascript:disableTargetFramename();" <#if entry.target = "_blank"><#assign targetChecked = true />checked="checked"</#if> /> #i18n{quicklinks.modify_entry_select.target.blank}
-       		<input type="radio" name="target" id="target2" value="_self" onchange="javascript:disableTargetFramename();" <#if entry.target = "_self"><#assign targetChecked = true />checked="checked"</#if> /> #i18n{quicklinks.modify_entry_select.target.self}
-       		<input type="radio" name="target" id="target3" value="_parent" onchange="javascript:disableTargetFramename();" <#if entry.target = "_parent"><#assign targetChecked = true />checked="checked"</#if>/> #i18n{quicklinks.modify_entry_select.target.parent}
-       		<input type="radio" name="target" id="target4" value="_top" onchange="javascript:disableTargetFramename();" <#if entry.target = "_top"><#assign targetChecked = true />checked="checked"</#if> /> #i18n{quicklinks.modify_entry_select.target.top}
-       		<input type="radio" name="target" id="target5" value="" onchange="javascript:document.getElementById('target_framename').disabled = false;" <#if !targetChecked>checked="checked"</#if> /> #i18n{quicklinks.modify_entry_select.target.other}
-            <input type="text" name="target_framename" id="target_framename" tabindex="2" size="10"
-            onchange="javascript:document.getElementById('target5').checked = true;"
-             maxlength="255" value="<#if !targetChecked>${entry.target}</#if>" />
-        </p>
-		<p>
+<div class="row" >
+	<div class="span12" >
+	<fieldset>
+	<legend>#i18n{quicklinks.modify_entry_select.adminTitle}</legend>
+		<form class="form-horizontal" method="post" enctype="multipart/form-data" name="modify_entry_select" action="jsp/admin/plugins/quicklinks/DoModifyEntry.jsp">
+		<input type="hidden" name="entry_id" id="entry_id" value="${entry.id}" />
+		<div class="control-group">
+		<label class="control-label" for="title">#i18n{quicklinks.modify_entry_select.labelTitle} * :</label>
+			<div class="controls">
+				<input type="text" name="title" id="title" tabindex="1" maxlength="255" value="${entry.title}" />
+			</div>
+		</div>
+		<div class="control-group">
+		<label class="control-label" for="target">#i18n{quicklinks.modify_entry_select.labelTarget} * :</label>
+			<#assign targetChecked = false />
+			<div class="controls">
+			<label class="radio inline">
+				<input type="radio" name="target" id="target1" value="_blank" onchange="javascript:disableTargetFramename();" <#if entry.target = "_blank">checked="checked"</#if> /> #i18n{quicklinks.modify_entry_select.target.blank}
+			</label>
+			<#assign targetChecked = true />
+			<label class="radio inline">
+				<input type="radio" name="target" id="target2" value="_self" onchange="javascript:disableTargetFramename();" <#if entry.target = "_self">checked="checked"</#if> /> #i18n{quicklinks.modify_entry_select.target.self}
+			</label>
+			<#assign targetChecked = true />
+			<label class="radio inline">
+				<input type="radio" name="target" id="target3" value="_parent" onchange="javascript:disableTargetFramename();" <#if entry.target = "_parent">checked="checked"</#if>/> #i18n{quicklinks.modify_entry_select.target.parent}
+			</label>
+			<#assign targetChecked = true />
+			<label class="radio inline">
+				<input type="radio" name="target" id="target4" value="_top" onchange="javascript:disableTargetFramename();" <#if entry.target = "_top">checked="checked"</#if> /> #i18n{quicklinks.modify_entry_select.target.top}
+			</label>
+			<#assign targetChecked = true />
+			<label class="radio inline">
+				<input type="radio" name="target" id="target5" value="" onchange="javascript:document.getElementById('target_framename').disabled = false;" <#if !targetChecked>checked="checked"</#if> /> #i18n{quicklinks.modify_entry_select.target.other}
+			</label>
+			<input type="text" name="target_framename" id="target_framename" tabindex="2" class="input-mini" onchange="javascript:document.getElementById('target5').checked = true;" maxlength="255" value="<#if !targetChecked>${entry.target}</#if>" />
+			</div>
+		</div>
+		<div class="form-actions">
+			<button class="btn btn-primary" type="submit" ><i class="icon-ok icon-white"></i>&nbsp;#i18n{quicklinks.modify_entry_select.buttonLabelModify}</button>
+			<button class="btn btn-primary" onclick="javascript:window.history.back();" ><i class="icon-remove-circle icon-white"></i>&nbsp;#i18n{portal.admin.message.buttonCancel}</button>
+		</div>
+		</form>
+	</fieldset>
+	
+	<fieldset>
+	<legend>
+		#i18n{quicklinks.modify_entry_select.option_list.adminTitle}
+		<form class="form-inline pull-right" method="post" name="add_entry_select_option" action="jsp/admin/plugins/quicklinks/CreateEntrySelectOption.jsp">
 			<input type="hidden" name="entry_id" id="entry_id" value="${entry.id}" />
-			<input type="submit" value="#i18n{quicklinks.modify_entry_select.buttonLabelModify}" tabindex="8" class="button" />
-			<input class="button" type="button" onclick="javascript:history.go(-1)" value="#i18n{portal.admin.message.buttonCancel}" />
-		</p>
-</form>
-</div>
-
-<div class="content-box" >
-<a name="option_list"></a>
-<h2>#i18n{quicklinks.modify_entry_select.option_list.adminTitle}</h2>
-
-<#if option_list?has_content>
-	<form method="post"  action="jsp/admin/plugins/quicklinks/ModifyEntry.jsp">
-		<p>
-			<@pagination paginator=paginator />
-			<!-- Number of feeds per page selector -->
-        	#i18n{quicklinks.modify_entry_select.option_list.labelItemsPerPage} :
-        	<select name="items_per_page">
-	            <#list [ "10" , "20" , "50" , "100" ] as nb>
-            		<#if nb_items_per_page = nb >
-             			<option selected="selected" value="${nb}">${nb}</option>
-            		<#else>
-	             		<option value="${nb}">${nb}</option>
-            		</#if>
-            	</#list>
-        	</select>
-        	<input type="hidden" name="entry_id" value="${entry.id}" />
-        	<input type="submit" class="button" value="#i18n{quicklinks.modify_entry_select.option_list.buttonItemsPerPage}" />
-		</p>
-	</form>
-
-	<table>
-		<tr>
-			<th>#i18n{quicklinks.modify_entry_select.option_list.labelTitle}</th>
-			<th>#i18n{quicklinks.modify_entry_select.option_list.labelUrl}</th>
-			<th>#i18n{quicklinks.modify_entry_select.option_list.labelActions}</th>
-		</tr>
-		<@optionsTable items=option_list />
-	</table>
-<#else>
-	<em>#i18n{quicklinks.modify_entry_select.option_list.noOption}</em>
-</#if>
-
-<form method="post" name="add_entry_select_option" action="jsp/admin/plugins/quicklinks/CreateEntrySelectOption.jsp">
-		<p>
-			<input type="hidden" name="entry_id" id="entry_id" value="${entry.id}" />
-			<input type="submit" value="#i18n{quicklinks.modify_entry_select.option_list.buttonLabelCreate}" tabindex="8" class="button" />
-		</p>
-</form>
+			<button class="btn btn-primary" type="submit" ><i class="icon-plus icon-white"></i>&nbsp;#i18n{quicklinks.modify_entry_select.option_list.buttonLabelCreate}</button>
+		</form>
+	</legend>
+		<a name="option_list"></a>
+		<#if option_list?has_content>
+		<@paginationAdmin paginator=paginator combo=1 />
+			<table class="table table-striped table-condensed">
+				<tr>
+					<th>#i18n{quicklinks.modify_entry_select.option_list.labelTitle}</th>
+					<th>#i18n{quicklinks.modify_entry_select.option_list.labelUrl}</th>
+					<th>#i18n{quicklinks.modify_entry_select.option_list.labelActions}</th>
+				</tr>
+				<@optionsTable items=option_list />
+			</table>
+		<#else>
+			<p class="label label-warning">#i18n{quicklinks.modify_entry_select.option_list.noOption}</p>
+		</#if>
+	</fieldset>
+	</div>
 </div>
 
 <script language="javascript">

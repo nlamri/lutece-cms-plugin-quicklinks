@@ -1,19 +1,27 @@
-<div class="content-box" >
-<h2>#i18n{quicklinks.create_entry_select_option.adminTitle}</h2>
-<form method="post" name="create_entry_select_option" action="jsp/admin/plugins/quicklinks/DoCreateEntrySelectOption.jsp">
-        <p>
-       		<label for="title">#i18n{quicklinks.create_entry_select_option.labelTitle} * :</label>
-            <input type="text" name="title" id="title" tabindex="1" size="50" maxlength="255" value="" />
-        </p>
-        <p>
-       		<label for="url">#i18n{quicklinks.create_entry_select_option.labelUrl} * :</label>
-            <input type="text" name="url" id="url" tabindex="1" size="50" maxlength="255" value="" />
-        </p>
-		<p>
-			<input type="hidden" name="entry_id" id="entry_id" value="${entry.id}" />
-			<input type="hidden" name="quicklinks_id" id="quicklinks_id" value="${entry.idQuicklinks}" />
-			<input type="submit" value="#i18n{quicklinks.create_entry_select_option.buttonLabelCreate}" tabindex="8" class="button" />
-			<input class="button" type="button" onclick="javascript:history.go(-1)" value="#i18n{portal.admin.message.buttonCancel}" />
-		</p>
-</form>
+<div class="row" >
+	<div class="span12" >
+	<fieldset>
+	<legend>#i18n{quicklinks.create_entry_select_option.adminTitle}</legend>
+		<form class="form-horizontal" method="post" name="create_entry_select_option" action="jsp/admin/plugins/quicklinks/DoCreateEntrySelectOption.jsp">
+        <input type="hidden" name="entry_id" id="entry_id" value="${entry.id}" />
+		<input type="hidden" name="quicklinks_id" id="quicklinks_id" value="${entry.idQuicklinks}" />
+		<div class="control-group">
+		<label class="control-label" for="title">#i18n{quicklinks.create_entry_select_option.labelTitle} * :</label>
+            <div class="controls">
+				<input type="text" name="title" id="title" tabindex="1" maxlength="255" value="" />
+			</div>
+		</div>
+        <div class="control-group">
+		<label class="control-label" for="url">#i18n{quicklinks.create_entry_select_option.labelUrl} * :</label>
+            <div class="controls">
+				<input type="text" name="url" id="url" tabindex="1" size="50" maxlength="255" value="" />
+			</div>
+		</div>
+        <div class="form-actions">
+			<button class="btn btn-primary" type="submit" ><i class="icon-ok icon-white"></i>&nbsp;#i18n{quicklinks.create_entry_select_option.buttonLabelCreate}</button>
+			<button class="btn btn-primary" onclick="javascript:window.history.back();" ><i class="icon-remove-circle icon-white"></i>&nbsp;#i18n{portal.admin.message.buttonCancel}</button>
+		</div>
+		</form>
+	</fieldset>
+	</div>
 </div>
