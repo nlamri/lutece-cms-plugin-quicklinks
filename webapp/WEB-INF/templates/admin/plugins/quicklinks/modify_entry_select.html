@@ -5,31 +5,31 @@
         <td>${option.title!}</td>
         <td>${option.url!}</td>
         <td>
-			<a class="btn btn-primary btn-mini" href="jsp/admin/plugins/quicklinks/ModifyEntrySelectOption.jsp?option_id=${option.id}&entry_id=${option.idEntry}" title=" ${option.title}">
+			<a class="btn btn-primary btn-small" href="jsp/admin/plugins/quicklinks/ModifyEntrySelectOption.jsp?option_id=${option.id}&entry_id=${option.idEntry}" title=" ${option.title}">
 				<i class="icon-edit icon-white"></i>
 			</a>                
             <#if option.idOrder &gt; 0>
-				<a class="btn btn-primary btn-mini" href="jsp/admin/plugins/quicklinks/DoGoUpEntrySelectOption.jsp?option_id=${option.id}&entry_id=${option.idEntry}" title="#i18n{quicklinks.modify_entry_select.option_list.buttonLabelGoUp}">
+				<a class="btn btn-primary btn-small" href="jsp/admin/plugins/quicklinks/DoGoUpEntrySelectOption.jsp?option_id=${option.id}&entry_id=${option.idEntry}" title="#i18n{quicklinks.modify_entry_select.option_list.buttonLabelGoUp}">
 					<i class="icon-chevron-up icon-white"></i>
 				</a>
             <#else>
-				<a class="btn btn-primary btn-mini disabled" href="javascript:return false;" title="#i18n{quicklinks.modify_entry_select.option_list.buttonLabelGoUp}" >
+				<a class="btn btn-primary btn-small disabled" href="javascript:return false;" title="#i18n{quicklinks.modify_entry_select.option_list.buttonLabelGoUp}" >
 					<i class="icon-chevron-up icon-white"></i>
 				</a>
             </#if>
             <#if items?seq_index_of(option) != items?size-1>
-            	<a class="btn btn-primary btn-mini" href="jsp/admin/plugins/quicklinks/DoGoDownEntrySelectOption.jsp?option_id=${option.id}&entry_id=${option.idEntry}" title="#i18n{quicklinks.modify_entry_select.option_list.buttonLabelGoDown}">
+            	<a class="btn btn-primary btn-small" href="jsp/admin/plugins/quicklinks/DoGoDownEntrySelectOption.jsp?option_id=${option.id}&entry_id=${option.idEntry}" title="#i18n{quicklinks.modify_entry_select.option_list.buttonLabelGoDown}">
 					<i class="icon-chevron-down icon-white"></i>
 	            </a>
             <#else>
-				<a class="btn btn-primary btn-mini disabled" href="javascript:return false;" title="#i18n{quicklinks.modify_entry_select.option_list.buttonLabelGoDown}" >
+				<a class="btn btn-primary btn-small disabled" href="javascript:return false;" title="#i18n{quicklinks.modify_entry_select.option_list.buttonLabelGoDown}" >
 					<i class="icon-chevron-down icon-white"></i>
 				</a>
             </#if>
-                <a class="btn btn-primary btn-mini" href="jsp/admin/plugins/quicklinks/DoCopyEntrySelectOption.jsp?option_id=${option.id}&entry_id=${option.idEntry}" title="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelDuplicate}" >
+                <a class="btn btn-primary btn-small" href="jsp/admin/plugins/quicklinks/DoCopyEntrySelectOption.jsp?option_id=${option.id}&entry_id=${option.idEntry}" title="#i18n{quicklinks.modify_quicklinks.entry_list.buttonLabelDuplicate}" >
 					<i class="icon-move icon-white"></i>
                 </a>
-                <a class="btn btn-danger btn-mini" href="jsp/admin/plugins/quicklinks/ConfirmRemoveEntrySelectOption.jsp?option_id=${option.id}&entry_id=${option.idEntry}" >
+                <a class="btn btn-danger btn-small" href="jsp/admin/plugins/quicklinks/ConfirmRemoveEntrySelectOption.jsp?option_id=${option.id}&entry_id=${option.idEntry}" >
 					<i class="icon-trash icon-white"></i>
                 </a>
             </td>            
