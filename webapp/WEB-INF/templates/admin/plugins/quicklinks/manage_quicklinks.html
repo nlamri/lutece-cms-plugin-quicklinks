@@ -40,7 +40,7 @@
 				<td>
 				<#if quicklinks_actions?exists>
 					<#list quicklinks_actions as action>
-					<a class="btn <#if action.name!="DELETE">btn-primary<#else>btn-danger</#if> btn-small" href="${action.url}?&quicklinks_id=${quicklinks.id}"  title="${action.description}" >
+					<a class="btn <#if action.nameKey=="quicklinks.action.delete.name" || action.nameKey=="quicklinks.action.disable.name">btn-danger<#elseif action.nameKey=="quicklinks.action.enable.name" >btn-success<#else>btn-primary</#if> btn-small" href="${action.url}?&quicklinks_id=${quicklinks.id}"  title="${action.description}" >
 						<i class="${action.iconUrl}"></i>
 					</a>
 					</#list>
