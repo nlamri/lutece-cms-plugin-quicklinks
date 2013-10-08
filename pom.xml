@@ -1,51 +1,51 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-	<parent>
-	  <artifactId>lutece-plugins-pom</artifactId>
-	  <groupId>fr.paris.lutece.plugins</groupId>
-	  <version>3.5</version>
-	</parent>
+    <parent>
+        <artifactId>lutece-plugins-pom</artifactId>
+        <groupId>fr.paris.lutece.plugins</groupId>
+        <version>3.5</version>
+    </parent>
 
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>fr.paris.lutece.plugins</groupId>
-	<artifactId>plugin-quicklinks</artifactId>
-	<packaging>lutece-plugin</packaging>
-	<version>2.1.4-SNAPSHOT</version>
-	<name>Lutece quicklinks plugin</name>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>fr.paris.lutece.plugins</groupId>
+    <artifactId>plugin-quicklinks</artifactId>
+    <packaging>lutece-plugin</packaging>
+    <version>2.1.4-SNAPSHOT</version>
+    <name>Lutece quicklinks plugin</name>
 
-	<repositories>
+    <repositories>
         <repository>
-          <id>luteceSnapshot</id>
-          <name>luteceSnapshot</name>
-          <url>http://dev.lutece.paris.fr/snapshot_repository</url>
-          <snapshots>
-              <enabled>true</enabled>
-          </snapshots>
+            <id>luteceSnapshot</id>
+            <name>luteceSnapshot</name>
+            <url>http://dev.lutece.paris.fr/snapshot_repository</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
         </repository>
         <repository>
-          <id>lutece</id>
-          <name>luteceRepository</name>
-          <url>http://dev.lutece.paris.fr/maven_repository</url>
-          <snapshots>
-              <enabled>false</enabled>
-          </snapshots>
+            <id>lutece</id>
+            <name>luteceRepository</name>
+            <url>http://dev.lutece.paris.fr/maven_repository</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>
     </repositories>
 	
- 	<dependencies>
-		<dependency>
-	    <groupId>fr.paris.lutece</groupId>
-	    <artifactId>lutece-core</artifactId>
-	    <version>[2.3.1,5.0.0-SNAPSHOT)</version>
-	    <type>lutece-core</type>
-	  </dependency>
-   </dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>fr.paris.lutece</groupId>
+            <artifactId>lutece-core</artifactId>
+            <version>[4.0.0,)</version>
+            <type>lutece-core</type>
+        </dependency>
+    </dependencies>
    
-   <properties>
-		<componentName>quicklinks</componentName>
-		<jiraProjectName>QUICKLINKS</jiraProjectName>
-		<jiraComponentId>10144</jiraComponentId>
-	</properties>
+    <properties>
+        <componentName>quicklinks</componentName>
+        <jiraProjectName>QUICKLINKS</jiraProjectName>
+        <jiraComponentId>10144</jiraComponentId>
+    </properties>
     <scm>
         <connection>scm:svn:http://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/cms/plugin-quicklinks</connection>
         <developerConnection>scm:svn:https://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/cms/plugin-quicklinks</developerConnection>
