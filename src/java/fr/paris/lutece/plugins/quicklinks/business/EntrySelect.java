@@ -51,7 +51,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * The class Entry Select
- *
+ * 
  */
 public class EntrySelect extends Entry
 {
@@ -95,21 +95,22 @@ public class EntrySelect extends Entry
     private String _strTarget;
 
     @Override
-    public EntrySelect clone(  ) throws CloneNotSupportedException
+    public EntrySelect clone( ) throws CloneNotSupportedException
     {
-        EntrySelect entrySelect = new EntrySelect(  );
-        entrySelect.setEntryType( getEntryType(  ) );
-        entrySelect.setIdOrder( getIdOrder(  ) );
-        entrySelect.setIdParent( getIdParent(  ) );
-        entrySelect.setIdQuicklinks( getIdQuicklinks(  ) );
-        entrySelect.setTitle( getTitle(  ) );
+        EntrySelect entrySelect = new EntrySelect( );
+        entrySelect.setEntryType( getEntryType( ) );
+        entrySelect.setIdOrder( getIdOrder( ) );
+        entrySelect.setIdParent( getIdParent( ) );
+        entrySelect.setIdQuicklinks( getIdQuicklinks( ) );
+        entrySelect.setTitle( getTitle( ) );
+        entrySelect.setTarget( getTarget( ) );
 
         return entrySelect;
     }
 
     /**
      * Copy an Entry
-     *
+     * 
      * @param nIdQuicklinks The {@link Quicklinks} identifier
      * @param plugin The {@link Plugin}
      * @param strNewName The new name
@@ -119,9 +120,9 @@ public class EntrySelect extends Entry
     {
         IEntry copy = super.copy( nIdQuicklinks, plugin, strNewName );
 
-        for ( EntrySelectOption entrySelectOption : EntrySelectOptionHome.findByEntry( getId(  ), plugin ) )
+        for ( EntrySelectOption entrySelectOption : EntrySelectOptionHome.findByEntry( getId( ), plugin ) )
         {
-            entrySelectOption.copy( copy.getId(  ), plugin );
+            entrySelectOption.copy( copy.getId( ), plugin );
         }
 
         return copy;
@@ -130,18 +131,18 @@ public class EntrySelect extends Entry
     @Override
     public String getHtml( Plugin plugin, Locale locale )
     {
-        HashMap<String, Object> model = new HashMap<String, Object>(  );
+        HashMap<String, Object> model = new HashMap<String, Object>( );
 
         model.put( MARK_ENTRY_SELECT, this );
-        model.put( MARK_OPTION_LIST, EntrySelectOptionHome.findByEntry( getId(  ), plugin ) );
+        model.put( MARK_OPTION_LIST, EntrySelectOptionHome.findByEntry( getId( ), plugin ) );
 
         HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_DISPLAY, locale, model );
 
-        return template.getHtml(  );
+        return template.getHtml( );
     }
 
     @Override
-    public String getTitle(  )
+    public String getTitle( )
     {
         return _strTitle;
     }
@@ -156,7 +157,7 @@ public class EntrySelect extends Entry
      * Get the target
      * @return the target
      */
-    public String getTarget(  )
+    public String getTarget( )
     {
         return _strTarget;
     }
@@ -177,9 +178,9 @@ public class EntrySelect extends Entry
         String strTargetFramename = request.getParameter( PARAMETER_TARGET_FRAMENAME );
 
         // Check Target
-        if ( ( strTarget == null ) ||
-                ( strTarget.equals( EMPTY_STRING ) &&
-                ( ( strTargetFramename == null ) || strTargetFramename.equals( "" ) ) ) )
+        if ( ( strTarget == null )
+                || ( strTarget.equals( EMPTY_STRING ) && ( ( strTargetFramename == null ) || strTargetFramename
+                        .equals( "" ) ) ) )
         {
             return Messages.MANDATORY_FIELDS;
         }
@@ -199,7 +200,7 @@ public class EntrySelect extends Entry
     @Override
     public void getSpecificParameters( HttpServletRequest request, HashMap<String, Object> model, Plugin plugin )
     {
-        Collection<EntrySelectOption> listEntrySelectOption = EntrySelectOptionHome.findByEntry( getId(  ), plugin );
+        Collection<EntrySelectOption> listEntrySelectOption = EntrySelectOptionHome.findByEntry( getId( ), plugin );
 
         _nDefaultItemsPerPage = AppPropertiesService.getPropertyInt( PROPERTY_STYLES_PER_PAGE,
                 DEFAULT_PAGINATOR_STYLES_PER_PAGE );
@@ -212,13 +213,13 @@ public class EntrySelect extends Entry
         url.addParameter( Paginator.PARAMETER_ITEMS_PER_PAGE, request.getParameter( Paginator.PARAMETER_ITEMS_PER_PAGE ) );
 
         Paginator paginator = new Paginator( (List<EntrySelectOption>) listEntrySelectOption, _nItemsPerPage,
-                url.getUrl(  ), Paginator.PARAMETER_PAGE_INDEX, _strCurrentPageIndex );
+                url.getUrl( ), Paginator.PARAMETER_PAGE_INDEX, _strCurrentPageIndex );
 
         model.put( MARK_PAGINATOR, paginator );
         model.put( MARK_NB_ITEMS_PER_PAGE, String.valueOf( _nItemsPerPage ) );
-        model.put( MARK_OPTION_LIST, paginator.getPageItems(  ) );
+        model.put( MARK_OPTION_LIST, paginator.getPageItems( ) );
         model.put( MARK_TARGET_DEFAULT_VALUE,
-            AppPropertiesService.getProperty( PROPERTY_TARGET_DEFAULT_VALUE, TARGET_DEFAULT_VALUE ) );
+                AppPropertiesService.getProperty( PROPERTY_TARGET_DEFAULT_VALUE, TARGET_DEFAULT_VALUE ) );
     }
 
     @Override
@@ -236,7 +237,7 @@ public class EntrySelect extends Entry
     @Override
     public void removeSpecificParameters( Plugin plugin )
     {
-        EntrySelectHome.remove( getId(  ), plugin );
+        EntrySelectHome.remove( getId( ), plugin );
     }
 
     @Override

@@ -42,17 +42,17 @@ import fr.paris.lutece.portal.web.constants.Messages;
 import fr.paris.lutece.portal.web.upload.MultipartHttpServletRequest;
 import fr.paris.lutece.util.html.HtmlTemplate;
 
-import org.apache.commons.fileupload.FileItem;
-
 import java.util.HashMap;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.fileupload.FileItem;
+
 
 /**
  * The class Entry Text
- *
+ * 
  */
 public class EntryUrl extends Entry
 {
@@ -112,15 +112,15 @@ public class EntryUrl extends Entry
     /**
      * @return the _strDescription
      */
-    public String getDescription(  )
+    public String getDescription( )
     {
         return _strDescription;
     }
 
     /**
-         * @return the url
-         */
-    public String getUrl(  )
+     * @return the url
+     */
+    public String getUrl( )
     {
         return _strUrl;
     }
@@ -136,7 +136,7 @@ public class EntryUrl extends Entry
     /**
      * @return the image
      */
-    public byte[] getImage(  )
+    public byte[] getImage( )
     {
         return _bytesImage;
     }
@@ -150,9 +150,9 @@ public class EntryUrl extends Entry
     }
 
     /**
-         * @return the imageMimeType
-         */
-    public String getImageMimeType(  )
+     * @return the imageMimeType
+     */
+    public String getImageMimeType( )
     {
         return _strImageMimeType;
     }
@@ -166,9 +166,9 @@ public class EntryUrl extends Entry
     }
 
     /**
-    * @return the entryUrlDisplayProperties
-    */
-    public EntryUrlDisplayProperties getEntryUrlDisplayProperties(  )
+     * @return the entryUrlDisplayProperties
+     */
+    public EntryUrlDisplayProperties getEntryUrlDisplayProperties( )
     {
         return _entryUrlDisplayProperties;
     }
@@ -184,7 +184,7 @@ public class EntryUrl extends Entry
     /**
      * @return the entryUrlLinkProperties
      */
-    public EntryUrlLinkProperties getEntryUrlLinkProperties(  )
+    public EntryUrlLinkProperties getEntryUrlLinkProperties( )
     {
         return _entryUrlLinkProperties;
     }
@@ -198,20 +198,21 @@ public class EntryUrl extends Entry
     }
 
     @Override
-    public EntryUrl clone(  ) throws CloneNotSupportedException
+    public EntryUrl clone( ) throws CloneNotSupportedException
     {
-        EntryUrl entryUrl = new EntryUrl(  );
-        entryUrl.setDescription( getDescription(  ) );
-        entryUrl.setEntryType( getEntryType(  ) );
-        entryUrl.setEntryUrlDisplayProperties( getEntryUrlDisplayProperties(  ) );
-        entryUrl.setEntryUrlLinkProperties( getEntryUrlLinkProperties(  ) );
-        entryUrl.setImage( getImage(  ) );
-        entryUrl.setImageMimeType( getImageMimeType(  ) );
-        entryUrl.setIdOrder( getIdOrder(  ) );
-        entryUrl.setIdParent( getIdParent(  ) );
-        entryUrl.setIdQuicklinks( getIdQuicklinks(  ) );
-        entryUrl.setTitle( getTitle(  ) );
-        entryUrl.setUrl( getUrl(  ) );
+        EntryUrl entryUrl = new EntryUrl( );
+        entryUrl.setDescription( getDescription( ) );
+        entryUrl.setEntryType( getEntryType( ) );
+        entryUrl.setEntryUrlDisplayProperties( getEntryUrlDisplayProperties( ) );
+        entryUrl.setEntryUrlLinkProperties( getEntryUrlLinkProperties( ) );
+        entryUrl.setImage( getImage( ) );
+        entryUrl.setImageMimeType( getImageMimeType( ) );
+        entryUrl.setIdOrder( getIdOrder( ) );
+        entryUrl.setIdParent( getIdParent( ) );
+        entryUrl.setIdQuicklinks( getIdQuicklinks( ) );
+        entryUrl.setTitle( getTitle( ) );
+        entryUrl.setUrl( getUrl( ) );
+        entryUrl.setTarget( getTarget( ) );
 
         return entryUrl;
     }
@@ -219,17 +220,17 @@ public class EntryUrl extends Entry
     @Override
     public String getHtml( Plugin plugin, Locale locale )
     {
-        HashMap<String, Object> model = new HashMap<String, Object>(  );
+        HashMap<String, Object> model = new HashMap<String, Object>( );
 
         model.put( MARK_ENTRY_URL, this );
 
         HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_DISPLAY, locale, model );
 
-        return template.getHtml(  );
+        return template.getHtml( );
     }
 
     @Override
-    public String getTitle(  )
+    public String getTitle( )
     {
         return _strTitle;
     }
@@ -244,7 +245,7 @@ public class EntryUrl extends Entry
      * Get the target
      * @return The target
      */
-    public String getTarget(  )
+    public String getTarget( )
     {
         return _strTarget;
     }
@@ -274,9 +275,9 @@ public class EntryUrl extends Entry
         boolean bUpdateImage = ( ( strUpdateImage != null ) && !strUpdateImage.equals( EMPTY_STRING ) ) ? true : false;
 
         // Check Target
-        if ( ( strTarget == null ) ||
-                ( strTarget.equals( EMPTY_STRING ) &&
-                ( ( strTargetFramename == null ) || strTargetFramename.equals( "" ) ) ) )
+        if ( ( strTarget == null )
+                || ( strTarget.equals( EMPTY_STRING ) && ( ( strTargetFramename == null ) || strTargetFramename
+                        .equals( "" ) ) ) )
         {
             return Messages.MANDATORY_FIELDS;
         }
@@ -296,9 +297,9 @@ public class EntryUrl extends Entry
             this.setDescription( strDescription );
         }
 
-        if ( ( strUrl == null ) || strUrl.equals( EMPTY_STRING ) || ( strDisplayProperties == null ) ||
-                !strDisplayProperties.matches( REGEX_ID ) || ( strLinkProperties == null ) ||
-                !strLinkProperties.matches( REGEX_ID ) )
+        if ( ( strUrl == null ) || strUrl.equals( EMPTY_STRING ) || ( strDisplayProperties == null )
+                || !strDisplayProperties.matches( REGEX_ID ) || ( strLinkProperties == null )
+                || !strLinkProperties.matches( REGEX_ID ) )
         {
             return Messages.MANDATORY_FIELDS;
         }
@@ -318,8 +319,8 @@ public class EntryUrl extends Entry
         {
             MultipartHttpServletRequest mRequest = (MultipartHttpServletRequest) request;
             FileItem item = mRequest.getFile( PARAMETER_IMAGE );
-            setImage( item.get(  ) );
-            setImageMimeType( item.getContentType(  ) );
+            setImage( item.get( ) );
+            setImageMimeType( item.getContentType( ) );
         }
 
         // Check display properties
@@ -354,15 +355,15 @@ public class EntryUrl extends Entry
     @Override
     public void getSpecificParameters( HttpServletRequest request, HashMap<String, Object> model, Plugin plugin )
     {
-        int nDisplayPropertiesDefaultValue = AppPropertiesService.getPropertyInt( PROPERTY_DISPLAY_PROPERTIES_DEFAULT_VALUE,
-                DISPLAY_PROPERTIES_DEFAULT_VALUE );
+        int nDisplayPropertiesDefaultValue = AppPropertiesService.getPropertyInt(
+                PROPERTY_DISPLAY_PROPERTIES_DEFAULT_VALUE, DISPLAY_PROPERTIES_DEFAULT_VALUE );
         int nLinkPropertiesDefaultValue = AppPropertiesService.getPropertyInt( PROPERTY_LINK_PROPERTIES_DEFAULT_VALUE,
                 LINK_PROPERTIES_DEFAULT_VALUE );
 
-        model.put( MARK_DISPLAY_PROPERTIES_LIST, EntryUrlDisplayProperties.getReferenceList(  ) );
-        model.put( MARK_LINK_PROPERTIES_LIST, EntryUrlLinkProperties.getReferenceList(  ) );
+        model.put( MARK_DISPLAY_PROPERTIES_LIST, EntryUrlDisplayProperties.getReferenceList( ) );
+        model.put( MARK_LINK_PROPERTIES_LIST, EntryUrlLinkProperties.getReferenceList( ) );
         model.put( MARK_TARGET_DEFAULT_VALUE,
-            AppPropertiesService.getProperty( PROPERTY_TARGET_DEFAULT_VALUE, TARGET_DEFAULT_VALUE ) );
+                AppPropertiesService.getProperty( PROPERTY_TARGET_DEFAULT_VALUE, TARGET_DEFAULT_VALUE ) );
         model.put( MARK_DISPLAY_PROPERTIES_DEFAULT_VALUE, nDisplayPropertiesDefaultValue );
         model.put( MARK_LINK_PROPERTIES_DEFAULT_VALUE, nLinkPropertiesDefaultValue );
     }
@@ -371,11 +372,11 @@ public class EntryUrl extends Entry
      * Get the image resource for the entry url
      * @return The {@link ImageResource} object
      */
-    public ImageResource getImageResource(  )
+    public ImageResource getImageResource( )
     {
-        ImageResource imageResource = new ImageResource(  );
-        imageResource.setImage( getImage(  ) );
-        imageResource.setMimeType( getImageMimeType(  ) );
+        ImageResource imageResource = new ImageResource( );
+        imageResource.setImage( getImage( ) );
+        imageResource.setMimeType( getImageMimeType( ) );
 
         return imageResource;
     }
@@ -384,9 +385,9 @@ public class EntryUrl extends Entry
      * Get the image Url
      * @return The image Url
      */
-    public String getImageUrl(  )
+    public String getImageUrl( )
     {
-        return EntryUrlService.getResourceImageEntryUrl( getId(  ) );
+        return EntryUrlService.getResourceImageEntryUrl( getId( ) );
     }
 
     @Override
@@ -404,7 +405,7 @@ public class EntryUrl extends Entry
     @Override
     public void removeSpecificParameters( Plugin plugin )
     {
-        EntryUrlHome.remove( getId(  ), plugin );
+        EntryUrlHome.remove( getId( ), plugin );
     }
 
     @Override
