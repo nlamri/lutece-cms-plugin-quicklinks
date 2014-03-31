@@ -22,7 +22,6 @@
     <!-- Specific plugin CSS stylesheet -->
     <css-stylesheets>
         <css-stylesheets-scope>portal</css-stylesheets-scope>
-        <css-stylesheet>quicklinks/quicklinks.css</css-stylesheet>
         <css-stylesheet>quicklinks/superfish/superfish.css</css-stylesheet>
         <css-stylesheet>quicklinks/superfish/superfish-vertical.css</css-stylesheet>
     </css-stylesheets>
