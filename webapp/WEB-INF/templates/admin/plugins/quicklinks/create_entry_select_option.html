@@ -1,29 +1,37 @@
-<div class="row-fluid">
-	<div class="span12" >
-	<fieldset>
-	<legend>#i18n{quicklinks.create_entry_select_option.adminTitle}</legend>
-		<form class="form-horizontal" method="post" name="create_entry_select_option" action="jsp/admin/plugins/quicklinks/DoCreateEntrySelectOption.jsp">
-        <input type="hidden" name="entry_id" id="entry_id" value="${entry.id}" />
-		<input type="hidden" name="quicklinks_id" id="quicklinks_id" value="${entry.idQuicklinks}" />
-		<div class="control-group">
-		<label class="control-label" for="title">#i18n{quicklinks.create_entry_select_option.labelTitle} * :</label>
-            <div class="controls">
-				<input type="text" name="title" id="title" tabindex="1" maxlength="255" value="" />
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-12">
+		<div class="box box-solid box-primary">
+			<div class="box-header">
+				<h3 class="box-title">#i18n{quicklinks.create_entry_select_option.adminTitle}</h3>
+			</div>
+			<div class="box-body">
+				<form class="form-horizontal" method="post" name="create_entry_select_option" action="jsp/admin/plugins/quicklinks/DoCreateEntrySelectOption.jsp">
+					<input type="hidden" name="entry_id" id="entry_id" value="${entry.id}">
+					<input type="hidden" name="quicklinks_id" id="quicklinks_id" value="${entry.idQuicklinks}">
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-sm-2 col-md-2" for="title">#i18n{quicklinks.create_entry_select_option.labelTitle} * </label>
+						<div class="col-xs-12 col-sm-5 col-md-5">
+							<input type="text" name="title" id="title" tabindex="1" maxlength="255" value="" class="form-control" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-sm-2 col-md-2" for="url">#i18n{quicklinks.create_entry_select_option.labelUrl} * </label>
+						<div class="col-xs-12 col-sm-5 col-md-5">
+							<input type="text" name="url" id="url" tabindex="2" maxlength="255" value="" class="form-control" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-12 col-sm-offset-2 col-sm-10 col-md-offset-2 col-md-10">
+						<button class="btn btn-primary btn-flat" type="submit" >
+							<i class="fa fa-check"></i>&nbsp;#i18n{quicklinks.create_entry_select_option.buttonLabelCreate}
+						</button>
+						<a class="btn btn-default btn-flat" href="jsp/admin/plugins/quicklinks/ModifyQuicklinks.jsp?&quicklinks_id=${entry.idQuicklinks}">
+							<i class="fa fa-close"></i>&nbsp;#i18n{portal.admin.message.buttonCancel}
+						</a>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
-        <div class="control-group">
-		<label class="control-label" for="url">#i18n{quicklinks.create_entry_select_option.labelUrl} * :</label>
-            <div class="controls">
-				<input type="text" name="url" id="url" tabindex="1" size="50" maxlength="255" value="" />
-			</div>
-		</div>
-        <div class="form-actions">
-			<button class="btn btn-primary btn-small" type="submit" ><i class="icon-ok icon-white"></i>&nbsp;#i18n{quicklinks.create_entry_select_option.buttonLabelCreate}</button>
-			<a class="btn btn-small" href="jsp/admin/plugins/quicklinks/ModifyQuicklinks.jsp?&quicklinks_id=${entry.idQuicklinks}">
-				<i class="icon-remove-circle"></i>&nbsp;#i18n{portal.admin.message.buttonCancel}
-			</a>
-		</div>
-		</form>
-	</fieldset>
 	</div>
 </div>
