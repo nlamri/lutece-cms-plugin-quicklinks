@@ -1,7 +1,7 @@
 <#include "macro_quicklinks.html" />
 <div class="row">
 	<div class="col-xs-12 col-sm-4 col-md-4">
-		<div class="box box-solid box-primary">
+		<div class="box box-primary">
 			<div class="box-header">
 				<h3 class="box-title">#i18n{quicklinks.modify_quicklinks.adminTitle}</h3>
 			</div>
@@ -18,7 +18,7 @@
 				<div class="form-group">
 					<label class="control-label col-xs-12 col-sm-3 col-md-3" for="type">#i18n{quicklinks.modify_quicklinks.labelType} *</label>
 					<div class="col-xs-12 col-sm-9 col-md-9">
-						<@comboWithParams name="type" default_value="${quicklinks.type.value}" additionalParameters="class=\"form-control\" " items=type_list />
+						<@comboWithParams name="type" default_value="${quicklinks.type.value}" additionalParameters="class=\"form-control\"" items=type_list />
 						<span class="help-block">#i18n{quicklinks.modify_quicklinks.descriptionType}</span>
 					</div>
 				</div>
@@ -79,9 +79,9 @@
 						<form class="form-inline" name="create_entry" method="post" action="jsp/admin/plugins/quicklinks/CreateEntry.jsp" >
 						<input type="hidden" name="quicklinks_id" value="${quicklinks.id}">
 						<label for="title">#i18n{quicklinks.modify_quicklinks.create_entry.labelEntryTitle}</label>
-						<input type="text" name="title" id="title" size="50" maxlength="255">
+						<input type="text" name="title" id="title" class="form-control" maxlength="255">
 						<label for="entry_type_id">#i18n{quicklinks.modify_quicklinks.create_entry.labelEntryType} *</label>
-						<select name="entry_type_id" id="entry_type_id">
+						<select name="entry_type_id" id="entry_type_id" class="form-control">
 							<#list entry_type_list as entryType>
 								<option value="${entryType.id}">#i18n{${entryType.titleI18nKey}}</option>
 							</#list>

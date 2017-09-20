@@ -33,7 +33,7 @@
 					<tr>
 						<td>${quicklinks.title}</td>
 						<td>#i18n{${quicklinks.type.i18nKey}}<#if quicklinksWithActions.quicklinks_include_tag?has_content > - ${quicklinksWithActions.quicklinks_include_tag}</#if></td>
-						<td>${quicklinks.workgroup}</td>
+						<td>${quicklinks.workgroup!}</td>
 						<td>${quicklinks.roleKey}</td>
 						<td>
 							<#if quicklinks.enabled>
@@ -46,7 +46,7 @@
 						<#if quicklinks_actions?exists>
 							<#list quicklinks_actions as action>
 							<a class="btn btn-xs btn-flat <#if action.nameKey=="quicklinks.action.delete.name" || action.nameKey=="quicklinks.action.disable.name">btn-danger<#elseif action.nameKey=="quicklinks.action.enable.name" >btn-success<#else>btn-primary</#if>" href="${action.url}?&quicklinks_id=${quicklinks.id}"  title="${action.description}" >
-								<i class="${action.iconUrl}"></i>
+								<i class="fa fa-fw ${action.iconUrl}"></i>
 							</a>
 							</#list>
 						</#if>  
