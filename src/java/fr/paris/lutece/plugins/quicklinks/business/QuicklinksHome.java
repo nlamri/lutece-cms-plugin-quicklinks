@@ -99,17 +99,6 @@ public class QuicklinksHome
     {
         return _dao.load( nIdQuicklinks, plugin );
     }
-    
-     /**
-     * Load the Quicklinks specified by Identifier
-     * @param nIdQuicklinks The identifier
-     * @param plugin The {@link Plugin} using this data access service
-     * @return The {@link Quicklinks}
-     */
-    public static Quicklinks getLastPrimaryKey( Plugin plugin )
-    {
-        return _dao.
-    }
 
     /**
      * Find All {@link Quicklinks}

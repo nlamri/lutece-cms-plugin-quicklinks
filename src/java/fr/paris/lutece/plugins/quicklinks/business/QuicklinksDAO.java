@@ -94,33 +94,9 @@ public final class QuicklinksDAO implements IQuicklinksDAO
 
         return nKey;
     }
-    
-    /**
-    * Get the last primary key inserted {@link Quicklinks}
-    * @param plugin The {@link Plugin} using this data access service
-    * @return The last key.
-    */
-    public int getLastPrimaryKey( Plugin plugin )
-    {
-        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_NEW_PK, plugin );
-        daoUtil.executeQuery(  );
-
-        int nKey;
-
-        if ( !daoUtil.next(  ) )
-        {
-            // if the table is empty
-            nKey = 1;
-        }
-        nKey = daoUtil.getInt( 1 );
-        
-        daoUtil.free(  );
-
-        return nKey;
-    }
 
     /**
-     * Gest a new record in the table.
+     * Insert a new record in the table.
      * @param quicklinks The Instance of the object {@link Quicklinks}
      * @param plugin The {@link Plugin} using this data access service
      * @return The new {@link Quicklinks}
