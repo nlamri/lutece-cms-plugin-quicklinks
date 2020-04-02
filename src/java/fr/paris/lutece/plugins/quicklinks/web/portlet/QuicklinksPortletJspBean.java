@@ -1,15 +1,15 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
- * Redistribution and use in source and binary quicklinkss, with or without
+ * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
  *
  *  1. Redistributions of source code must retain the above copyright notice
  *     and the following disclaimer.
  *
- *  2. Redistributions in binary quicklinks must reproduce the above copyright notice
+ *  2. Redistributions in binary form must reproduce the above copyright notice
  *     and the following disclaimer in the documentation and/or other materials
  *     provided with the distribution.
  *
@@ -59,7 +59,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-
 /**
  * This class provides the user interface to manage quicklinks Portlet
  */
@@ -82,49 +81,51 @@ public class QuicklinksPortletJspBean extends PortletJspBean
     /**
      * Returns the portlet creation quicklinks
      *
-     * @param request The http request
+     * @param request
+     *            The http request
      * @return The HTML quicklinks
      */
     public String getCreate( HttpServletRequest request )
     {
-        HashMap<String, Object> model = new HashMap<String, Object>(  );
+        HashMap<String, Object> model = new HashMap<String, Object>( );
         String strIdPage = request.getParameter( PARAMETER_PAGE_ID );
         String strIdPortletType = request.getParameter( PARAMETER_PORTLET_TYPE_ID );
         PortletType portletType = PortletTypeHome.findByPrimaryKey( strIdPortletType );
-        Plugin plugin = PluginService.getPlugin( portletType.getPluginName(  ) );
+        Plugin plugin = PluginService.getPlugin( portletType.getPluginName( ) );
 
-        // Set Quicklinks filter 
-        QuicklinksFilter filter = new QuicklinksFilter(  );
+        // Set Quicklinks filter
+        QuicklinksFilter filter = new QuicklinksFilter( );
         filter.setType( QuicklinksType.PORTLET );
         filter.setEnabled( true );
 
         Collection<Quicklinks> listQuicklinks = QuicklinksHome.findbyFilter( filter, plugin );
-        listQuicklinks = (List) AdminWorkgroupService.getAuthorizedCollection( listQuicklinks, getUser(  ) );
+        listQuicklinks = (List) AdminWorkgroupService.getAuthorizedCollection( listQuicklinks, getUser( ) );
 
-        ReferenceList referenceListQuicklinks = new ReferenceList(  );
+        ReferenceList referenceListQuicklinks = new ReferenceList( );
 
         for ( Quicklinks quicklinks : listQuicklinks )
         {
-            referenceListQuicklinks.addItem( quicklinks.getId(  ), quicklinks.getTitle(  ) );
+            referenceListQuicklinks.addItem( quicklinks.getId( ), quicklinks.getTitle( ) );
         }
 
         model.put( MARK_QUICKLINKS_LIST, referenceListQuicklinks );
 
         HtmlTemplate template = getCreateTemplate( strIdPage, strIdPortletType, model );
 
-        return template.getHtml(  );
+        return template.getHtml( );
     }
 
     /**
      * Returns the Download portlet modification quicklinks
      *
-     * @param request The Http request
+     * @param request
+     *            The Http request
      * @return The HTML quicklinks
      */
     public String getModify( HttpServletRequest request )
     {
         Quicklinks quicklinks;
-        HashMap<String, Object> model = new HashMap<String, Object>(  );
+        HashMap<String, Object> model = new HashMap<String, Object>( );
         String strPortletId = request.getParameter( PARAMETER_PORTLET_ID );
         int nPortletId = -1;
 
@@ -132,47 +133,48 @@ public class QuicklinksPortletJspBean extends PortletJspBean
         {
             nPortletId = Integer.parseInt( strPortletId );
         }
-        catch ( NumberFormatException ne )
+        catch( NumberFormatException ne )
         {
             AppLogService.error( ne );
         }
 
         QuicklinksPortlet portlet = (QuicklinksPortlet) PortletHome.findByPrimaryKey( nPortletId );
-        Plugin plugin = PluginService.getPlugin( portlet.getPluginName(  ) );
-        quicklinks = QuicklinksHome.findByPrimaryKey( portlet.getQuicklinksId(  ), plugin );
+        Plugin plugin = PluginService.getPlugin( portlet.getPluginName( ) );
+        quicklinks = QuicklinksHome.findByPrimaryKey( portlet.getQuicklinksId( ), plugin );
 
-        // Set Quicklinks filter 
-        QuicklinksFilter filter = new QuicklinksFilter(  );
+        // Set Quicklinks filter
+        QuicklinksFilter filter = new QuicklinksFilter( );
         filter.setType( QuicklinksType.PORTLET );
         filter.setEnabled( true );
 
         Collection<Quicklinks> listQuicklinks = QuicklinksHome.findbyFilter( filter, plugin );
-        listQuicklinks = (List) AdminWorkgroupService.getAuthorizedCollection( listQuicklinks, getUser(  ) );
+        listQuicklinks = (List) AdminWorkgroupService.getAuthorizedCollection( listQuicklinks, getUser( ) );
 
-        ReferenceList referenceListQuicklinks = new ReferenceList(  );
+        ReferenceList referenceListQuicklinks = new ReferenceList( );
 
         for ( Quicklinks quicklinksFromList : listQuicklinks )
         {
-            referenceListQuicklinks.addItem( quicklinksFromList.getId(  ), quicklinksFromList.getTitle(  ) );
+            referenceListQuicklinks.addItem( quicklinksFromList.getId( ), quicklinksFromList.getTitle( ) );
         }
 
         model.put( MARK_QUICKLINKS_LIST, referenceListQuicklinks );
-        model.put( MARK_ID_QUICKLINKS, quicklinks.getId(  ) );
+        model.put( MARK_ID_QUICKLINKS, quicklinks.getId( ) );
 
         HtmlTemplate template = getModifyTemplate( portlet, model );
 
-        return template.getHtml(  );
+        return template.getHtml( );
     }
 
     /**
      * Process portlet's creation
      *
-     * @param request The Http request
+     * @param request
+     *            The Http request
      * @return The Jsp management URL of the process result
      */
     public String doCreate( HttpServletRequest request )
     {
-        QuicklinksPortlet portlet = new QuicklinksPortlet(  );
+        QuicklinksPortlet portlet = new QuicklinksPortlet( );
         String strPageId = request.getParameter( PARAMETER_PAGE_ID );
         String strQuicklinksId = request.getParameter( PARAMETER_ID_QUICKLINKS );
         int nPageId = -1;
@@ -186,7 +188,7 @@ public class QuicklinksPortletJspBean extends PortletJspBean
             nPageId = Integer.parseInt( strPageId );
             nQuicklinksId = Integer.parseInt( strQuicklinksId );
         }
-        catch ( NumberFormatException ne )
+        catch( NumberFormatException ne )
         {
             AppLogService.error( ne );
         }
@@ -205,16 +207,17 @@ public class QuicklinksPortletJspBean extends PortletJspBean
         portlet.setQuicklinksId( nQuicklinksId );
 
         // Creating portlet
-        QuicklinksPortletHome.getInstance(  ).create( portlet );
+        QuicklinksPortletHome.getInstance( ).create( portlet );
 
-        //Displays the page with the new Portlet
+        // Displays the page with the new Portlet
         return getPageUrl( nPageId );
     }
 
     /**
      * Process portlet's modification
      *
-     * @param request The http request
+     * @param request
+     *            The http request
      * @return Management's Url
      */
     public String doModify( HttpServletRequest request )
@@ -230,7 +233,7 @@ public class QuicklinksPortletJspBean extends PortletJspBean
             nPortletId = Integer.parseInt( strPortletId );
             nQuicklinksId = Integer.parseInt( strQuicklinksId );
         }
-        catch ( NumberFormatException ne )
+        catch( NumberFormatException ne )
         {
             AppLogService.error( ne );
         }
@@ -252,9 +255,9 @@ public class QuicklinksPortletJspBean extends PortletJspBean
 
         portlet.setQuicklinksId( nQuicklinksId );
         // updates the portlet
-        portlet.update(  );
+        portlet.update( );
 
         // displays the page with the potlet updated
-        return getPageUrl( portlet.getPageId(  ) );
+        return getPageUrl( portlet.getPageId( ) );
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -37,7 +37,6 @@ import fr.paris.lutece.portal.service.plugin.Plugin;
 
 import java.util.Collection;
 
-
 /**
  * Interface for {@link Quicklinks} DAO
  *
@@ -47,7 +46,8 @@ public interface IQuicklinksDAO
     /**
      * Calculate a new primary key to add a new {@link Quicklinks}
      *
-     * @param plugin The {@link Plugin} using this data access service
+     * @param plugin
+     *            The {@link Plugin} using this data access service
      * @return The new key.
      */
     int newPrimaryKey( Plugin plugin );
@@ -55,8 +55,10 @@ public interface IQuicklinksDAO
     /**
      * Insert a new record in the table.
      *
-     * @param quicklinks The Instance of the object {@link Quicklinks}
-     * @param plugin The {@link Plugin} using this data access service
+     * @param quicklinks
+     *            The Instance of the object {@link Quicklinks}
+     * @param plugin
+     *            The {@link Plugin} using this data access service
      * @return The new {@link Quicklinks}
      */
     Quicklinks insert( Quicklinks quicklinks, Plugin plugin );
@@ -64,24 +66,30 @@ public interface IQuicklinksDAO
     /**
      * Delete the {@link Quicklinks} specified by identifier
      *
-     * @param nIdQuicklinks The identifier
-     * @param plugin The {@link Plugin} using this data access service
+     * @param nIdQuicklinks
+     *            The identifier
+     * @param plugin
+     *            The {@link Plugin} using this data access service
      */
     void delete( int nIdQuicklinks, Plugin plugin );
 
     /**
      * Update The {@link Quicklinks}
      *
-     * @param quicklinks The {@link Quicklinks} to update
-     * @param plugin The {@link Plugin} using this data access service
+     * @param quicklinks
+     *            The {@link Quicklinks} to update
+     * @param plugin
+     *            The {@link Plugin} using this data access service
      */
     void store( Quicklinks quicklinks, Plugin plugin );
 
     /**
      * Load the Quicklinks specified by Identifier
      *
-     * @param nIdQuicklinks The identifier
-     * @param plugin The {@link Plugin} using this data access service
+     * @param nIdQuicklinks
+     *            The identifier
+     * @param plugin
+     *            The {@link Plugin} using this data access service
      * @return The {@link Quicklinks}
      */
     Quicklinks load( int nIdQuicklinks, Plugin plugin );
@@ -89,7 +97,8 @@ public interface IQuicklinksDAO
     /**
      * Find All {@link Quicklinks}
      *
-     * @param plugin The {@link Plugin} using this data access service
+     * @param plugin
+     *            The {@link Plugin} using this data access service
      * @return A {@link Collection} of {@link Quicklinks}
      */
     Collection<Quicklinks> findAll( Plugin plugin );
@@ -97,8 +106,10 @@ public interface IQuicklinksDAO
     /**
      * Find all {@link Quicklinks} corresponding to {@link QuicklinksFilter}
      *
-     * @param quickLinksFilter The {@link QuicklinksFilter}
-     * @param plugin The {@link Plugin} using this data access service
+     * @param quickLinksFilter
+     *            The {@link QuicklinksFilter}
+     * @param plugin
+     *            The {@link Plugin} using this data access service
      * @return A {@link Collection} of {@link Quicklinks}
      */
     Collection<Quicklinks> findbyFilter( QuicklinksFilter quickLinksFilter, Plugin plugin );

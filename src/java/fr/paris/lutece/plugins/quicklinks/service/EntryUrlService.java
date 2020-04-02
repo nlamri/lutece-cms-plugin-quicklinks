@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -44,20 +44,19 @@ import fr.paris.lutece.portal.service.plugin.PluginService;
 import fr.paris.lutece.portal.web.constants.Parameters;
 import fr.paris.lutece.util.url.UrlItem;
 
-
 /**
  * Service for Url entry types. Provide ImageResource managemenent
  *
  */
 public class EntryUrlService implements ImageResourceProvider
 {
-    private static EntryUrlService _singleton = new EntryUrlService(  );
+    private static EntryUrlService _singleton = new EntryUrlService( );
     private static final String IMAGE_RESOURCE_TYPE_ID = "quicklinks_entryurl_image";
 
     /**
      * Creates a new instance of EntryUrlService
      */
-    EntryUrlService(  )
+    EntryUrlService( )
     {
         ImageResourceManager.registerProvider( this );
     }
@@ -67,16 +66,18 @@ public class EntryUrlService implements ImageResourceProvider
      *
      * @return The unique instance
      */
-    public static EntryUrlService getInstance(  )
+    public static EntryUrlService getInstance( )
     {
         return _singleton;
     }
 
     /**
-    * Return the Resource id
-    * @param nIdResource The resource identifier
-    * @return The Resource Image
-    */
+     * Return the Resource id
+     * 
+     * @param nIdResource
+     *            The resource identifier
+     * @return The Resource Image
+     */
     public ImageResource getImageResource( int arg0 )
     {
         Plugin plugin = PluginService.getPlugin( QuicklinksPlugin.PLUGIN_NAME );
@@ -86,7 +87,7 @@ public class EntryUrlService implements ImageResourceProvider
         {
             EntryUrl entryUrl = (EntryUrl) entry;
 
-            return entryUrl.getImageResource(  );
+            return entryUrl.getImageResource( );
         }
 
         return null;
@@ -94,25 +95,28 @@ public class EntryUrlService implements ImageResourceProvider
 
     /**
      * Return the Resource Type id
+     * 
      * @return The Resource Type Id
      */
-    public String getResourceTypeId(  )
+    public String getResourceTypeId( )
     {
         return IMAGE_RESOURCE_TYPE_ID;
     }
 
     /**
      * Management of the image associated to the {@link EntryUrl}
-     * @param nEntryUrl The {@link EntryUrl} identifier
+     * 
+     * @param nEntryUrl
+     *            The {@link EntryUrl} identifier
      * @return The url of the resource
      */
     public static String getResourceImageEntryUrl( int nEntryUrl )
     {
-        String strResourceType = EntryUrlService.getInstance(  ).getResourceTypeId(  );
+        String strResourceType = EntryUrlService.getInstance( ).getResourceTypeId( );
         UrlItem url = new UrlItem( Parameters.IMAGE_SERVLET );
         url.addParameter( Parameters.RESOURCE_TYPE, strResourceType );
         url.addParameter( Parameters.RESOURCE_ID, Integer.toString( nEntryUrl ) );
 
-        return url.getUrlWithEntity(  );
+        return url.getUrlWithEntity( );
     }
 }

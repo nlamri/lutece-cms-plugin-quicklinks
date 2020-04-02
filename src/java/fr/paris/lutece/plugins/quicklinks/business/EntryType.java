@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,7 +33,6 @@
  */
 package fr.paris.lutece.plugins.quicklinks.business;
 
-
 /**
  *
  * Class entryType
@@ -48,15 +47,16 @@ public class EntryType
     private String _strTemplateModify;
 
     /**
-         * @return the templateCreate
-         */
-    public String getTemplateCreate(  )
+     * @return the templateCreate
+     */
+    public String getTemplateCreate( )
     {
         return _strTemplateCreate;
     }
 
     /**
-     * @param strTemplateCreate the templateCreate to set
+     * @param strTemplateCreate
+     *            the templateCreate to set
      */
     public void setTemplateCreate( String strTemplateCreate )
     {
@@ -66,13 +66,14 @@ public class EntryType
     /**
      * @return the templateModify
      */
-    public String getTemplateModify(  )
+    public String getTemplateModify( )
     {
         return _strTemplateModify;
     }
 
     /**
-     * @param strTemplateModify the templateModify to set
+     * @param strTemplateModify
+     *            the templateModify to set
      */
     public void setTemplateModify( String strTemplateModify )
     {
@@ -80,17 +81,19 @@ public class EntryType
     }
 
     /**
-    *
-    * @return the id of the entry type
-    */
-    public int getId(  )
+     *
+     * @return the id of the entry type
+     */
+    public int getId( )
     {
         return _nId;
     }
 
     /**
      * set the id of the entry type
-     * @param nId the id of the entry type
+     * 
+     * @param nId
+     *            the id of the entry type
      */
     public void setId( int nId )
     {
@@ -101,14 +104,16 @@ public class EntryType
      *
      * @return the I18n key title of the entry type
      */
-    public String getTitleI18nKey(  )
+    public String getTitleI18nKey( )
     {
         return _strTitleKey;
     }
 
     /**
      * set the I18n key title of the entry type
-     * @param strTitle the I18n key title of the entry type
+     * 
+     * @param strTitle
+     *            the I18n key title of the entry type
      */
     public void setTitleI18nKey( String strTitle )
     {
@@ -119,14 +124,16 @@ public class EntryType
      *
      * @return the path for acces to the Classe Entry
      */
-    public String getClassName(  )
+    public String getClassName( )
     {
         return _strClassName;
     }
 
     /**
      * set the path for acces to the Class Entry
-     * @param strClassName the path for acces to the Class Entry
+     * 
+     * @param strClassName
+     *            the path for acces to the Class Entry
      */
     public void setClassName( String strClassName )
     {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -43,7 +43,6 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
-
 /**
  * The class Entry Text
  *
@@ -64,7 +63,8 @@ public class EntryText extends Entry
     private String _strDescription;
 
     /**
-     * @param _strDescription the _strDescription to set
+     * @param _strDescription
+     *            the _strDescription to set
      */
     public void setDescription( String _strDescription )
     {
@@ -74,21 +74,21 @@ public class EntryText extends Entry
     /**
      * @return the _strDescription
      */
-    public String getDescription(  )
+    public String getDescription( )
     {
         return _strDescription;
     }
 
     @Override
-    public EntryText clone(  ) throws CloneNotSupportedException
+    public EntryText clone( ) throws CloneNotSupportedException
     {
-        EntryText entryText = new EntryText(  );
-        entryText.setDescription( getDescription(  ) );
-        entryText.setEntryType( getEntryType(  ) );
-        entryText.setIdOrder( getIdOrder(  ) );
-        entryText.setIdParent( getIdParent(  ) );
-        entryText.setIdQuicklinks( getIdQuicklinks(  ) );
-        entryText.setTitle( getTitle(  ) );
+        EntryText entryText = new EntryText( );
+        entryText.setDescription( getDescription( ) );
+        entryText.setEntryType( getEntryType( ) );
+        entryText.setIdOrder( getIdOrder( ) );
+        entryText.setIdParent( getIdParent( ) );
+        entryText.setIdQuicklinks( getIdQuicklinks( ) );
+        entryText.setTitle( getTitle( ) );
 
         return entryText;
     }
@@ -96,17 +96,17 @@ public class EntryText extends Entry
     @Override
     public String getHtml( Plugin plugin, Locale locale )
     {
-        HashMap<String, Object> model = new HashMap<String, Object>(  );
+        HashMap<String, Object> model = new HashMap<String, Object>( );
 
         model.put( MARK_ENTRY_TEXT, this );
 
         HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_DISPLAY, locale, model );
 
-        return template.getHtml(  );
+        return template.getHtml( );
     }
 
     @Override
-    public String getTitle(  )
+    public String getTitle( )
     {
         return _strTitle;
     }
@@ -147,7 +147,7 @@ public class EntryText extends Entry
     @Override
     public void removeSpecificParameters( Plugin plugin )
     {
-        EntryTextHome.remove( getId(  ), plugin );
+        EntryTextHome.remove( getId( ), plugin );
     }
 
     @Override

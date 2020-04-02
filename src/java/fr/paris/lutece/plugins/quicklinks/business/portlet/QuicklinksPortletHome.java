@@ -1,15 +1,15 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
- * Redistribution and use in source and binary quicklinkss, with or without
+ * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
  *
  *  1. Redistributions of source code must retain the above copyright notice
  *     and the following disclaimer.
  *
- *  2. Redistributions in binary quicklinks must reproduce the above copyright notice
+ *  2. Redistributions in binary form must reproduce the above copyright notice
  *     and the following disclaimer in the documentation and/or other materials
  *     provided with the distribution.
  *
@@ -38,18 +38,15 @@ import fr.paris.lutece.portal.business.portlet.PortletHome;
 import fr.paris.lutece.portal.business.portlet.PortletTypeHome;
 import fr.paris.lutece.portal.service.spring.SpringContextService;
 
-
 /**
- * This class provides instances management methods for Quicklinks Portlet
- * objects
+ * This class provides instances management methods for Quicklinks Portlet objects
  */
 public class QuicklinksPortletHome extends PortletHome
 {
     /////////////////////////////////////////////////////////////////////////////////
     // Constants
     // Static variable pointed at the DAO instance
-    private static IQuicklinksPortletDAO _dao = (IQuicklinksPortletDAO) SpringContextService.getPluginBean( "quicklinks",
-            "quicklinks.quicklinksPortletDAO" );
+    private static IQuicklinksPortletDAO _dao = (IQuicklinksPortletDAO) SpringContextService.getPluginBean( "quicklinks", "quicklinks.quicklinksPortletDAO" );
 
     /* This class implements the Singleton design pattern. */
     private static QuicklinksPortletHome _singleton;
@@ -57,7 +54,7 @@ public class QuicklinksPortletHome extends PortletHome
     /**
      * Constructor
      */
-    public QuicklinksPortletHome(  )
+    public QuicklinksPortletHome( )
     {
         if ( _singleton == null )
         {
@@ -70,11 +67,11 @@ public class QuicklinksPortletHome extends PortletHome
      *
      * @return the QuicklinksPortletHome instance
      */
-    public static PortletHome getInstance(  )
+    public static PortletHome getInstance( )
     {
         if ( _singleton == null )
         {
-            _singleton = new QuicklinksPortletHome(  );
+            _singleton = new QuicklinksPortletHome( );
         }
 
         return _singleton;
@@ -85,9 +82,9 @@ public class QuicklinksPortletHome extends PortletHome
      *
      * @return the portlet type identifier
      */
-    public String getPortletTypeId(  )
+    public String getPortletTypeId( )
     {
-        String strCurrentClassName = this.getClass(  ).getName(  );
+        String strCurrentClassName = this.getClass( ).getName( );
         String strPortletTypeId = PortletTypeHome.getPortletTypeId( strCurrentClassName );
 
         return strPortletTypeId;
@@ -98,14 +95,16 @@ public class QuicklinksPortletHome extends PortletHome
      *
      * @return the instance of the DAO singleton
      */
-    public IPortletInterfaceDAO getDAO(  )
+    public IPortletInterfaceDAO getDAO( )
     {
         return _dao;
     }
 
     /**
      * return number of quicklinks portlet who are associate to the id quicklinks
-     * @param nIdQuicklinks the id of the quicklinks
+     * 
+     * @param nIdQuicklinks
+     *            the id of the quicklinks
      * @return number of quicklinks portlet who are associate to the id quicklinks
      */
     public static int getCountPortletByIdQuicklinks( int nIdQuicklinks )

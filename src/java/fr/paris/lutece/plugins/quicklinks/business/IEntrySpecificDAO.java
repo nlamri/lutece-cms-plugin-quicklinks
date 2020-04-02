@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -35,7 +35,6 @@ package fr.paris.lutece.plugins.quicklinks.business;
 
 import fr.paris.lutece.portal.service.plugin.Plugin;
 
-
 /**
  * Manage the Entry
  *
@@ -43,27 +42,33 @@ import fr.paris.lutece.portal.service.plugin.Plugin;
 public interface IEntrySpecificDAO
 {
     /**
-    * Insert the Entry
-    *
-    * @param entry The {@link Entry} to insert
-    * @param plugin The {@link Plugin}
-    * @return The Entry
-    */
+     * Insert the Entry
+     *
+     * @param entry
+     *            The {@link Entry} to insert
+     * @param plugin
+     *            The {@link Plugin}
+     * @return The Entry
+     */
     IEntry insert( IEntry entry, Plugin plugin );
 
     /**
      * Deletes the {@link Entry} whose identifier is specified in parameter
      *
-     * @param nId The identifier of the  {@link Entry}
-     * @param plugin The {@link Plugin}
+     * @param nId
+     *            The identifier of the {@link Entry}
+     * @param plugin
+     *            The {@link Plugin}
      */
     void delete( int nId, Plugin plugin );
 
     /**
      * Load the data of the entry type from the table
      *
-     * @param nId The {@link Entry} identifier
-     * @param plugin the plugin
+     * @param nId
+     *            The {@link Entry} identifier
+     * @param plugin
+     *            the plugin
      * @return the instance of the EntryType
      */
     IEntry load( IEntry entry, Plugin plugin );
@@ -71,8 +76,10 @@ public interface IEntrySpecificDAO
     /**
      * Update the {@link Entry}
      *
-     * @param entry The {@link Entry} object
-     * @param plugin The {@link Plugin}
+     * @param entry
+     *            The {@link Entry} object
+     * @param plugin
+     *            The {@link Plugin}
      */
     void store( IEntry entry, Plugin plugin );
 }

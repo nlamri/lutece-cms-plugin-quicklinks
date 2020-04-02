@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -41,7 +41,6 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
-
 /**
  * Interface for Entry
  *
@@ -51,52 +50,59 @@ public interface IEntry
     /**
      * @return the nIdQuicklinks
      */
-    public abstract int getIdQuicklinks(  );
+    public abstract int getIdQuicklinks( );
 
     /**
-     * @param nIdQuicklinks the nIdQuicklinks to set
+     * @param nIdQuicklinks
+     *            the nIdQuicklinks to set
      */
     public abstract void setIdQuicklinks( int nIdQuicklinks );
 
     /**
      * @return the nId
      */
-    public abstract int getId(  );
+    public abstract int getId( );
 
     /**
-     * @param nId the nIdEntry to set
+     * @param nId
+     *            the nIdEntry to set
      */
     public abstract void setId( int nId );
 
     /**
      * @return the nIdOrder
      */
-    public abstract int getIdOrder(  );
+    public abstract int getIdOrder( );
 
     /**
-     * @param nIdOrder the nIdOrder to set
+     * @param nIdOrder
+     *            the nIdOrder to set
      */
     public abstract void setIdOrder( int nIdOrder );
 
     /**
      * @return the _nIdParent
      */
-    public abstract int getIdParent(  );
+    public abstract int getIdParent( );
 
     /**
-     * @param nIdParent the _nIdParent to set
+     * @param nIdParent
+     *            the _nIdParent to set
      */
     public abstract void setIdParent( int nIdParent );
 
     /**
-     * @param plugin the {@link Plugin}
+     * @param plugin
+     *            the {@link Plugin}
      * @return the parent Entry
      */
     public abstract IEntry getParent( Plugin plugin );
 
     /**
      * Get the child abstract Entry list
-     * @param plugin The Plugin
+     * 
+     * @param plugin
+     *            The Plugin
      * @return A {@link Collection} of childs
      */
     public abstract Collection<IEntry> getChilds( Plugin plugin );
@@ -104,42 +110,53 @@ public interface IEntry
     /**
      * @return the entryType
      */
-    public abstract EntryType getEntryType(  );
+    public abstract EntryType getEntryType( );
 
     /**
-     * @param nType the entryType to set
+     * @param nType
+     *            the entryType to set
      */
     public abstract void setEntryType( EntryType entryType );
 
     /**
      * @return the strTitle
      */
-    public abstract String getTitle(  );
+    public abstract String getTitle( );
 
     /**
-     * @param strTitle the strTitle to set
+     * @param strTitle
+     *            the strTitle to set
      */
     public abstract void setTitle( String strTitle );
 
     /**
      * Get the HTML code of the entry
-     * @param plugin The {@link Plugin}
-     * @param locale The {@link Locale}
+     * 
+     * @param plugin
+     *            The {@link Plugin}
+     * @param locale
+     *            The {@link Locale}
      * @return HTML code of the entry
      */
     public abstract String getHtml( Plugin plugin, Locale locale );
 
     /**
      * get the specific parameters for the entry
-     * @param request the {@link HttpServletRequest}
-     * @param model The HashMap to fill
-     * @param plugin The {@link Plugin}
+     * 
+     * @param request
+     *            the {@link HttpServletRequest}
+     * @param model
+     *            The HashMap to fill
+     * @param plugin
+     *            The {@link Plugin}
      */
     public abstract void getSpecificParameters( HttpServletRequest request, HashMap<String, Object> model, Plugin plugin );
 
     /**
      * Set the specific parameters for the entry
-     * @param request the {@link HttpServletRequest}
+     * 
+     * @param request
+     *            the {@link HttpServletRequest}
      * @return The i18n message if error occurs, null else
      */
     public abstract String setSpecificParameters( HttpServletRequest request );
@@ -149,13 +166,15 @@ public interface IEntry
      * @return
      * @throws CloneNotSupportedException
      */
-    public IEntry clone(  ) throws CloneNotSupportedException;
+    public IEntry clone( ) throws CloneNotSupportedException;
 
     /**
      * Copy an Entry
      *
-     * @param nIdQuicklinks The {@link Quicklinks} identifier
-     * @param plugin The {@link Plugin}
+     * @param nIdQuicklinks
+     *            The {@link Quicklinks} identifier
+     * @param plugin
+     *            The {@link Plugin}
      * @return The {@link IEntry} copy
      */
     public IEntry copy( int nIdQuicklinks, Plugin plugin );
@@ -163,9 +182,12 @@ public interface IEntry
     /**
      * Copy an Entry
      *
-     * @param nIdQuicklinks The {@link Quicklinks} identifier
-     * @param plugin The {@link Plugin}
-     * @param strNewName The new name
+     * @param nIdQuicklinks
+     *            The {@link Quicklinks} identifier
+     * @param plugin
+     *            The {@link Plugin}
+     * @param strNewName
+     *            The new name
      * @return The {@link IEntry} copy
      */
     public IEntry copy( int nIdQuicklinks, Plugin plugin, String strNewName );
@@ -173,28 +195,32 @@ public interface IEntry
     /**
      * Load the specific parameters
      *
-     * @param plugin The {@link Plugin}
+     * @param plugin
+     *            The {@link Plugin}
      */
     public abstract void loadSpecificParameters( Plugin plugin );
 
     /**
      * Create the specific parameters
      *
-     * @param plugin The {@link Plugin}
+     * @param plugin
+     *            The {@link Plugin}
      */
     public abstract void createSpecificParameters( Plugin plugin );
 
     /**
      * Remove the specific parameters
      *
-     * @param plugin The {@link Plugin}
+     * @param plugin
+     *            The {@link Plugin}
      */
     public abstract void removeSpecificParameters( Plugin plugin );
 
     /**
      * Update the specific parameters
      *
-     * @param plugin The {@link Plugin}
+     * @param plugin
+     *            The {@link Plugin}
      */
     public abstract void updateSpecificParameters( Plugin plugin );
 }

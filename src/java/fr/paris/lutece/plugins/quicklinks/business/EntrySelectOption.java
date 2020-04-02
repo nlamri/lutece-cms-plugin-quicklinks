@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -43,7 +43,6 @@ import sun.net.www.content.text.plain;
 
 import java.util.Locale;
 
-
 /**
  * The class Entry Select option
  *
@@ -60,15 +59,16 @@ public class EntrySelectOption
     private int _nIdOrder;
 
     /**
-         * @return the url
-         */
-    public String getUrl(  )
+     * @return the url
+     */
+    public String getUrl( )
     {
         return _strUrl;
     }
 
     /**
-     * @param strUrl the url to set
+     * @param strUrl
+     *            the url to set
      */
     public void setUrl( String strUrl )
     {
@@ -76,13 +76,13 @@ public class EntrySelectOption
     }
 
     @Override
-    protected EntrySelectOption clone(  ) throws CloneNotSupportedException
+    protected EntrySelectOption clone( ) throws CloneNotSupportedException
     {
-        EntrySelectOption entrySelectOption = new EntrySelectOption(  );
-        entrySelectOption.setIdEntry( getIdEntry(  ) );
-        entrySelectOption.setIdOrder( getIdOrder(  ) );
-        entrySelectOption.setTitle( getTitle(  ) );
-        entrySelectOption.setUrl( getUrl(  ) );
+        EntrySelectOption entrySelectOption = new EntrySelectOption( );
+        entrySelectOption.setIdEntry( getIdEntry( ) );
+        entrySelectOption.setIdOrder( getIdOrder( ) );
+        entrySelectOption.setTitle( getTitle( ) );
+        entrySelectOption.setUrl( getUrl( ) );
 
         return entrySelectOption;
     }
@@ -90,8 +90,10 @@ public class EntrySelectOption
     /**
      * Copy an {@link EntrySelectOption}
      *
-     * @param nIdQuicklinks The {@link Entry} identifier
-     * @param plugin The {@link Plugin}
+     * @param nIdQuicklinks
+     *            The {@link Entry} identifier
+     * @param plugin
+     *            The {@link Plugin}
      * @return The {@link EntrySelectOption} copy
      */
     public EntrySelectOption copy( int nIdEntry, Plugin plugin )
@@ -102,9 +104,12 @@ public class EntrySelectOption
     /**
      * Copy an {@link EntrySelectOption}
      *
-     * @param nIdQuicklinks The {@link Entry} identifier
-     * @param plugin The {@link Plugin}
-     * @param strNewName The new name
+     * @param nIdQuicklinks
+     *            The {@link Entry} identifier
+     * @param plugin
+     *            The {@link Plugin}
+     * @param strNewName
+     *            The new name
      * @return The {@link EntrySelectOption} copy
      */
     public EntrySelectOption copy( int nIdEntry, Plugin plugin, String strNewName )
@@ -113,9 +118,9 @@ public class EntrySelectOption
 
         try
         {
-            copy = this.clone(  );
+            copy = this.clone( );
         }
-        catch ( CloneNotSupportedException e )
+        catch( CloneNotSupportedException e )
         {
             AppLogService.error( "Object EntrySelectOption does not support clone process." );
         }
@@ -134,15 +139,17 @@ public class EntrySelectOption
 
     /**
      * Get the title
+     * 
      * @return The title
      */
-    public String getTitle(  )
+    public String getTitle( )
     {
         return _strTitle;
     }
 
     /**
      * Set the title
+     * 
      * @param strTitle
      */
     public void setTitle( String strTitle )
@@ -151,7 +158,8 @@ public class EntrySelectOption
     }
 
     /**
-     * @param nIdOrder the nIdOrder to set
+     * @param nIdOrder
+     *            the nIdOrder to set
      */
     public void setIdOrder( int nIdOrder )
     {
@@ -161,13 +169,14 @@ public class EntrySelectOption
     /**
      * @return the nIdOrder
      */
-    public int getIdOrder(  )
+    public int getIdOrder( )
     {
         return _nIdOrder;
     }
 
     /**
-     * @param nIdEntry the _nIdEntry to set
+     * @param nIdEntry
+     *            the _nIdEntry to set
      */
     public void setIdEntry( int nIdEntry )
     {
@@ -177,13 +186,14 @@ public class EntrySelectOption
     /**
      * @return the _nIdEntry
      */
-    public int getIdEntry(  )
+    public int getIdEntry( )
     {
         return _nIdEntry;
     }
 
     /**
-     * @param nId the _nId to set
+     * @param nId
+     *            the _nId to set
      */
     public void setId( int nId )
     {
@@ -193,7 +203,7 @@ public class EntrySelectOption
     /**
      * @return the _nId
      */
-    public int getId(  )
+    public int getId( )
     {
         return _nId;
     }

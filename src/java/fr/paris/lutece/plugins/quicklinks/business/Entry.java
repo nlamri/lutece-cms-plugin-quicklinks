@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -42,7 +42,6 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
-
 public class Entry implements IEntry, Cloneable
 {
     private static final String EMPTY_STRING = "";
@@ -55,78 +54,95 @@ public class Entry implements IEntry, Cloneable
     /**
      * @return the _nIdParent
      */
-    public int getIdParent(  )
+    public int getIdParent( )
     {
         return _nIdParent;
     }
 
     /**
-     * @param nIdParent the _nIdParent to set
+     * @param nIdParent
+     *            the _nIdParent to set
      */
     public void setIdParent( int nIdParent )
     {
         _nIdParent = nIdParent;
     }
 
-    /* (non-Javadoc)
-         * @see fr.paris.lutece.plugins.quicklinks.business.IEntry#getIdQuicklinks()
-         */
-    public int getIdQuicklinks(  )
+    /*
+     * (non-Javadoc)
+     * 
+     * @see fr.paris.lutece.plugins.quicklinks.business.IEntry#getIdQuicklinks()
+     */
+    public int getIdQuicklinks( )
     {
         return _nIdQuicklinks;
     }
 
-    /* (non-Javadoc)
-         * @see fr.paris.lutece.plugins.quicklinks.business.IEntry#setIdQuicklinks(int)
-         */
+    /*
+     * (non-Javadoc)
+     * 
+     * @see fr.paris.lutece.plugins.quicklinks.business.IEntry#setIdQuicklinks(int)
+     */
     public void setIdQuicklinks( int nIdQuicklinks )
     {
         _nIdQuicklinks = nIdQuicklinks;
     }
 
-    /* (non-Javadoc)
-         * @see fr.paris.lutece.plugins.quicklinks.business.IEntry#getIdEntry()
-         */
-    public int getId(  )
+    /*
+     * (non-Javadoc)
+     * 
+     * @see fr.paris.lutece.plugins.quicklinks.business.IEntry#getIdEntry()
+     */
+    public int getId( )
     {
         return _nId;
     }
 
-    /* (non-Javadoc)
-         * @see fr.paris.lutece.plugins.quicklinks.business.IEntry#setIdEntry(int)
-         */
+    /*
+     * (non-Javadoc)
+     * 
+     * @see fr.paris.lutece.plugins.quicklinks.business.IEntry#setIdEntry(int)
+     */
     public void setId( int nIdEntry )
     {
         _nId = nIdEntry;
     }
 
-    /* (non-Javadoc)
-         * @see fr.paris.lutece.plugins.quicklinks.business.IEntry#getIdOrder()
-         */
-    public int getIdOrder(  )
+    /*
+     * (non-Javadoc)
+     * 
+     * @see fr.paris.lutece.plugins.quicklinks.business.IEntry#getIdOrder()
+     */
+    public int getIdOrder( )
     {
         return _nIdOrder;
     }
 
-    /* (non-Javadoc)
-         * @see fr.paris.lutece.plugins.quicklinks.business.IEntry#setIdOrder(int)
-         */
+    /*
+     * (non-Javadoc)
+     * 
+     * @see fr.paris.lutece.plugins.quicklinks.business.IEntry#setIdOrder(int)
+     */
     public void setIdOrder( int nIdOrder )
     {
         _nIdOrder = nIdOrder;
     }
 
-    /* (non-Javadoc)
-         * @see fr.paris.lutece.plugins.quicklinks.business.IEntry#getType()
-         */
-    public EntryType getEntryType(  )
+    /*
+     * (non-Javadoc)
+     * 
+     * @see fr.paris.lutece.plugins.quicklinks.business.IEntry#getType()
+     */
+    public EntryType getEntryType( )
     {
         return _entryType;
     }
 
-    /* (non-Javadoc)
-         * @see fr.paris.lutece.plugins.quicklinks.business.IEntry#setType(int)
-         */
+    /*
+     * (non-Javadoc)
+     * 
+     * @see fr.paris.lutece.plugins.quicklinks.business.IEntry#setType(int)
+     */
     public void setEntryType( EntryType entryType )
     {
         _entryType = entryType;
@@ -134,17 +150,21 @@ public class Entry implements IEntry, Cloneable
 
     // ############ Abstract methods ############
 
-    /* (non-Javadoc)
-         * @see fr.paris.lutece.plugins.quicklinks.business.IEntry#getTitle()
-         */
-    public String getTitle(  )
+    /*
+     * (non-Javadoc)
+     * 
+     * @see fr.paris.lutece.plugins.quicklinks.business.IEntry#getTitle()
+     */
+    public String getTitle( )
     {
         return null;
     }
 
-    /* (non-Javadoc)
-         * @see fr.paris.lutece.plugins.quicklinks.business.IEntry#setTitle(java.lang.String)
-         */
+    /*
+     * (non-Javadoc)
+     * 
+     * @see fr.paris.lutece.plugins.quicklinks.business.IEntry#setTitle(java.lang.String)
+     */
     public void setTitle( String strTitle )
     {
     }
@@ -152,16 +172,18 @@ public class Entry implements IEntry, Cloneable
     /**
      * Clone the entry
      */
-    public IEntry clone(  ) throws CloneNotSupportedException
+    public IEntry clone( ) throws CloneNotSupportedException
     {
-        throw new CloneNotSupportedException(  );
+        throw new CloneNotSupportedException( );
     }
 
     /**
      * Copy an Entry
      *
-     * @param nIdQuicklinks The {@link Quicklinks} identifier
-     * @param plugin the {@link Plugin}
+     * @param nIdQuicklinks
+     *            The {@link Quicklinks} identifier
+     * @param plugin
+     *            the {@link Plugin}
      * @return The {@link IEntry} copy
      */
     public IEntry copy( int nIdQuicklinks, Plugin plugin )
@@ -172,9 +194,12 @@ public class Entry implements IEntry, Cloneable
     /**
      * Copy an Entry
      *
-     * @param nIdQuicklinks The {@link Quicklinks} identifier
-     * @param plugin the {@link Plugin}
-     * @param strNewName The new name
+     * @param nIdQuicklinks
+     *            The {@link Quicklinks} identifier
+     * @param plugin
+     *            the {@link Plugin}
+     * @param strNewName
+     *            The new name
      * @return The {@link IEntry} copy
      */
     public IEntry copy( int nIdQuicklinks, Plugin plugin, String strNewName )
@@ -183,9 +208,9 @@ public class Entry implements IEntry, Cloneable
 
         try
         {
-            copy = this.clone(  );
+            copy = this.clone( );
         }
-        catch ( CloneNotSupportedException e )
+        catch( CloneNotSupportedException e )
         {
             AppLogService.error( "Object Entry does not support clone process." );
         }
@@ -200,18 +225,20 @@ public class Entry implements IEntry, Cloneable
 
         copy = EntryHome.create( copy, plugin );
 
-        for ( IEntry entry : EntryHome.findByParentId( this.getId(  ), plugin ) )
+        for ( IEntry entry : EntryHome.findByParentId( this.getId( ), plugin ) )
         {
-            entry.setIdParent( copy.getId(  ) );
+            entry.setIdParent( copy.getId( ) );
             entry.copy( nIdQuicklinks, plugin );
         }
 
         return copy;
     }
 
-    /* (non-Javadoc)
-         * @see fr.paris.lutece.plugins.quicklinks.business.IEntry#getHtml(fr.paris.lutece.portal.service.plugin.Plugin, java.util.Locale)
-         */
+    /*
+     * (non-Javadoc)
+     * 
+     * @see fr.paris.lutece.plugins.quicklinks.business.IEntry#getHtml(fr.paris.lutece.portal.service.plugin.Plugin, java.util.Locale)
+     */
     public String getHtml( Plugin plugin, Locale locale )
     {
         return null;
@@ -219,25 +246,29 @@ public class Entry implements IEntry, Cloneable
 
     /*
      * (non-Javadoc)
+     * 
      * @see fr.paris.lutece.plugins.quicklinks.business.IEntry#getChilds(fr.paris.lutece.portal.service.plugin.Plugin)
      */
     public Collection<IEntry> getChilds( Plugin plugin )
     {
-        return EntryHome.findByParentId( getId(  ), plugin );
+        return EntryHome.findByParentId( getId( ), plugin );
     }
 
     /*
      * (non-Javadoc)
+     * 
      * @see fr.paris.lutece.plugins.quicklinks.business.IEntry#getParent(fr.paris.lutece.portal.service.plugin.Plugin)
      */
     public IEntry getParent( Plugin plugin )
     {
-        return EntryHome.findByPrimaryKey( getIdParent(  ), plugin );
+        return EntryHome.findByPrimaryKey( getIdParent( ), plugin );
     }
 
     /**
      * Set the specific parameters for the entry
-     * @param request the {@link HttpServletRequest}
+     * 
+     * @param request
+     *            the {@link HttpServletRequest}
      * @return The i18n message if error occurs, null else
      */
     public String setSpecificParameters( HttpServletRequest request )
@@ -247,9 +278,13 @@ public class Entry implements IEntry, Cloneable
 
     /**
      * Get the specific parameters for the entry
-     * @param request the {@link HttpServletRequest}
-     * @param model The {@link HashMap} model
-     * @param plugin The {@link Plugin}
+     * 
+     * @param request
+     *            the {@link HttpServletRequest}
+     * @param model
+     *            The {@link HashMap} model
+     * @param plugin
+     *            The {@link Plugin}
      */
     public void getSpecificParameters( HttpServletRequest request, HashMap<String, Object> model, Plugin plugin )
     {
@@ -258,7 +293,8 @@ public class Entry implements IEntry, Cloneable
     /**
      * Load the specific parameters
      *
-     * @param plugin The {@link Plugin}
+     * @param plugin
+     *            The {@link Plugin}
      */
     public void loadSpecificParameters( Plugin plugin )
     {
@@ -267,7 +303,8 @@ public class Entry implements IEntry, Cloneable
     /**
      * Create the specific parameters
      *
-     * @param plugin The {@link Plugin}
+     * @param plugin
+     *            The {@link Plugin}
      */
     public void createSpecificParameters( Plugin plugin )
     {
@@ -276,7 +313,8 @@ public class Entry implements IEntry, Cloneable
     /**
      * Remove the specific parameters
      *
-     * @param plugin The {@link Plugin}
+     * @param plugin
+     *            The {@link Plugin}
      */
     public void removeSpecificParameters( Plugin plugin )
     {
@@ -285,7 +323,8 @@ public class Entry implements IEntry, Cloneable
     /**
      * Update the specific parameters
      *
-     * @param plugin The {@link Plugin}
+     * @param plugin
+     *            The {@link Plugin}
      */
     public void updateSpecificParameters( Plugin plugin )
     {

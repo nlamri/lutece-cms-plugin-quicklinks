@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -40,16 +40,18 @@ import fr.paris.lutece.util.ReferenceList;
  *
  */
 public enum EntryUrlLinkProperties
-{LINK_ON_TEXT_AND_IMAGE( 1, "quicklinks.entryUrlLinkProperties.linkTextImage.name" ),
-    LINK_ON_TEXT( 2, "quicklinks.entryUrlLinkProperties.linkText.name" ),
-    LINK_ON_IMAGE( 3, "quicklinks.entryUrlLinkProperties.linkImage.name" );
+{
+    LINK_ON_TEXT_AND_IMAGE( 1, "quicklinks.entryUrlLinkProperties.linkTextImage.name" ), LINK_ON_TEXT( 2,
+            "quicklinks.entryUrlLinkProperties.linkText.name" ), LINK_ON_IMAGE( 3, "quicklinks.entryUrlLinkProperties.linkImage.name" );
 
     private final int _nValue;
     private final String _strI18nKey;
 
     /**
      * Constructor : associate a value to enum
-     * @param nValue The value
+     * 
+     * @param nValue
+     *            The value
      */
     private EntryUrlLinkProperties( int nValue, String strI18nKey )
     {
@@ -59,32 +61,36 @@ public enum EntryUrlLinkProperties
 
     /**
      * Return the enum value
+     * 
      * @return The enum value
      */
-    public int getValue(  )
+    public int getValue( )
     {
         return this._nValue;
     }
 
     /**
      * Return the enum i18n key
+     * 
      * @return The enum i18n key
      */
-    public String getI18nKey(  )
+    public String getI18nKey( )
     {
         return this._strI18nKey;
     }
 
     /**
-    * Get the {@link EntryUrlLinkProperties} by value
-    * @param nValue The value
-    * @return The {@link EntryUrlLinkProperties}
-    */
+     * Get the {@link EntryUrlLinkProperties} by value
+     * 
+     * @param nValue
+     *            The value
+     * @return The {@link EntryUrlLinkProperties}
+     */
     public static EntryUrlLinkProperties getByValue( int nValue )
     {
-        for ( EntryUrlLinkProperties e : EntryUrlLinkProperties.values(  ) )
+        for ( EntryUrlLinkProperties e : EntryUrlLinkProperties.values( ) )
         {
-            if ( e.getValue(  ) == nValue )
+            if ( e.getValue( ) == nValue )
             {
                 return e;
             }
@@ -95,15 +101,16 @@ public enum EntryUrlLinkProperties
 
     /**
      * Get the {@link ReferenceList}
+     * 
      * @return The {@link ReferenceList}
      */
-    public static ReferenceList getReferenceList(  )
+    public static ReferenceList getReferenceList( )
     {
-        ReferenceList referenceList = new ReferenceList(  );
+        ReferenceList referenceList = new ReferenceList( );
 
-        for ( EntryUrlLinkProperties e : EntryUrlLinkProperties.values(  ) )
+        for ( EntryUrlLinkProperties e : EntryUrlLinkProperties.values( ) )
         {
-            referenceList.addItem( e.getValue(  ), e.getI18nKey(  ) );
+            referenceList.addItem( e.getValue( ), e.getI18nKey( ) );
         }
 
         return referenceList;

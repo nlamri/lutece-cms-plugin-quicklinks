@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -45,7 +45,6 @@ import fr.paris.lutece.util.ReferenceList;
 
 import java.util.Locale;
 
-
 /**
  *
  * class QuicklinksResourceIdService
@@ -75,7 +74,7 @@ public class QuicklinksResourceIdService extends ResourceIdService
     private static final String PROPERTY_LABEL_CHANGE_STATE = "quicklinks.permission.label.changeState";
 
     /** Creates a new instance of DocumentTypeResourceIdService */
-    public QuicklinksResourceIdService(  )
+    public QuicklinksResourceIdService( )
     {
         setPluginName( QuicklinksPlugin.PLUGIN_NAME );
     }
@@ -83,35 +82,35 @@ public class QuicklinksResourceIdService extends ResourceIdService
     /**
      * Initializes the service
      */
-    public void register(  )
+    public void register( )
     {
-        ResourceType rt = new ResourceType(  );
-        rt.setResourceIdServiceClass( QuicklinksResourceIdService.class.getName(  ) );
+        ResourceType rt = new ResourceType( );
+        rt.setResourceIdServiceClass( QuicklinksResourceIdService.class.getName( ) );
         rt.setPluginName( QuicklinksPlugin.PLUGIN_NAME );
         rt.setResourceTypeKey( Quicklinks.RESOURCE_TYPE );
         rt.setResourceTypeLabelKey( PROPERTY_LABEL_RESOURCE_TYPE );
 
-        Permission p = new Permission(  );
+        Permission p = new Permission( );
         p.setPermissionKey( PERMISSION_CREATE );
         p.setPermissionTitleKey( PROPERTY_LABEL_CREATE );
         rt.registerPermission( p );
 
-        p = new Permission(  );
+        p = new Permission( );
         p.setPermissionKey( PERMISSION_MODIFY );
         p.setPermissionTitleKey( PROPERTY_LABEL_MODIFY );
         rt.registerPermission( p );
 
-        p = new Permission(  );
+        p = new Permission( );
         p.setPermissionKey( PERMISSION_COPY );
         p.setPermissionTitleKey( PROPERTY_LABEL_COPY );
         rt.registerPermission( p );
 
-        p = new Permission(  );
+        p = new Permission( );
         p.setPermissionKey( PERMISSION_CHANGE_STATE );
         p.setPermissionTitleKey( PROPERTY_LABEL_CHANGE_STATE );
         rt.registerPermission( p );
 
-        p = new Permission(  );
+        p = new Permission( );
         p.setPermissionKey( PERMISSION_DELETE );
         p.setPermissionTitleKey( PROPERTY_LABEL_DELETE );
         rt.registerPermission( p );
@@ -121,7 +120,9 @@ public class QuicklinksResourceIdService extends ResourceIdService
 
     /**
      * Returns a list of quicklinks resource ids
-     * @param locale The current locale
+     * 
+     * @param locale
+     *            The current locale
      * @return A list of resource ids
      */
     public ReferenceList getResourceIdList( Locale locale )
@@ -131,8 +132,11 @@ public class QuicklinksResourceIdService extends ResourceIdService
 
     /**
      * Returns the Title of a given resource
-     * @param strId The Id of the resource
-     * @param locale The current locale
+     * 
+     * @param strId
+     *            The Id of the resource
+     * @param locale
+     *            The current locale
      * @return The Title of a given resource
      */
     public String getTitle( String strId, Locale locale )
@@ -143,14 +147,13 @@ public class QuicklinksResourceIdService extends ResourceIdService
         {
             nIdQuicklinks = Integer.parseInt( strId );
         }
-        catch ( NumberFormatException ne )
+        catch( NumberFormatException ne )
         {
             AppLogService.error( ne );
         }
 
-        Quicklinks quicklinks = QuicklinksHome.findByPrimaryKey( nIdQuicklinks,
-                PluginService.getPlugin( QuicklinksPlugin.PLUGIN_NAME ) );
+        Quicklinks quicklinks = QuicklinksHome.findByPrimaryKey( nIdQuicklinks, PluginService.getPlugin( QuicklinksPlugin.PLUGIN_NAME ) );
 
-        return quicklinks.getTitle(  );
+        return quicklinks.getTitle( );
     }
 }

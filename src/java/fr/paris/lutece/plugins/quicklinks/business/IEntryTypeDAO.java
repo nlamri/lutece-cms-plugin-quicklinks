@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -38,25 +38,28 @@ import fr.paris.lutece.portal.service.plugin.Plugin;
 import java.util.Collection;
 import java.util.List;
 
-
 /**
-*  Interface IEntryTypeDAO
-*/
+ * Interface IEntryTypeDAO
+ */
 public interface IEntryTypeDAO
 {
     /**
-         * Load the data of the entry type from the table
-         *
-         * @param nIdKey The identifier of the entry type
-         * @param plugin the plugin
-         * @return the instance of the EntryType
-         */
+     * Load the data of the entry type from the table
+     *
+     * @param nIdKey
+     *            The identifier of the entry type
+     * @param plugin
+     *            the plugin
+     * @return the instance of the EntryType
+     */
     EntryType load( int nIdKey, Plugin plugin );
 
     /**
-         * Load the data of all  entry type returns them in a  list
-         * @param plugin the plugin
-         * @return the {@link Collection} of entry type
-         */
+     * Load the data of all entry type returns them in a list
+     * 
+     * @param plugin
+     *            the plugin
+     * @return the {@link Collection} of entry type
+     */
     Collection<EntryType> select( Plugin plugin );
 }

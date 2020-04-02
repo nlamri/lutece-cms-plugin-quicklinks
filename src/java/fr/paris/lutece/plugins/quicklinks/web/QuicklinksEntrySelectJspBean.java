@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -59,10 +59,8 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
-
 /**
- * This class provides the user interface to manage {@link Quicklinks} features ( manage,
- * create, modify, remove)
+ * This class provides the user interface to manage {@link Quicklinks} features ( manage, create, modify, remove)
  */
 public class QuicklinksEntrySelectJspBean extends PluginAdminPageJspBean
 {
@@ -110,46 +108,46 @@ public class QuicklinksEntrySelectJspBean extends PluginAdminPageJspBean
     private static final String REGEX_ID = "^[\\d]+$";
     private static final String EMPTY_STRING = "";
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see fr.paris.lutece.portal.web.admin.PluginAdminPageJspBean#init(javax.servlet.http.HttpServletRequest, java.lang.String)
      */
     @Override
-    public void init( HttpServletRequest request, String strRight )
-        throws AccessDeniedException
+    public void init( HttpServletRequest request, String strRight ) throws AccessDeniedException
     {
         super.init( request, strRight );
     }
 
     /**
-     * Get the authorized {@link EntrySelectOption},  filtered by quicklinks workgroup
+     * Get the authorized {@link EntrySelectOption}, filtered by quicklinks workgroup
      *
-     * @param request The {@link HttpServletRequest}
-     * @param strPermissionType The type of permission (see {@link QuicklinksResourceIdService} class)
+     * @param request
+     *            The {@link HttpServletRequest}
+     * @param strPermissionType
+     *            The type of permission (see {@link QuicklinksResourceIdService} class)
      * @return The {@link EntrySelectOption} or null if user have no access
      */
-    private EntrySelectOption getAuthorizedEntry( HttpServletRequest request, String strPermissionType )
-        throws AccessDeniedException
+    private EntrySelectOption getAuthorizedEntry( HttpServletRequest request, String strPermissionType ) throws AccessDeniedException
     {
         String strIdEntrySelectOption = request.getParameter( PARAMETER_OPTION_ID );
         String strIdEntry = request.getParameter( PARAMETER_ENTRY_ID );
 
         if ( ( strIdEntrySelectOption == null ) || !strIdEntrySelectOption.matches( REGEX_ID ) )
         {
-            throw new AccessDeniedException(  );
+            throw new AccessDeniedException( );
         }
 
         int nIdEntrySelectOption = Integer.parseInt( strIdEntrySelectOption );
         int nIdEntry = Integer.parseInt( strIdEntry );
-        EntrySelectOption entrySelectOption = EntrySelectOptionHome.findByPrimaryKey( nIdEntrySelectOption, nIdEntry,
-                getPlugin(  ) );
-        IEntry entry = EntryHome.findByPrimaryKey( entrySelectOption.getIdEntry(  ), getPlugin(  ) );
-        Quicklinks quicklinks = QuicklinksHome.findByPrimaryKey( entry.getIdQuicklinks(  ), getPlugin(  ) );
+        EntrySelectOption entrySelectOption = EntrySelectOptionHome.findByPrimaryKey( nIdEntrySelectOption, nIdEntry, getPlugin( ) );
+        IEntry entry = EntryHome.findByPrimaryKey( entrySelectOption.getIdEntry( ), getPlugin( ) );
+        Quicklinks quicklinks = QuicklinksHome.findByPrimaryKey( entry.getIdQuicklinks( ), getPlugin( ) );
 
-        if ( ( entry == null ) || !AdminWorkgroupService.isAuthorized( quicklinks, getUser(  ) ) ||
-                !RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE, String.valueOf( entry.getId(  ) ),
-                    strPermissionType, getUser(  ) ) )
+        if ( ( entry == null ) || !AdminWorkgroupService.isAuthorized( quicklinks, getUser( ) )
+                || !RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE, String.valueOf( entry.getId( ) ), strPermissionType, getUser( ) ) )
         {
-            throw new AccessDeniedException(  );
+            throw new AccessDeniedException( );
         }
 
         return entrySelectOption;
@@ -157,51 +155,54 @@ public class QuicklinksEntrySelectJspBean extends PluginAdminPageJspBean
 
     /**
      * Move the entry down
-     * @param request The Http servlet request
+     * 
+     * @param request
+     *            The Http servlet request
      * @return The redirect url
      */
-    public String doGoDownSelectOption( HttpServletRequest request )
-        throws AccessDeniedException
+    public String doGoDownSelectOption( HttpServletRequest request ) throws AccessDeniedException
     {
         EntrySelectOption entrySelectOption = getAuthorizedEntry( request, QuicklinksResourceIdService.PERMISSION_MODIFY );
 
-        EntrySelectOptionHome.goDown( entrySelectOption.getId(  ), entrySelectOption.getIdEntry(  ), getPlugin(  ) );
+        EntrySelectOptionHome.goDown( entrySelectOption.getId( ), entrySelectOption.getIdEntry( ), getPlugin( ) );
 
         UrlItem url = new UrlItem( JSP_URL_MODIFY );
-        url.addParameter( PARAMETER_ENTRY_ID, entrySelectOption.getIdEntry(  ) );
+        url.addParameter( PARAMETER_ENTRY_ID, entrySelectOption.getIdEntry( ) );
         url.setAnchor( ANCHOR_NAME );
 
-        return url.getUrl(  );
+        return url.getUrl( );
     }
 
     /**
      * Move the entry up
-     * @param request The Http servlet request
+     * 
+     * @param request
+     *            The Http servlet request
      * @return The redirect url
      */
-    public String doGoUpSelectOption( HttpServletRequest request )
-        throws AccessDeniedException
+    public String doGoUpSelectOption( HttpServletRequest request ) throws AccessDeniedException
     {
         EntrySelectOption entrySelectOption = getAuthorizedEntry( request, QuicklinksResourceIdService.PERMISSION_MODIFY );
 
-        EntrySelectOptionHome.goUp( entrySelectOption.getId(  ), entrySelectOption.getIdEntry(  ), getPlugin(  ) );
+        EntrySelectOptionHome.goUp( entrySelectOption.getId( ), entrySelectOption.getIdEntry( ), getPlugin( ) );
 
         UrlItem url = new UrlItem( JSP_URL_MODIFY );
-        url.addParameter( PARAMETER_ENTRY_ID, entrySelectOption.getIdEntry(  ) );
+        url.addParameter( PARAMETER_ENTRY_ID, entrySelectOption.getIdEntry( ) );
         url.setAnchor( ANCHOR_NAME );
 
-        return url.getUrl(  );
+        return url.getUrl( );
     }
 
     /**
      * Get the {@link EntrySelectOption} creation page
-     * @param request The HTTP servlet request
+     * 
+     * @param request
+     *            The HTTP servlet request
      * @return The HTML template
      */
-    public String getCreateSelectOption( HttpServletRequest request )
-        throws AccessDeniedException
+    public String getCreateSelectOption( HttpServletRequest request ) throws AccessDeniedException
     {
-        Plugin plugin = getPlugin(  );
+        Plugin plugin = getPlugin( );
         String strIdEntry = request.getParameter( PARAMETER_ENTRY_ID );
 
         if ( ( strIdEntry == null ) || !strIdEntry.matches( REGEX_ID ) )
@@ -216,39 +217,40 @@ public class QuicklinksEntrySelectJspBean extends PluginAdminPageJspBean
             return AdminMessageService.getMessageUrl( request, Messages.MANDATORY_FIELDS, AdminMessage.TYPE_STOP );
         }
 
-        if ( !RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE, String.valueOf( entry.getIdQuicklinks(  ) ),
-                    QuicklinksResourceIdService.PERMISSION_MODIFY, getUser(  ) ) )
+        if ( !RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE, String.valueOf( entry.getIdQuicklinks( ) ), QuicklinksResourceIdService.PERMISSION_MODIFY,
+                getUser( ) ) )
         {
-            throw new AccessDeniedException(  );
+            throw new AccessDeniedException( );
         }
 
-        HashMap<String, Object> model = new HashMap<String, Object>(  );
+        HashMap<String, Object> model = new HashMap<String, Object>( );
         setPageTitleProperty( MESSAGE_PAGE_TITLE_CREATE_SELECT_OPTION );
 
-        model.put( MARK_LOCALE, getLocale(  ) );
+        model.put( MARK_LOCALE, getLocale( ) );
         model.put( MARK_PLUGIN, plugin );
         model.put( MARK_ENTRY, entry );
 
-        HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_CREATE_SELECT_OPTION, getLocale(  ), model );
+        HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_CREATE_SELECT_OPTION, getLocale( ), model );
 
-        return getAdminPage( template.getHtml(  ) );
+        return getAdminPage( template.getHtml( ) );
     }
 
     /**
      * Processes the {@link Entry} creation
-     * @param request The HTTP servlet request
+     * 
+     * @param request
+     *            The HTTP servlet request
      * @return The URL to redirect to
      */
-    public String doCreateSelectOption( HttpServletRequest request )
-        throws AccessDeniedException
+    public String doCreateSelectOption( HttpServletRequest request ) throws AccessDeniedException
     {
-        Plugin plugin = getPlugin(  );
+        Plugin plugin = getPlugin( );
         String strIdEntry = request.getParameter( PARAMETER_ENTRY_ID );
         String strTitle = request.getParameter( PARAMETER_TITLE );
         String strUrl = request.getParameter( PARAMETER_URL );
 
-        if ( ( strIdEntry == null ) || !strIdEntry.matches( REGEX_ID ) || ( strTitle == null ) ||
-                strTitle.equals( EMPTY_STRING ) || ( strUrl == null ) || strUrl.equals( EMPTY_STRING ) )
+        if ( ( strIdEntry == null ) || !strIdEntry.matches( REGEX_ID ) || ( strTitle == null ) || strTitle.equals( EMPTY_STRING ) || ( strUrl == null )
+                || strUrl.equals( EMPTY_STRING ) )
         {
             return AdminMessageService.getMessageUrl( request, Messages.MANDATORY_FIELDS, AdminMessage.TYPE_STOP );
         }
@@ -260,157 +262,159 @@ public class QuicklinksEntrySelectJspBean extends PluginAdminPageJspBean
             return AdminMessageService.getMessageUrl( request, Messages.MANDATORY_FIELDS, AdminMessage.TYPE_STOP );
         }
 
-        if ( !RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE, String.valueOf( entry.getIdQuicklinks(  ) ),
-                    QuicklinksResourceIdService.PERMISSION_MODIFY, getUser(  ) ) )
+        if ( !RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE, String.valueOf( entry.getIdQuicklinks( ) ), QuicklinksResourceIdService.PERMISSION_MODIFY,
+                getUser( ) ) )
         {
-            throw new AccessDeniedException(  );
+            throw new AccessDeniedException( );
         }
 
-        EntrySelectOption option = new EntrySelectOption(  );
+        EntrySelectOption option = new EntrySelectOption( );
         option.setTitle( strTitle );
         option.setUrl( strUrl );
-        option.setIdEntry( entry.getId(  ) );
+        option.setIdEntry( entry.getId( ) );
 
-        if ( AppPropertiesService.getProperty( PROPERTY_OPTION_ORDER_DEFAULT_VALUE, DEFAULT_VALUE_OPTION_ORDER )
-                                     .equals( DEFAULT_VALUE_OPTION_ORDER ) )
+        if ( AppPropertiesService.getProperty( PROPERTY_OPTION_ORDER_DEFAULT_VALUE, DEFAULT_VALUE_OPTION_ORDER ).equals( DEFAULT_VALUE_OPTION_ORDER ) )
         {
             option.setIdOrder( EntrySelectOptionHome.FIRST_ORDER );
         }
         else
         {
-            option.setIdOrder( EntrySelectOptionHome.findByEntry( entry.getId(  ), plugin ).size(  ) );
+            option.setIdOrder( EntrySelectOptionHome.findByEntry( entry.getId( ), plugin ).size( ) );
         }
 
         EntrySelectOptionHome.create( option, plugin );
 
         UrlItem url = new UrlItem( JSP_URL_MODIFY );
-        url.addParameter( PARAMETER_QUICKLINKS_ID, entry.getIdQuicklinks(  ) );
-        url.addParameter( PARAMETER_ENTRY_ID, entry.getId(  ) );
+        url.addParameter( PARAMETER_QUICKLINKS_ID, entry.getIdQuicklinks( ) );
+        url.addParameter( PARAMETER_ENTRY_ID, entry.getId( ) );
         url.setAnchor( ANCHOR_NAME );
 
-        return url.getUrl(  );
+        return url.getUrl( );
     }
 
     /**
      * Get the {@link Entry} modification page
-     * @param request The HTTP servlet request
+     * 
+     * @param request
+     *            The HTTP servlet request
      * @return The HTML template
      */
-    public String getModifySelectOption( HttpServletRequest request )
-        throws AccessDeniedException
+    public String getModifySelectOption( HttpServletRequest request ) throws AccessDeniedException
     {
-        Plugin plugin = getPlugin(  );
+        Plugin plugin = getPlugin( );
         EntrySelectOption entrySelectOption = getAuthorizedEntry( request, QuicklinksResourceIdService.PERMISSION_MODIFY );
-        IEntry entry = EntryHome.findByPrimaryKey( entrySelectOption.getIdEntry(  ), plugin );
-        HashMap<String, Object> model = new HashMap<String, Object>(  );
+        IEntry entry = EntryHome.findByPrimaryKey( entrySelectOption.getIdEntry( ), plugin );
+        HashMap<String, Object> model = new HashMap<String, Object>( );
         setPageTitleProperty( MESSAGE_PAGE_TITLE_MODIFY_SELECT_OPTION );
 
-        model.put( MARK_LOCALE, getLocale(  ) );
+        model.put( MARK_LOCALE, getLocale( ) );
         model.put( MARK_PLUGIN, plugin );
         model.put( MARK_ENTRY, entry );
         model.put( MARK_OPTION, entrySelectOption );
 
-        HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_MODIFY_SELECT_OPTION, getLocale(  ), model );
+        HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_MODIFY_SELECT_OPTION, getLocale( ), model );
 
-        return getAdminPage( template.getHtml(  ) );
+        return getAdminPage( template.getHtml( ) );
     }
 
     /**
      * Processes the {@link Entry} modification
-     * @param request The HTTP servlet request
+     * 
+     * @param request
+     *            The HTTP servlet request
      * @return The URL to redirect to
      */
-    public String doModifySelectOption( HttpServletRequest request )
-        throws AccessDeniedException
+    public String doModifySelectOption( HttpServletRequest request ) throws AccessDeniedException
     {
-        Plugin plugin = getPlugin(  );
+        Plugin plugin = getPlugin( );
         String strTitle = request.getParameter( PARAMETER_TITLE );
         String strUrl = request.getParameter( PARAMETER_URL );
         EntrySelectOption entrySelectOption = getAuthorizedEntry( request, QuicklinksResourceIdService.PERMISSION_MODIFY );
-        IEntry entry = EntryHome.findByPrimaryKey( entrySelectOption.getIdEntry(  ), plugin );
+        IEntry entry = EntryHome.findByPrimaryKey( entrySelectOption.getIdEntry( ), plugin );
 
-        if ( ( strTitle == null ) || strTitle.equals( EMPTY_STRING ) || ( strUrl == null ) ||
-                strUrl.equals( EMPTY_STRING ) )
+        if ( ( strTitle == null ) || strTitle.equals( EMPTY_STRING ) || ( strUrl == null ) || strUrl.equals( EMPTY_STRING ) )
         {
             return AdminMessageService.getMessageUrl( request, Messages.MANDATORY_FIELDS, AdminMessage.TYPE_STOP );
         }
 
         entrySelectOption.setTitle( strTitle );
         entrySelectOption.setUrl( strUrl );
-        entrySelectOption.setIdEntry( entry.getId(  ) );
+        entrySelectOption.setIdEntry( entry.getId( ) );
 
         EntrySelectOptionHome.update( entrySelectOption, plugin );
 
         UrlItem url = new UrlItem( JSP_URL_MODIFY );
-        url.addParameter( PARAMETER_QUICKLINKS_ID, entry.getIdQuicklinks(  ) );
-        url.addParameter( PARAMETER_ENTRY_ID, entry.getId(  ) );
+        url.addParameter( PARAMETER_QUICKLINKS_ID, entry.getIdQuicklinks( ) );
+        url.addParameter( PARAMETER_ENTRY_ID, entry.getId( ) );
         url.setAnchor( ANCHOR_NAME );
 
-        return url.getUrl(  );
+        return url.getUrl( );
     }
 
     /**
      * Processes the {@link Entry} removal confirmation
-     * @param request The HTTP servlet request
+     * 
+     * @param request
+     *            The HTTP servlet request
      * @return The URL to redirect to
      */
-    public String doConfirmRemoveSelectOption( HttpServletRequest request )
-        throws AccessDeniedException
+    public String doConfirmRemoveSelectOption( HttpServletRequest request ) throws AccessDeniedException
     {
         EntrySelectOption entrySelectOption = getAuthorizedEntry( request, QuicklinksResourceIdService.PERMISSION_MODIFY );
 
         if ( ( entrySelectOption == null ) )
         {
-            throw new AccessDeniedException(  );
+            throw new AccessDeniedException( );
         }
 
-        HashMap<String, Object> model = new HashMap<String, Object>(  );
-        model.put( MARK_OPTION_ID, String.valueOf( entrySelectOption.getId(  ) ) );
-        model.put( MARK_ENTRY_ID, String.valueOf( entrySelectOption.getIdEntry(  ) ) );
+        HashMap<String, Object> model = new HashMap<String, Object>( );
+        model.put( MARK_OPTION_ID, String.valueOf( entrySelectOption.getId( ) ) );
+        model.put( MARK_ENTRY_ID, String.valueOf( entrySelectOption.getIdEntry( ) ) );
 
-        return AdminMessageService.getMessageUrl( request, MESSAGE_CONFIRMATION_REMOVE_OPTION,
-            JSP_URL_PREFIX + JSP_URL_DELETE_OPTION, AdminMessage.TYPE_QUESTION, model );
+        return AdminMessageService.getMessageUrl( request, MESSAGE_CONFIRMATION_REMOVE_OPTION, JSP_URL_PREFIX + JSP_URL_DELETE_OPTION,
+                AdminMessage.TYPE_QUESTION, model );
     }
 
     /**
      * Processes the {@link Entry} removal
-     * @param request The HTTP servlet request
+     * 
+     * @param request
+     *            The HTTP servlet request
      * @return The URL to redirect to
      */
-    public String doRemoveSelectOption( HttpServletRequest request )
-        throws AccessDeniedException
+    public String doRemoveSelectOption( HttpServletRequest request ) throws AccessDeniedException
     {
         EntrySelectOption entrySelectOption = getAuthorizedEntry( request, QuicklinksResourceIdService.PERMISSION_MODIFY );
 
-        EntrySelectOptionHome.remove( entrySelectOption.getId(  ), entrySelectOption.getIdEntry(  ), getPlugin(  ) );
+        EntrySelectOptionHome.remove( entrySelectOption.getId( ), entrySelectOption.getIdEntry( ), getPlugin( ) );
 
         UrlItem url = new UrlItem( JSP_URL_MODIFY );
-        url.addParameter( PARAMETER_ENTRY_ID, entrySelectOption.getIdEntry(  ) );
+        url.addParameter( PARAMETER_ENTRY_ID, entrySelectOption.getIdEntry( ) );
         url.setAnchor( ANCHOR_NAME );
 
-        return url.getUrl(  );
+        return url.getUrl( );
     }
 
     /**
      * Processes the {@link EntrySelectOption} copy
      *
-     * @param request The {@link HttpServletRequest}
+     * @param request
+     *            The {@link HttpServletRequest}
      * @return The Url to redirect to
      */
-    public String doCopyEntrySelectOption( HttpServletRequest request )
-        throws AccessDeniedException
+    public String doCopyEntrySelectOption( HttpServletRequest request ) throws AccessDeniedException
     {
         EntrySelectOption entrySelectOption = getAuthorizedEntry( request, QuicklinksResourceIdService.PERMISSION_MODIFY );
 
-        entrySelectOption.copy( entrySelectOption.getIdEntry(  ), getPlugin(  ),
-            I18nService.getLocalizedString( MESSAGE_COPY, getLocale(  ) ) + entrySelectOption.getTitle(  ) );
+        entrySelectOption.copy( entrySelectOption.getIdEntry( ), getPlugin( ),
+                I18nService.getLocalizedString( MESSAGE_COPY, getLocale( ) ) + entrySelectOption.getTitle( ) );
 
         UrlItem url = new UrlItem( JSP_URL_MODIFY );
-        url.addParameter( PARAMETER_ENTRY_ID, entrySelectOption.getIdEntry(  ) );
+        url.addParameter( PARAMETER_ENTRY_ID, entrySelectOption.getIdEntry( ) );
         url.setAnchor( ANCHOR_NAME );
 
-        return url.getUrl(  );
+        return url.getUrl( );
     }
 
-    //-------------------------- Private methods --------------------------
+    // -------------------------- Private methods --------------------------
 }

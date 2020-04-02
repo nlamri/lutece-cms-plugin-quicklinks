@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -37,7 +37,6 @@ import fr.paris.lutece.portal.service.plugin.Plugin;
 
 import java.util.Collection;
 
-
 /**
  *
  * {@link Quicklinks} action Dao
@@ -45,10 +44,13 @@ import java.util.Collection;
 public interface IQuicklinksActionDAO
 {
     /**
-    * Load the list of actions for a all {@link Quicklinks} by {@link Quicklinks} state
-    * @param bIsEnabled true is the {@link Quicklinks} is enabled
-    * @param plugin the plugin
-    * @return The Collection of actions
-    */
+     * Load the list of actions for a all {@link Quicklinks} by {@link Quicklinks} state
+     * 
+     * @param bIsEnabled
+     *            true is the {@link Quicklinks} is enabled
+     * @param plugin
+     *            the plugin
+     * @return The Collection of actions
+     */
     Collection<QuicklinksAction> selectActionsByQuicklinksState( boolean bIsEnabled, Plugin plugin );
 }

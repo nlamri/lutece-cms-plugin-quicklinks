@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -41,32 +41,33 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
-
 /**
  * This class provides instances management methods (create, find, ...) for SpaceAction objects
  */
 public final class QuicklinksActionHome
 {
     // Static variable pointed at the DAO instance
-    private static IQuicklinksActionDAO _dao = (IQuicklinksActionDAO) SpringContextService.getPluginBean( "quicklinks",
-            "quicklinks.quicklinksActionDAO" );
+    private static IQuicklinksActionDAO _dao = (IQuicklinksActionDAO) SpringContextService.getPluginBean( "quicklinks", "quicklinks.quicklinksActionDAO" );
 
     /**
      * Private constructor - this class need not be instantiated
      */
-    private QuicklinksActionHome(  )
+    private QuicklinksActionHome( )
     {
     }
 
     /**
      * Load the list of actions by {@link Quicklinks} state
-     * @param bIsEnabled true if the {@link Quicklinks} is enabled
-     * @param locale the locale
-     * @param plugin the plugin
+     * 
+     * @param bIsEnabled
+     *            true if the {@link Quicklinks} is enabled
+     * @param locale
+     *            the locale
+     * @param plugin
+     *            the plugin
      * @return The Collection of actions
      */
-    public static Collection<QuicklinksAction> selectActionsByQuicklinksState( boolean bIsEnabled, Plugin plugin,
-        Locale locale )
+    public static Collection<QuicklinksAction> selectActionsByQuicklinksState( boolean bIsEnabled, Plugin plugin, Locale locale )
     {
         Collection<QuicklinksAction> listFormActions = _dao.selectActionsByQuicklinksState( bIsEnabled, plugin );
 

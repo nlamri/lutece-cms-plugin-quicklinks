@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -49,7 +49,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.fileupload.FileItem;
 
-
 /**
  * The class Entry Text
  * 
@@ -96,13 +95,14 @@ public class EntryUrl extends Entry
     private String _strTarget;
     private String _strDescription;
     private String _strUrl;
-    private byte[] _bytesImage;
+    private byte [ ] _bytesImage;
     private String _strImageMimeType;
     private EntryUrlDisplayProperties _entryUrlDisplayProperties;
     private EntryUrlLinkProperties _entryUrlLinkProperties;
 
     /**
-     * @param strDescription the _strDescription to set
+     * @param strDescription
+     *            the _strDescription to set
      */
     public void setDescription( String strDescription )
     {
@@ -126,7 +126,8 @@ public class EntryUrl extends Entry
     }
 
     /**
-     * @param strUrl the url to set
+     * @param strUrl
+     *            the url to set
      */
     public void setUrl( String strUrl )
     {
@@ -136,15 +137,16 @@ public class EntryUrl extends Entry
     /**
      * @return the image
      */
-    public byte[] getImage( )
+    public byte [ ] getImage( )
     {
         return _bytesImage;
     }
 
     /**
-     * @param image the image to set
+     * @param image
+     *            the image to set
      */
-    public void setImage( byte[] image )
+    public void setImage( byte [ ] image )
     {
         this._bytesImage = image;
     }
@@ -158,7 +160,8 @@ public class EntryUrl extends Entry
     }
 
     /**
-     * @param strImageMimeType the imageMimeType to set
+     * @param strImageMimeType
+     *            the imageMimeType to set
      */
     public void setImageMimeType( String strImageMimeType )
     {
@@ -174,7 +177,8 @@ public class EntryUrl extends Entry
     }
 
     /**
-     * @param entryUrlDisplayProperties the entryUrlDisplayProperties to set
+     * @param entryUrlDisplayProperties
+     *            the entryUrlDisplayProperties to set
      */
     public void setEntryUrlDisplayProperties( EntryUrlDisplayProperties entryUrlDisplayProperties )
     {
@@ -190,7 +194,8 @@ public class EntryUrl extends Entry
     }
 
     /**
-     * @param entryUrlLinkProperties the entryUrlLinkProperties to set
+     * @param entryUrlLinkProperties
+     *            the entryUrlLinkProperties to set
      */
     public void setEntryUrlLinkProperties( EntryUrlLinkProperties entryUrlLinkProperties )
     {
@@ -243,6 +248,7 @@ public class EntryUrl extends Entry
 
     /**
      * Get the target
+     * 
      * @return The target
      */
     public String getTarget( )
@@ -252,6 +258,7 @@ public class EntryUrl extends Entry
 
     /**
      * Set the target
+     * 
      * @param strTarget
      */
     public void setTarget( String strTarget )
@@ -275,9 +282,7 @@ public class EntryUrl extends Entry
         boolean bUpdateImage = ( ( strUpdateImage != null ) && !strUpdateImage.equals( EMPTY_STRING ) ) ? true : false;
 
         // Check Target
-        if ( ( strTarget == null )
-                || ( strTarget.equals( EMPTY_STRING ) && ( ( strTargetFramename == null ) || strTargetFramename
-                        .equals( "" ) ) ) )
+        if ( ( strTarget == null ) || ( strTarget.equals( EMPTY_STRING ) && ( ( strTargetFramename == null ) || strTargetFramename.equals( "" ) ) ) )
         {
             return Messages.MANDATORY_FIELDS;
         }
@@ -297,9 +302,8 @@ public class EntryUrl extends Entry
             this.setDescription( strDescription );
         }
 
-        if ( ( strUrl == null ) || strUrl.equals( EMPTY_STRING ) || ( strDisplayProperties == null )
-                || !strDisplayProperties.matches( REGEX_ID ) || ( strLinkProperties == null )
-                || !strLinkProperties.matches( REGEX_ID ) )
+        if ( ( strUrl == null ) || strUrl.equals( EMPTY_STRING ) || ( strDisplayProperties == null ) || !strDisplayProperties.matches( REGEX_ID )
+                || ( strLinkProperties == null ) || !strLinkProperties.matches( REGEX_ID ) )
         {
             return Messages.MANDATORY_FIELDS;
         }
@@ -342,8 +346,11 @@ public class EntryUrl extends Entry
 
     /**
      * Check the url
-     * @param requet The {@link HttpServletRequest}
-     * @param strUrl The url in String format
+     * 
+     * @param requet
+     *            The {@link HttpServletRequest}
+     * @param strUrl
+     *            The url in String format
      * @return true if url is valid, false else
      */
     private boolean checkUrl( HttpServletRequest requet, String strUrl )
@@ -355,21 +362,19 @@ public class EntryUrl extends Entry
     @Override
     public void getSpecificParameters( HttpServletRequest request, HashMap<String, Object> model, Plugin plugin )
     {
-        int nDisplayPropertiesDefaultValue = AppPropertiesService.getPropertyInt(
-                PROPERTY_DISPLAY_PROPERTIES_DEFAULT_VALUE, DISPLAY_PROPERTIES_DEFAULT_VALUE );
-        int nLinkPropertiesDefaultValue = AppPropertiesService.getPropertyInt( PROPERTY_LINK_PROPERTIES_DEFAULT_VALUE,
-                LINK_PROPERTIES_DEFAULT_VALUE );
+        int nDisplayPropertiesDefaultValue = AppPropertiesService.getPropertyInt( PROPERTY_DISPLAY_PROPERTIES_DEFAULT_VALUE, DISPLAY_PROPERTIES_DEFAULT_VALUE );
+        int nLinkPropertiesDefaultValue = AppPropertiesService.getPropertyInt( PROPERTY_LINK_PROPERTIES_DEFAULT_VALUE, LINK_PROPERTIES_DEFAULT_VALUE );
 
         model.put( MARK_DISPLAY_PROPERTIES_LIST, EntryUrlDisplayProperties.getReferenceList( ) );
         model.put( MARK_LINK_PROPERTIES_LIST, EntryUrlLinkProperties.getReferenceList( ) );
-        model.put( MARK_TARGET_DEFAULT_VALUE,
-                AppPropertiesService.getProperty( PROPERTY_TARGET_DEFAULT_VALUE, TARGET_DEFAULT_VALUE ) );
+        model.put( MARK_TARGET_DEFAULT_VALUE, AppPropertiesService.getProperty( PROPERTY_TARGET_DEFAULT_VALUE, TARGET_DEFAULT_VALUE ) );
         model.put( MARK_DISPLAY_PROPERTIES_DEFAULT_VALUE, nDisplayPropertiesDefaultValue );
         model.put( MARK_LINK_PROPERTIES_DEFAULT_VALUE, nLinkPropertiesDefaultValue );
     }
 
     /**
      * Get the image resource for the entry url
+     * 
      * @return The {@link ImageResource} object
      */
     public ImageResource getImageResource( )
@@ -383,6 +388,7 @@ public class EntryUrl extends Entry
 
     /**
      * Get the image Url
+     * 
      * @return The image Url
      */
     public String getImageUrl( )

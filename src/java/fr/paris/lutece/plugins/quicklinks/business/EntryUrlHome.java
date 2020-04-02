@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -36,7 +36,6 @@ package fr.paris.lutece.plugins.quicklinks.business;
 import fr.paris.lutece.portal.service.plugin.Plugin;
 import fr.paris.lutece.portal.service.spring.SpringContextService;
 
-
 /**
  *
  * class EntryUrlHome
@@ -45,21 +44,22 @@ import fr.paris.lutece.portal.service.spring.SpringContextService;
 public final class EntryUrlHome
 {
     // Static variable pointed at the DAO instance
-    private static IEntrySpecificDAO _dao = (IEntrySpecificDAO) SpringContextService.getPluginBean( "quicklinks",
-            "quicklinks.entryUrlDAO" );
+    private static IEntrySpecificDAO _dao = (IEntrySpecificDAO) SpringContextService.getPluginBean( "quicklinks", "quicklinks.entryUrlDAO" );
 
     /**
      * Private constructor - this class need not be instantiated
      */
-    private EntryUrlHome(  )
+    private EntryUrlHome( )
     {
     }
 
     /**
      * Returns an instance of a {@link EntryUrl} whose identifier is specified in parameter
      *
-     * @param entry The {@link EntryUrl} to load
-     * @param plugin the Plugin
+     * @param entry
+     *            The {@link EntryUrl} to load
+     * @param plugin
+     *            the Plugin
      * @return an instance of EntryUrl
      */
     public static IEntry load( IEntry entry, Plugin plugin )
@@ -70,8 +70,10 @@ public final class EntryUrlHome
     /**
      * Insert a new record in the table.
      *
-     * @param entry The Instance of the object {@link EntryUrl}
-     * @param plugin The {@link Plugin} using this data access service
+     * @param entry
+     *            The Instance of the object {@link EntryUrl}
+     * @param plugin
+     *            The {@link Plugin} using this data access service
      * @return The {@link EntryUrl}
      */
     public static IEntry create( EntryUrl entry, Plugin plugin )
@@ -82,8 +84,10 @@ public final class EntryUrlHome
     /**
      * Delete the {@link EntryUrl} specified by identifier
      *
-     * @param nId The identifier
-     * @param plugin The {@link Plugin} using this data access service
+     * @param nId
+     *            The identifier
+     * @param plugin
+     *            The {@link Plugin} using this data access service
      */
     public static void remove( int nId, Plugin plugin )
     {
@@ -93,8 +97,10 @@ public final class EntryUrlHome
     /**
      * Update The {@link EntryUrl}
      *
-     * @param entry The {@link EntryUrl} to update
-     * @param plugin The {@link Plugin} using this data access service
+     * @param entry
+     *            The {@link EntryUrl} to update
+     * @param plugin
+     *            The {@link Plugin} using this data access service
      */
     public static void update( EntryUrl entry, Plugin plugin )
     {

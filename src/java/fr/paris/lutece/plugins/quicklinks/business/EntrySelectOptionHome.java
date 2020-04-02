@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -38,7 +38,6 @@ import fr.paris.lutece.portal.service.spring.SpringContextService;
 
 import java.util.Collection;
 
-
 /**
  *
  * class EntrySelectOptionHome
@@ -51,30 +50,32 @@ public final class EntrySelectOptionHome
     protected static final int STEP = 1;
 
     // Static variable pointed at the DAO instance
-    private static IEntrySelectOptionDAO _dao = (IEntrySelectOptionDAO) SpringContextService.getPluginBean( "quicklinks",
-            "quicklinks.entrySelectOptionDAO" );
+    private static IEntrySelectOptionDAO _dao = (IEntrySelectOptionDAO) SpringContextService.getPluginBean( "quicklinks", "quicklinks.entrySelectOptionDAO" );
 
     /**
      * Private constructor - this class need not be instantiated
      */
-    private EntrySelectOptionHome(  )
+    private EntrySelectOptionHome( )
     {
     }
 
     /**
      * Insert a new record in the table.
-     * @param option The Instance of the object {@link Entry}
-     * @param plugin The {@link Plugin} using this data access service
+     * 
+     * @param option
+     *            The Instance of the object {@link Entry}
+     * @param plugin
+     *            The {@link Plugin} using this data access service
      * @return The {@link EntrySelectOption}
      */
     public static EntrySelectOption create( EntrySelectOption option, Plugin plugin )
     {
-        //Move down all orders in new list
-        for ( EntrySelectOption optionChangeOrder : findByEntry( option.getIdEntry(  ), plugin ) )
+        // Move down all orders in new list
+        for ( EntrySelectOption optionChangeOrder : findByEntry( option.getIdEntry( ), plugin ) )
         {
-            if ( optionChangeOrder.getIdOrder(  ) >= option.getIdOrder(  ) )
+            if ( optionChangeOrder.getIdOrder( ) >= option.getIdOrder( ) )
             {
-                optionChangeOrder.setIdOrder( optionChangeOrder.getIdOrder(  ) + STEP );
+                optionChangeOrder.setIdOrder( optionChangeOrder.getIdOrder( ) + STEP );
                 _dao.store( optionChangeOrder, plugin );
             }
         }
@@ -84,20 +85,24 @@ public final class EntrySelectOptionHome
 
     /**
      * Delete the {@link Entry} specified by identifier
-     * @param nId The identifier
-     * @param nIdEntry The Entry identifier
-     * @param plugin The {@link Plugin} using this data access service
+     * 
+     * @param nId
+     *            The identifier
+     * @param nIdEntry
+     *            The Entry identifier
+     * @param plugin
+     *            The {@link Plugin} using this data access service
      */
     public static void remove( int nId, int nIdEntry, Plugin plugin )
     {
         EntrySelectOption optionOld = findByPrimaryKey( nId, nIdEntry, plugin );
 
-        //Move up all orders in old list
-        for ( EntrySelectOption optionChangeOrder : findByEntry( optionOld.getIdEntry(  ), plugin ) )
+        // Move up all orders in old list
+        for ( EntrySelectOption optionChangeOrder : findByEntry( optionOld.getIdEntry( ), plugin ) )
         {
-            if ( optionChangeOrder.getIdOrder(  ) > optionOld.getIdOrder(  ) )
+            if ( optionChangeOrder.getIdOrder( ) > optionOld.getIdOrder( ) )
             {
-                optionChangeOrder.setIdOrder( optionChangeOrder.getIdOrder(  ) - STEP );
+                optionChangeOrder.setIdOrder( optionChangeOrder.getIdOrder( ) - STEP );
                 _dao.store( optionChangeOrder, plugin );
             }
         }
@@ -107,8 +112,11 @@ public final class EntrySelectOptionHome
 
     /**
      * Delete the all the {@link EntrySelectOption} option from an entry
-     * @param nId The entry identifier
-     * @param plugin The {@link Plugin} using this data access service
+     * 
+     * @param nId
+     *            The entry identifier
+     * @param plugin
+     *            The {@link Plugin} using this data access service
      */
     public static void removeByEntryId( int nId, Plugin plugin )
     {
@@ -116,14 +124,17 @@ public final class EntrySelectOptionHome
 
         for ( EntrySelectOption entrySelectOption : listOptions )
         {
-            remove( entrySelectOption.getId(  ), entrySelectOption.getIdEntry(  ), plugin );
+            remove( entrySelectOption.getId( ), entrySelectOption.getIdEntry( ), plugin );
         }
     }
 
     /**
      * Update The {@link Entry}
-     * @param option The {@link Entry} to update
-     * @param plugin The {@link Plugin} using this data access service
+     * 
+     * @param option
+     *            The {@link Entry} to update
+     * @param plugin
+     *            The {@link Plugin} using this data access service
      */
     public static void update( EntrySelectOption option, Plugin plugin )
     {
@@ -132,31 +143,31 @@ public final class EntrySelectOptionHome
             return;
         }
 
-        EntrySelectOption optionOld = findByPrimaryKey( option.getId(  ), option.getIdEntry(  ), plugin );
+        EntrySelectOption optionOld = findByPrimaryKey( option.getId( ), option.getIdEntry( ), plugin );
 
         if ( optionOld == null )
         {
             return;
         }
 
-        //Move up all orders in old list
-        Collection<EntrySelectOption> listOptionMove = findByEntry( optionOld.getIdEntry(  ), plugin );
+        // Move up all orders in old list
+        Collection<EntrySelectOption> listOptionMove = findByEntry( optionOld.getIdEntry( ), plugin );
 
         for ( EntrySelectOption optionChangeOrder : listOptionMove )
         {
-            if ( optionChangeOrder.getIdOrder(  ) > optionOld.getIdOrder(  ) )
+            if ( optionChangeOrder.getIdOrder( ) > optionOld.getIdOrder( ) )
             {
-                optionChangeOrder.setIdOrder( optionChangeOrder.getIdOrder(  ) - STEP );
+                optionChangeOrder.setIdOrder( optionChangeOrder.getIdOrder( ) - STEP );
                 _dao.store( optionChangeOrder, plugin );
             }
         }
 
-        //Move down all orders in new list
+        // Move down all orders in new list
         for ( EntrySelectOption optionChangeOrder : listOptionMove )
         {
-            if ( optionChangeOrder.getIdOrder(  ) >= option.getIdOrder(  ) )
+            if ( optionChangeOrder.getIdOrder( ) >= option.getIdOrder( ) )
             {
-                optionChangeOrder.setIdOrder( optionChangeOrder.getIdOrder(  ) + STEP );
+                optionChangeOrder.setIdOrder( optionChangeOrder.getIdOrder( ) + STEP );
                 _dao.store( optionChangeOrder, plugin );
             }
         }
@@ -166,22 +177,29 @@ public final class EntrySelectOptionHome
 
     /**
      * Get the max order of a option list entry
-     * @param nIdEntry The id of the {@link Entry}
-     * @param plugin The {@link Plugin}
+     * 
+     * @param nIdEntry
+     *            The id of the {@link Entry}
+     * @param plugin
+     *            The {@link Plugin}
      * @return the max order
      */
     private static int countEntry( int nIdEntry, Plugin plugin )
     {
         Collection<EntrySelectOption> listOptions = findByEntry( nIdEntry, plugin );
 
-        return ( listOptions == null ) ? 0 : listOptions.size(  );
+        return ( listOptions == null ) ? 0 : listOptions.size( );
     }
 
     /**
      * Move down an {@link IEntry} into the list
-     * @param nId The id of the {@link IEntry}
-     *  @param nIdEntry The Entry identifier
-     * @param plugin The plugin
+     * 
+     * @param nId
+     *            The id of the {@link IEntry}
+     * @param nIdEntry
+     *            The Entry identifier
+     * @param plugin
+     *            The plugin
      */
     public static void goDown( int nId, int nIdEntry, Plugin plugin )
     {
@@ -192,46 +210,53 @@ public final class EntrySelectOptionHome
             return;
         }
 
-        int nCountEntry = countEntry( optionDown.getIdEntry(  ), plugin );
+        int nCountEntry = countEntry( optionDown.getIdEntry( ), plugin );
 
-        if ( optionDown.getIdOrder(  ) >= nCountEntry )
+        if ( optionDown.getIdOrder( ) >= nCountEntry )
         {
             return;
         }
 
-        optionDown.setIdOrder( optionDown.getIdOrder(  ) + STEP );
+        optionDown.setIdOrder( optionDown.getIdOrder( ) + STEP );
 
-        //Commit
+        // Commit
         update( optionDown, plugin );
     }
 
     /**
      * Move up an {@link IEntry} into the list
-     * @param nId The id of the {@link IEntry}
-     * @param nIdEntry The Entry identifier
-     * @param plugin The plugin
+     * 
+     * @param nId
+     *            The id of the {@link IEntry}
+     * @param nIdEntry
+     *            The Entry identifier
+     * @param plugin
+     *            The plugin
      */
     public static void goUp( int nId, int nIdEntry, Plugin plugin )
     {
         EntrySelectOption optionUp = findByPrimaryKey( nId, nIdEntry, plugin );
 
-        if ( ( optionUp == null ) || ( optionUp.getIdOrder(  ) <= FIRST_ORDER ) )
+        if ( ( optionUp == null ) || ( optionUp.getIdOrder( ) <= FIRST_ORDER ) )
         {
             return;
         }
 
-        optionUp.setIdOrder( optionUp.getIdOrder(  ) - STEP );
+        optionUp.setIdOrder( optionUp.getIdOrder( ) - STEP );
 
-        //Commit
+        // Commit
         update( optionUp, plugin );
     }
 
     /**
-     * Returns an instance of a  EntrySelectOption whose identifier is specified in parameter
+     * Returns an instance of a EntrySelectOption whose identifier is specified in parameter
      *
-     * @param nKey The EntrySelectOption primary key
-     * @param nIdEntry The Entry identifier
-     * @param plugin the Plugin
+     * @param nKey
+     *            The EntrySelectOption primary key
+     * @param nIdEntry
+     *            The Entry identifier
+     * @param plugin
+     *            the Plugin
      * @return an instance of EntrySelectOption
      */
     public static EntrySelectOption findByPrimaryKey( int nId, int nIdEntry, Plugin plugin )
@@ -240,11 +265,12 @@ public final class EntrySelectOptionHome
     }
 
     /**
-         * Returns a list of all EntrySelectOption
-         *
-         * @param plugin the plugin
-         * @return  the {@link Collection} of EntrySelectOption
-         */
+     * Returns a list of all EntrySelectOption
+     *
+     * @param plugin
+     *            the plugin
+     * @return the {@link Collection} of EntrySelectOption
+     */
     public static Collection<EntrySelectOption> findAll( Plugin plugin )
     {
         return _dao.select( plugin );
@@ -253,8 +279,10 @@ public final class EntrySelectOptionHome
     /**
      * Returns a list of all EntrySelectOption
      *
-     * @param nIdEntry the entry Id
-     * @param plugin the plugin
+     * @param nIdEntry
+     *            the entry Id
+     * @param plugin
+     *            the plugin
      * @return the {@link Collection} of EntrySelectOption
      */
     public static Collection<EntrySelectOption> findByEntry( int nIdEntry, Plugin plugin )

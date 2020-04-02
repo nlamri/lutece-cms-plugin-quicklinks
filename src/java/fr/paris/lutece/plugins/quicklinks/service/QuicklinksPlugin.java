@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -36,7 +36,6 @@ package fr.paris.lutece.plugins.quicklinks.service;
 import fr.paris.lutece.plugins.quicklinks.business.Quicklinks;
 import fr.paris.lutece.portal.service.plugin.PluginDefaultImplementation;
 
-
 /**
  * class QuicklinksPlugin
  */
@@ -47,9 +46,9 @@ public class QuicklinksPlugin extends PluginDefaultImplementation
     /**
      * Initialize the plugin {@link Quicklinks}
      */
-    public void init(  )
+    public void init( )
     {
         // Initialize the Quicklinks service
-        QuicklinksService.getInstance(  ).init(  );
+        QuicklinksService.getInstance( ).init( );
     }
 }

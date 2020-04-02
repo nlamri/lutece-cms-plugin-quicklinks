@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -47,7 +47,6 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
-
 
 /**
  * The class Entry Select
@@ -111,9 +110,12 @@ public class EntrySelect extends Entry
     /**
      * Copy an Entry
      * 
-     * @param nIdQuicklinks The {@link Quicklinks} identifier
-     * @param plugin The {@link Plugin}
-     * @param strNewName The new name
+     * @param nIdQuicklinks
+     *            The {@link Quicklinks} identifier
+     * @param plugin
+     *            The {@link Plugin}
+     * @param strNewName
+     *            The new name
      * @return The {@link IEntry} copy
      */
     public IEntry copy( int nIdQuicklinks, Plugin plugin, String strNewName )
@@ -155,6 +157,7 @@ public class EntrySelect extends Entry
 
     /**
      * Get the target
+     * 
      * @return the target
      */
     public String getTarget( )
@@ -164,6 +167,7 @@ public class EntrySelect extends Entry
 
     /**
      * Set the target
+     * 
      * @param strTarget
      */
     public void setTarget( String strTarget )
@@ -178,9 +182,7 @@ public class EntrySelect extends Entry
         String strTargetFramename = request.getParameter( PARAMETER_TARGET_FRAMENAME );
 
         // Check Target
-        if ( ( strTarget == null )
-                || ( strTarget.equals( EMPTY_STRING ) && ( ( strTargetFramename == null ) || strTargetFramename
-                        .equals( "" ) ) ) )
+        if ( ( strTarget == null ) || ( strTarget.equals( EMPTY_STRING ) && ( ( strTargetFramename == null ) || strTargetFramename.equals( "" ) ) ) )
         {
             return Messages.MANDATORY_FIELDS;
         }
@@ -202,24 +204,21 @@ public class EntrySelect extends Entry
     {
         Collection<EntrySelectOption> listEntrySelectOption = EntrySelectOptionHome.findByEntry( getId( ), plugin );
 
-        _nDefaultItemsPerPage = AppPropertiesService.getPropertyInt( PROPERTY_STYLES_PER_PAGE,
-                DEFAULT_PAGINATOR_STYLES_PER_PAGE );
+        _nDefaultItemsPerPage = AppPropertiesService.getPropertyInt( PROPERTY_STYLES_PER_PAGE, DEFAULT_PAGINATOR_STYLES_PER_PAGE );
         _strCurrentPageIndex = Paginator.getPageIndex( request, Paginator.PARAMETER_PAGE_INDEX, _strCurrentPageIndex );
-        _nItemsPerPage = Paginator.getItemsPerPage( request, Paginator.PARAMETER_ITEMS_PER_PAGE, _nItemsPerPage,
-                _nDefaultItemsPerPage );
+        _nItemsPerPage = Paginator.getItemsPerPage( request, Paginator.PARAMETER_ITEMS_PER_PAGE, _nItemsPerPage, _nDefaultItemsPerPage );
 
         UrlItem url = new UrlItem( JSP_URL_PREFIX + JSP_URL_MODIFY );
         url.addParameter( PARAMETER_ENTRY_ID, request.getParameter( PARAMETER_ENTRY_ID ) );
         url.addParameter( Paginator.PARAMETER_ITEMS_PER_PAGE, request.getParameter( Paginator.PARAMETER_ITEMS_PER_PAGE ) );
 
-        Paginator paginator = new Paginator( (List<EntrySelectOption>) listEntrySelectOption, _nItemsPerPage,
-                url.getUrl( ), Paginator.PARAMETER_PAGE_INDEX, _strCurrentPageIndex );
+        Paginator paginator = new Paginator( (List<EntrySelectOption>) listEntrySelectOption, _nItemsPerPage, url.getUrl( ), Paginator.PARAMETER_PAGE_INDEX,
+                _strCurrentPageIndex );
 
         model.put( MARK_PAGINATOR, paginator );
         model.put( MARK_NB_ITEMS_PER_PAGE, String.valueOf( _nItemsPerPage ) );
         model.put( MARK_OPTION_LIST, paginator.getPageItems( ) );
-        model.put( MARK_TARGET_DEFAULT_VALUE,
-                AppPropertiesService.getProperty( PROPERTY_TARGET_DEFAULT_VALUE, TARGET_DEFAULT_VALUE ) );
+        model.put( MARK_TARGET_DEFAULT_VALUE, AppPropertiesService.getProperty( PROPERTY_TARGET_DEFAULT_VALUE, TARGET_DEFAULT_VALUE ) );
     }
 
     @Override

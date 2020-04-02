@@ -1,15 +1,15 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
- * Redistribution and use in source and binary quicklinkss, with or without
+ * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
  *
  *  1. Redistributions of source code must retain the above copyright notice
  *     and the following disclaimer.
  *
- *  2. Redistributions in binary quicklinks must reproduce the above copyright notice
+ *  2. Redistributions in binary form must reproduce the above copyright notice
  *     and the following disclaimer in the documentation and/or other materials
  *     provided with the distribution.
  *
@@ -36,7 +36,6 @@ package fr.paris.lutece.plugins.quicklinks.business.portlet;
 import fr.paris.lutece.portal.business.portlet.IPortletInterfaceDAO;
 import fr.paris.lutece.portal.business.portlet.Portlet;
 
-
 /**
  * IQuicklinksPortletDAO
  */
@@ -46,30 +45,35 @@ public interface IQuicklinksPortletDAO extends IPortletInterfaceDAO
      * Deletes records for a portlet identifier in the table quicklinks_portlet
      *
      *
-     * @param nPortletId the portlet identifier
+     * @param nPortletId
+     *            the portlet identifier
      */
     void delete( int nPortletId );
 
     /**
-      * Insert a new record in the table quicklinks_portlet
-      *
-      *
-      * @param portlet the instance of the Portlet object to insert
-      */
+     * Insert a new record in the table quicklinks_portlet
+     *
+     *
+     * @param portlet
+     *            the instance of the Portlet object to insert
+     */
     void insert( Portlet portlet );
 
     /**
      * Loads the data of Quicklinks Portlet whose identifier is specified in parameter
      *
      *
-     * @param nPortletId The Portlet identifier
+     * @param nPortletId
+     *            The Portlet identifier
      * @return theDocumentListPortlet object
      */
     Portlet load( int nPortletId );
 
     /**
      * return number of quicklinks portlet who are associate to the id quicklinks
-     * @param nIdQuicklinks the id of the quicklinks
+     * 
+     * @param nIdQuicklinks
+     *            the id of the quicklinks
      * @return number of quicklinks portlet who are associate to the id quicklinks
      */
     int selectCountPortletByIdQuicklinks( int nIdQuicklinks );
@@ -78,7 +82,8 @@ public interface IQuicklinksPortletDAO extends IPortletInterfaceDAO
      * Update the record in the table
      *
      *
-     * @param portlet A portlet
+     * @param portlet
+     *            A portlet
      */
     void store( Portlet portlet );
 }

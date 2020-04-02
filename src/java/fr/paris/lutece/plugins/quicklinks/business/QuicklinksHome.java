@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -42,7 +42,6 @@ import fr.paris.lutece.util.ReferenceList;
 import java.util.Collection;
 import java.util.Locale;
 
-
 /**
  * The Home class for {@link Quicklinks}
  *
@@ -50,13 +49,15 @@ import java.util.Locale;
 public class QuicklinksHome
 {
     // Static variable pointed at the DAO instance
-    private static IQuicklinksDAO _dao = (IQuicklinksDAO) SpringContextService.getPluginBean( "quicklinks",
-            "quicklinks.quicklinksDAO" );
+    private static IQuicklinksDAO _dao = (IQuicklinksDAO) SpringContextService.getPluginBean( "quicklinks", "quicklinks.quicklinksDAO" );
 
     /**
      * Insert a new record in the table.
-     * @param quicklinks The Instance of the object {@link Quicklinks}
-     * @param plugin The {@link Plugin} using this data access service
+     * 
+     * @param quicklinks
+     *            The Instance of the object {@link Quicklinks}
+     * @param plugin
+     *            The {@link Plugin} using this data access service
      * @return The new {@link Quicklinks}
      */
     public static Quicklinks create( Quicklinks quicklinks, Plugin plugin )
@@ -66,14 +67,17 @@ public class QuicklinksHome
 
     /**
      * Delete the {@link Quicklinks} specified by identifier
-     * @param nIdQuicklinks The identifier
-     * @param plugin The {@link Plugin} using this data access service
+     * 
+     * @param nIdQuicklinks
+     *            The identifier
+     * @param plugin
+     *            The {@link Plugin} using this data access service
      */
     public static void remove( int nIdQuicklinks, Plugin plugin )
     {
         for ( IEntry entry : EntryHome.findByQuicklinksId( nIdQuicklinks, plugin ) )
         {
-            EntryHome.remove( entry.getId(  ), plugin );
+            EntryHome.remove( entry.getId( ), plugin );
         }
 
         _dao.delete( nIdQuicklinks, plugin );
@@ -81,8 +85,11 @@ public class QuicklinksHome
 
     /**
      * Update The {@link Quicklinks}
-     * @param quicklinks The {@link Quicklinks} to update
-     * @param plugin The {@link Plugin} using this data access service
+     * 
+     * @param quicklinks
+     *            The {@link Quicklinks} to update
+     * @param plugin
+     *            The {@link Plugin} using this data access service
      */
     public static void update( Quicklinks quicklinks, Plugin plugin )
     {
@@ -91,8 +98,11 @@ public class QuicklinksHome
 
     /**
      * Load the Quicklinks specified by Identifier
-     * @param nIdQuicklinks The identifier
-     * @param plugin The {@link Plugin} using this data access service
+     * 
+     * @param nIdQuicklinks
+     *            The identifier
+     * @param plugin
+     *            The {@link Plugin} using this data access service
      * @return The {@link Quicklinks}
      */
     public static Quicklinks findByPrimaryKey( int nIdQuicklinks, Plugin plugin )
@@ -102,7 +112,9 @@ public class QuicklinksHome
 
     /**
      * Find All {@link Quicklinks}
-     * @param plugin The {@link Plugin} using this data access service
+     * 
+     * @param plugin
+     *            The {@link Plugin} using this data access service
      * @return A {@link Collection} of {@link Quicklinks}
      */
     public static Collection<Quicklinks> findAll( Plugin plugin )
@@ -112,16 +124,18 @@ public class QuicklinksHome
 
     /**
      * Find All {@link Quicklinks} and put them in a {@link ReferenceList}
-     * @param plugin The {@link Plugin} using this data access service
+     * 
+     * @param plugin
+     *            The {@link Plugin} using this data access service
      * @return A ReferenceList
      */
     public static ReferenceList findReferenceList( Plugin plugin )
     {
-        ReferenceList referenceList = new ReferenceList(  );
+        ReferenceList referenceList = new ReferenceList( );
 
         for ( Quicklinks quicklinks : _dao.findAll( plugin ) )
         {
-            referenceList.addItem( quicklinks.getId(  ), quicklinks.getTitle(  ) );
+            referenceList.addItem( quicklinks.getId( ), quicklinks.getTitle( ) );
         }
 
         return referenceList;
@@ -129,8 +143,11 @@ public class QuicklinksHome
 
     /**
      * Find all {@link Quicklinks} corresponding to {@link QuicklinksFilter}
-     * @param quickLinksFilter The {@link QuicklinksFilter}
-     * @param plugin The {@link Plugin} using this data access service
+     * 
+     * @param quickLinksFilter
+     *            The {@link QuicklinksFilter}
+     * @param plugin
+     *            The {@link Plugin} using this data access service
      * @return A {@link Collection} of {@link Quicklinks}
      */
     public static Collection<Quicklinks> findbyFilter( QuicklinksFilter quickLinksFilter, Plugin plugin )

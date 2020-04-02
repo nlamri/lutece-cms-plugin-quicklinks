@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -74,10 +74,8 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
-
 /**
- * This class provides the user interface to manage {@link Quicklinks} features ( manage,
- * create, modify, remove)
+ * This class provides the user interface to manage {@link Quicklinks} features ( manage, create, modify, remove)
  */
 public class QuicklinksJspBean extends PluginAdminPageJspBean
 {
@@ -176,58 +174,58 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
     private int _nDefaultItemsPerPage;
     private String _strCurrentPageIndex;
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see fr.paris.lutece.portal.web.admin.PluginAdminPageJspBean#init(javax.servlet.http.HttpServletRequest, java.lang.String)
      */
     @Override
-    public void init( HttpServletRequest request, String strRight )
-        throws AccessDeniedException
+    public void init( HttpServletRequest request, String strRight ) throws AccessDeniedException
     {
         super.init( request, strRight );
     }
 
     /**
      * Get the {@link Quicklinks} management page
-     * @param request The HTTP servlet request
+     * 
+     * @param request
+     *            The HTTP servlet request
      * @return The HTML template
      */
     public String getManageQuicklinks( HttpServletRequest request )
     {
-        HashMap<String, Object> model = new HashMap<String, Object>(  );
-        Collection<Quicklinks> quicklinksList = QuicklinksHome.findAll( getPlugin(  ) );
-        quicklinksList = AdminWorkgroupService.getAuthorizedCollection( quicklinksList, getUser(  ) );
+        HashMap<String, Object> model = new HashMap<String, Object>( );
+        Collection<Quicklinks> quicklinksList = QuicklinksHome.findAll( getPlugin( ) );
+        quicklinksList = AdminWorkgroupService.getAuthorizedCollection( quicklinksList, getUser( ) );
         setPageTitleProperty( MESSAGE_PAGE_TITLE_MANAGE );
 
-        _nDefaultItemsPerPage = AppPropertiesService.getPropertyInt( PROPERTY_STYLES_PER_PAGE,
-                DEFAULT_PAGINATOR_STYLES_PER_PAGE );
+        _nDefaultItemsPerPage = AppPropertiesService.getPropertyInt( PROPERTY_STYLES_PER_PAGE, DEFAULT_PAGINATOR_STYLES_PER_PAGE );
         _strCurrentPageIndex = Paginator.getPageIndex( request, Paginator.PARAMETER_PAGE_INDEX, _strCurrentPageIndex );
-        _nItemsPerPage = Paginator.getItemsPerPage( request, Paginator.PARAMETER_ITEMS_PER_PAGE, _nItemsPerPage,
-                _nDefaultItemsPerPage );
+        _nItemsPerPage = Paginator.getItemsPerPage( request, Paginator.PARAMETER_ITEMS_PER_PAGE, _nItemsPerPage, _nDefaultItemsPerPage );
 
         UrlItem url = new UrlItem( JSP_URL_PREFIX + JSP_URL_MANAGE );
 
-        Paginator paginator = new Paginator( (List<Quicklinks>) quicklinksList, _nItemsPerPage, url.getUrl(  ),
-                Paginator.PARAMETER_PAGE_INDEX, _strCurrentPageIndex );
-        Collection<HashMap<String, Object>> listQuicklinksWithListActions = new ArrayList<HashMap<String, Object>>(  );
+        Paginator paginator = new Paginator( (List<Quicklinks>) quicklinksList, _nItemsPerPage, url.getUrl( ), Paginator.PARAMETER_PAGE_INDEX,
+                _strCurrentPageIndex );
+        Collection<HashMap<String, Object>> listQuicklinksWithListActions = new ArrayList<HashMap<String, Object>>( );
 
-        for ( Quicklinks quicklinks : (List<Quicklinks>) paginator.getPageItems(  ) )
+        for ( Quicklinks quicklinks : (List<Quicklinks>) paginator.getPageItems( ) )
         {
-            Collection<QuicklinksAction> listActions = QuicklinksActionHome.selectActionsByQuicklinksState( quicklinks.isEnabled(  ),
-                    getPlugin(  ), getLocale(  ) );
-            HashMap<String, Object> modelQuicklinks = new HashMap<String, Object>(  );
+            Collection<QuicklinksAction> listActions = QuicklinksActionHome.selectActionsByQuicklinksState( quicklinks.isEnabled( ), getPlugin( ),
+                    getLocale( ) );
+            HashMap<String, Object> modelQuicklinks = new HashMap<String, Object>( );
             modelQuicklinks.put( MARK_QUICKLINKS, quicklinks );
 
-            if ( quicklinks.getType(  ).equals( QuicklinksType.INCLUDE ) )
+            if ( quicklinks.getType( ).equals( QuicklinksType.INCLUDE ) )
             {
-                String strQuicklinksMarker = QuicklinksInclude.getQuicklinksMarkerPrefix(  ) +
-                    String.valueOf( quicklinks.getId(  ) );
-                String strlabelTag = I18nService.getLocalizedString( MESSAGE_LABEL_TAG,
-                        new String[] { strQuicklinksMarker }, getLocale(  ) );
+                String strQuicklinksMarker = QuicklinksInclude.getQuicklinksMarkerPrefix( ) + String.valueOf( quicklinks.getId( ) );
+                String strlabelTag = I18nService.getLocalizedString( MESSAGE_LABEL_TAG, new String [ ] {
+                        strQuicklinksMarker
+                }, getLocale( ) );
                 modelQuicklinks.put( MARK_QUICKLINKS_INCLUDE_TAG, strlabelTag );
             }
 
-            modelQuicklinks.put( MARK_QUICKLINKS_ACTIONS,
-                RBACService.getAuthorizedActionsCollection( listActions, quicklinks, getUser(  ) ) );
+            modelQuicklinks.put( MARK_QUICKLINKS_ACTIONS, RBACService.getAuthorizedActionsCollection( listActions, quicklinks, getUser( ) ) );
             listQuicklinksWithListActions.add( modelQuicklinks );
         }
 
@@ -235,75 +233,72 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
         model.put( MARK_PAGINATOR, paginator );
         model.put( MARK_QUICKLINKS_LIST, listQuicklinksWithListActions );
         model.put( MARK_PERMISSION_CREATE,
-            RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE, RBAC.WILDCARD_RESOURCES_ID,
-                QuicklinksResourceIdService.PERMISSION_CREATE, getUser(  ) ) );
-        model.put( MARK_PLUGIN, getPlugin(  ) );
+                RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE, RBAC.WILDCARD_RESOURCES_ID, QuicklinksResourceIdService.PERMISSION_CREATE, getUser( ) ) );
+        model.put( MARK_PLUGIN, getPlugin( ) );
 
         // Get Actions list
-        HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_MANAGE, getLocale(  ), model );
+        HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_MANAGE, getLocale( ), model );
 
-        return getAdminPage( template.getHtml(  ) );
+        return getAdminPage( template.getHtml( ) );
     }
 
     /**
-    * Get the {@link Quicklinks} creation page
-    * @param request The HTTP servlet request
-    * @return The HTML template
-    */
-    public String getCreateQuicklinks( HttpServletRequest request )
-        throws AccessDeniedException
+     * Get the {@link Quicklinks} creation page
+     * 
+     * @param request
+     *            The HTTP servlet request
+     * @return The HTML template
+     */
+    public String getCreateQuicklinks( HttpServletRequest request ) throws AccessDeniedException
     {
-        Locale locale = getLocale(  );
+        Locale locale = getLocale( );
 
-        if ( !RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE, RBAC.WILDCARD_RESOURCES_ID,
-                    QuicklinksResourceIdService.PERMISSION_CREATE, getUser(  ) ) )
+        if ( !RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE, RBAC.WILDCARD_RESOURCES_ID, QuicklinksResourceIdService.PERMISSION_CREATE, getUser( ) ) )
         {
-            throw new AccessDeniedException(  );
+            throw new AccessDeniedException( );
         }
 
-        HashMap<String, Object> model = new HashMap<String, Object>(  );
+        HashMap<String, Object> model = new HashMap<String, Object>( );
         setPageTitleProperty( MESSAGE_PAGE_TITLE_CREATE );
 
-        ReferenceList listType = new ReferenceList(  );
+        ReferenceList listType = new ReferenceList( );
 
-        for ( ReferenceItem item : QuicklinksType.getReferenceList(  ) )
+        for ( ReferenceItem item : QuicklinksType.getReferenceList( ) )
         {
-            listType.addItem( item.getCode(  ), I18nService.getLocalizedString( item.getName(  ), locale ) );
+            listType.addItem( item.getCode( ), I18nService.getLocalizedString( item.getName( ), locale ) );
         }
 
-        ReferenceList listState = new ReferenceList(  );
+        ReferenceList listState = new ReferenceList( );
         listState.addItem( Boolean.toString( true ), I18nService.getLocalizedString( MESSAGE_STATE_ENABLED, locale ) );
         listState.addItem( Boolean.toString( false ), I18nService.getLocalizedString( MESSAGE_STATE_DISABLED, locale ) );
 
-        model.put( MARK_PLUGIN, getPlugin(  ) );
+        model.put( MARK_PLUGIN, getPlugin( ) );
         model.put( MARK_TYPE_LIST, listType );
-        model.put( MARK_DEFAULT_VALUE_TYPE,
-            AppPropertiesService.getProperty( PROPERTY_TYPE_DEFAULT_VALUE, DEFAULT_VALUE_TYPE ) );
+        model.put( MARK_DEFAULT_VALUE_TYPE, AppPropertiesService.getProperty( PROPERTY_TYPE_DEFAULT_VALUE, DEFAULT_VALUE_TYPE ) );
         model.put( MARK_DEFAULT_VALUE_WORKGROUP_KEY, AdminWorkgroupService.ALL_GROUPS );
-        model.put( MARK_WORKGROUP_KEY_LIST, AdminWorkgroupService.getUserWorkgroups( getUser(  ), getLocale(  ) ) );
-        model.put( MARK_ROLE_KEY_LIST, RoleHome.getRolesList(  ) );
+        model.put( MARK_WORKGROUP_KEY_LIST, AdminWorkgroupService.getUserWorkgroups( getUser( ), getLocale( ) ) );
+        model.put( MARK_ROLE_KEY_LIST, RoleHome.getRolesList( ) );
         model.put( MARK_DEFAULT_VALUE_ROLE_KEY, Quicklinks.ROLE_NONE );
         model.put( MARK_STATE_LIST, listState );
-        model.put( MARK_DEFAULT_VALUE_STATE,
-            AppPropertiesService.getProperty( PROPERTY_STATE_DEFAULT_VALUE, DEFAULT_VALUE_STATE ) );
+        model.put( MARK_DEFAULT_VALUE_STATE, AppPropertiesService.getProperty( PROPERTY_STATE_DEFAULT_VALUE, DEFAULT_VALUE_STATE ) );
 
-        HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_CREATE, getLocale(  ), model );
+        HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_CREATE, getLocale( ), model );
 
-        return getAdminPage( template.getHtml(  ) );
+        return getAdminPage( template.getHtml( ) );
     }
 
     /**
      * Processes the {@link Quicklinks} creation
-     * @param request The HTTP servlet request
+     * 
+     * @param request
+     *            The HTTP servlet request
      * @return The URL to redirect to
      */
-    public String doCreateQuicklinks( HttpServletRequest request )
-        throws AccessDeniedException
+    public String doCreateQuicklinks( HttpServletRequest request ) throws AccessDeniedException
     {
-        if ( !RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE, RBAC.WILDCARD_RESOURCES_ID,
-                    QuicklinksResourceIdService.PERMISSION_CREATE, getUser(  ) ) )
+        if ( !RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE, RBAC.WILDCARD_RESOURCES_ID, QuicklinksResourceIdService.PERMISSION_CREATE, getUser( ) ) )
         {
-            throw new AccessDeniedException(  );
+            throw new AccessDeniedException( );
         }
 
         String strTitle = request.getParameter( PARAMETER_TITLE );
@@ -314,10 +309,9 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
         String strCssStyle = request.getParameter( PARAMETER_CSS_STYLE );
 
         // Check mandatory fields
-        if ( ( strTitle == null ) || strTitle.equals( EMPTY_STRING ) || ( strType == null ) ||
-                !strType.matches( REGEX_ID ) || ( strWorkgroupKey == null ) || strWorkgroupKey.equals( EMPTY_STRING ) ||
-                ( strRoleKey == null ) || strRoleKey.equals( EMPTY_STRING ) || ( strState == null ) ||
-                strState.equals( EMPTY_STRING ) )
+        if ( ( strTitle == null ) || strTitle.equals( EMPTY_STRING ) || ( strType == null ) || !strType.matches( REGEX_ID ) || ( strWorkgroupKey == null )
+                || strWorkgroupKey.equals( EMPTY_STRING ) || ( strRoleKey == null ) || strRoleKey.equals( EMPTY_STRING ) || ( strState == null )
+                || strState.equals( EMPTY_STRING ) )
         {
             return AdminMessageService.getMessageUrl( request, Messages.MANDATORY_FIELDS, AdminMessage.TYPE_STOP );
         }
@@ -331,7 +325,7 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
         }
 
         // Set quicklinks and create it
-        Quicklinks quicklinks = new Quicklinks(  );
+        Quicklinks quicklinks = new Quicklinks( );
         quicklinks.setEnabled( Boolean.parseBoolean( strState ) );
         quicklinks.setRoleKey( strRoleKey );
         quicklinks.setTitle( strTitle );
@@ -339,91 +333,90 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
         quicklinks.setWorkgroup( strWorkgroupKey );
         quicklinks.setCssStyle( strCssStyle );
 
-        QuicklinksHome.create( quicklinks, getPlugin(  ) );
+        QuicklinksHome.create( quicklinks, getPlugin( ) );
 
         return JSP_URL_MANAGE;
     }
 
     /**
      * Get the {@link Quicklinks} modification page
-     * @param request The HTTP servlet request
+     * 
+     * @param request
+     *            The HTTP servlet request
      * @return The HTML template
      */
-    public String getModifyQuicklinks( HttpServletRequest request )
-        throws AccessDeniedException
+    public String getModifyQuicklinks( HttpServletRequest request ) throws AccessDeniedException
     {
-        Plugin plugin = getPlugin(  );
-        Locale locale = getLocale(  );
+        Plugin plugin = getPlugin( );
+        Locale locale = getLocale( );
         Quicklinks quicklinks = getAuthorizedQuicklinks( request, QuicklinksResourceIdService.PERMISSION_MODIFY );
-        HashMap<String, Object> model = new HashMap<String, Object>(  );
+        HashMap<String, Object> model = new HashMap<String, Object>( );
         setPageTitleProperty( MESSAGE_PAGE_TITLE_MODIFY );
 
         // General attributes
-        ReferenceList listType = new ReferenceList(  );
+        ReferenceList listType = new ReferenceList( );
 
-        for ( ReferenceItem item : QuicklinksType.getReferenceList(  ) )
+        for ( ReferenceItem item : QuicklinksType.getReferenceList( ) )
         {
-            listType.addItem( item.getCode(  ), I18nService.getLocalizedString( item.getName(  ), locale ) );
+            listType.addItem( item.getCode( ), I18nService.getLocalizedString( item.getName( ), locale ) );
         }
 
-        ReferenceList listState = new ReferenceList(  );
+        ReferenceList listState = new ReferenceList( );
         listState.addItem( Boolean.toString( true ), I18nService.getLocalizedString( MESSAGE_STATE_ENABLED, locale ) );
         listState.addItem( Boolean.toString( false ), I18nService.getLocalizedString( MESSAGE_STATE_DISABLED, locale ) );
 
         model.put( MARK_PLUGIN, plugin );
         model.put( MARK_TYPE_LIST, listType );
         model.put( MARK_QUICKLINKS, quicklinks );
-        model.put( MARK_WORKGROUP_KEY_LIST, AdminWorkgroupService.getUserWorkgroups( getUser(  ), getLocale(  ) ) );
-        model.put( MARK_ROLE_KEY_LIST, RoleHome.getRolesList(  ) );
+        model.put( MARK_WORKGROUP_KEY_LIST, AdminWorkgroupService.getUserWorkgroups( getUser( ), getLocale( ) ) );
+        model.put( MARK_ROLE_KEY_LIST, RoleHome.getRolesList( ) );
         model.put( MARK_STATE_LIST, listState );
 
-        //### Entry section
+        // ### Entry section
         // create entry box
         Collection<EntryType> listEntryType = EntryTypeHome.findAll( plugin );
         model.put( MARK_ENTRY_TYPE_LIST, listEntryType );
 
-        // entry list        
-        EntryFilter filter = new EntryFilter(  );
-        filter.setIdQuicklinks( quicklinks.getId(  ) );
+        // entry list
+        EntryFilter filter = new EntryFilter( );
+        filter.setIdQuicklinks( quicklinks.getId( ) );
         filter.setIdParent( EntryHome.ROOT_PARENT_ID );
 
         Collection<IEntry> listEntry = EntryHome.findByFilter( filter, plugin );
 
-        _nDefaultItemsPerPage = AppPropertiesService.getPropertyInt( PROPERTY_STYLES_PER_PAGE,
-                DEFAULT_PAGINATOR_STYLES_PER_PAGE );
+        _nDefaultItemsPerPage = AppPropertiesService.getPropertyInt( PROPERTY_STYLES_PER_PAGE, DEFAULT_PAGINATOR_STYLES_PER_PAGE );
         _strCurrentPageIndex = Paginator.getPageIndex( request, Paginator.PARAMETER_PAGE_INDEX, _strCurrentPageIndex );
-        _nItemsPerPage = Paginator.getItemsPerPage( request, Paginator.PARAMETER_ITEMS_PER_PAGE, _nItemsPerPage,
-                _nDefaultItemsPerPage );
+        _nItemsPerPage = Paginator.getItemsPerPage( request, Paginator.PARAMETER_ITEMS_PER_PAGE, _nItemsPerPage, _nDefaultItemsPerPage );
 
         UrlItem url = new UrlItem( JSP_URL_PREFIX + JSP_URL_MODIFY );
-        url.addParameter( PARAMETER_QUICKLINKS_ID, quicklinks.getId(  ) );
+        url.addParameter( PARAMETER_QUICKLINKS_ID, quicklinks.getId( ) );
 
-        Paginator paginator = new Paginator( (List<IEntry>) listEntry, _nItemsPerPage, url.getUrl(  ),
-                Paginator.PARAMETER_PAGE_INDEX, _strCurrentPageIndex );
+        Paginator paginator = new Paginator( (List<IEntry>) listEntry, _nItemsPerPage, url.getUrl( ), Paginator.PARAMETER_PAGE_INDEX, _strCurrentPageIndex );
 
         model.put( MARK_NB_ITEMS_PER_PAGE, String.valueOf( _nItemsPerPage ) );
         model.put( MARK_PAGINATOR, paginator );
-        model.put( MARK_ENTRY_LIST, paginator.getPageItems(  ) );
+        model.put( MARK_ENTRY_LIST, paginator.getPageItems( ) );
 
-        HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_MODIFY, getLocale(  ), model );
+        HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_MODIFY, getLocale( ), model );
 
-        return getAdminPage( template.getHtml(  ) );
+        return getAdminPage( template.getHtml( ) );
     }
 
     /**
      * Processes the {@link Quicklinks} modification
-     * @param request The HTTP servlet request
+     * 
+     * @param request
+     *            The HTTP servlet request
      * @return The URL to redirect to
      */
-    public String doModifyQuicklinks( HttpServletRequest request )
-        throws AccessDeniedException
+    public String doModifyQuicklinks( HttpServletRequest request ) throws AccessDeniedException
     {
         if ( request.getParameter( PARAMETER_CANCEL ) != null )
         {
             return JSP_URL_MANAGE;
         }
 
-        Plugin plugin = getPlugin(  );
+        Plugin plugin = getPlugin( );
         String strTitle = request.getParameter( PARAMETER_TITLE );
         String strType = request.getParameter( PARAMETER_TYPE );
         String strWorkgroupKey = request.getParameter( PARAMETER_WORKGROUP_KEY );
@@ -432,10 +425,9 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
         String strCssStyle = request.getParameter( PARAMETER_CSS_STYLE );
 
         // Check mandatory fields
-        if ( ( strTitle == null ) || strTitle.equals( EMPTY_STRING ) || ( strType == null ) ||
-                !strType.matches( REGEX_ID ) || ( strWorkgroupKey == null ) || strWorkgroupKey.equals( EMPTY_STRING ) ||
-                ( strRoleKey == null ) || strRoleKey.equals( EMPTY_STRING ) || ( strState == null ) ||
-                strState.equals( EMPTY_STRING ) )
+        if ( ( strTitle == null ) || strTitle.equals( EMPTY_STRING ) || ( strType == null ) || !strType.matches( REGEX_ID ) || ( strWorkgroupKey == null )
+                || strWorkgroupKey.equals( EMPTY_STRING ) || ( strRoleKey == null ) || strRoleKey.equals( EMPTY_STRING ) || ( strState == null )
+                || strState.equals( EMPTY_STRING ) )
         {
             return AdminMessageService.getMessageUrl( request, Messages.MANDATORY_FIELDS, AdminMessage.TYPE_STOP );
         }
@@ -450,22 +442,20 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
 
         Quicklinks quicklinks = getAuthorizedQuicklinks( request, QuicklinksResourceIdService.PERMISSION_MODIFY );
 
-        if ( ( Boolean.parseBoolean( strState ) != quicklinks.isEnabled(  ) ) &&
-                !RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE, String.valueOf( quicklinks.getId(  ) ),
-                    QuicklinksResourceIdService.PERMISSION_CHANGE_STATE, getUser(  ) ) )
+        if ( ( Boolean.parseBoolean( strState ) != quicklinks.isEnabled( ) ) && !RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE,
+                String.valueOf( quicklinks.getId( ) ), QuicklinksResourceIdService.PERMISSION_CHANGE_STATE, getUser( ) ) )
         {
-            throw new AccessDeniedException(  );
+            throw new AccessDeniedException( );
         }
 
         // Check if portlets are assigned to quicklinks
-        int nCountPortlets = QuicklinksPortletHome.getCountPortletByIdQuicklinks( quicklinks.getId(  ) );
+        int nCountPortlets = QuicklinksPortletHome.getCountPortletByIdQuicklinks( quicklinks.getId( ) );
 
-        if ( ( nCountPortlets > 0 ) &&
-                ( ( Boolean.parseBoolean( strState ) != quicklinks.isEnabled(  ) ) ||
-                ( quicklinksType != quicklinks.getType(  ) ) ) )
+        if ( ( nCountPortlets > 0 ) && ( ( Boolean.parseBoolean( strState ) != quicklinks.isEnabled( ) ) || ( quicklinksType != quicklinks.getType( ) ) ) )
         {
-            return AdminMessageService.getMessageUrl( request, MESSAGE_STOP_CANNOT_MODIFY_QUICKLINKS,
-                new String[] { String.valueOf( nCountPortlets ) }, AdminMessage.TYPE_STOP );
+            return AdminMessageService.getMessageUrl( request, MESSAGE_STOP_CANNOT_MODIFY_QUICKLINKS, new String [ ] {
+                    String.valueOf( nCountPortlets )
+            }, AdminMessage.TYPE_STOP );
         }
 
         // Set quicklinks
@@ -482,93 +472,97 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
         if ( request.getParameter( PARAMETER_APPLY ) != null )
         {
             url = new UrlItem( JSP_URL_MODIFY );
-            url.addParameter( PARAMETER_QUICKLINKS_ID, quicklinks.getId(  ) );
+            url.addParameter( PARAMETER_QUICKLINKS_ID, quicklinks.getId( ) );
         }
         else
         {
             url = new UrlItem( JSP_URL_MANAGE );
         }
 
-        return url.getUrl(  );
+        return url.getUrl( );
     }
 
     /**
      * Processes the {@link Quicklinks} deletion
-     * @param request The HTTP servlet request
+     * 
+     * @param request
+     *            The HTTP servlet request
      * @return The URL to redirect to
      */
-    public String doRemoveQuicklinks( HttpServletRequest request )
-        throws AccessDeniedException
+    public String doRemoveQuicklinks( HttpServletRequest request ) throws AccessDeniedException
     {
         Quicklinks quicklinks = getAuthorizedQuicklinks( request, QuicklinksResourceIdService.PERMISSION_DELETE );
 
         // Check if portlets are assigned to quicklinks
-        int nCountPortlets = QuicklinksPortletHome.getCountPortletByIdQuicklinks( quicklinks.getId(  ) );
+        int nCountPortlets = QuicklinksPortletHome.getCountPortletByIdQuicklinks( quicklinks.getId( ) );
 
         if ( ( nCountPortlets > 0 ) )
         {
-            return AdminMessageService.getMessageUrl( request, MESSAGE_STOP_CANNOT_REMOVE_QUICKLINKS,
-                new String[] { String.valueOf( nCountPortlets ) }, AdminMessage.TYPE_STOP );
+            return AdminMessageService.getMessageUrl( request, MESSAGE_STOP_CANNOT_REMOVE_QUICKLINKS, new String [ ] {
+                    String.valueOf( nCountPortlets )
+            }, AdminMessage.TYPE_STOP );
         }
 
-        QuicklinksHome.remove( quicklinks.getId(  ), getPlugin(  ) );
+        QuicklinksHome.remove( quicklinks.getId( ), getPlugin( ) );
 
         UrlItem url = new UrlItem( JSP_URL_MANAGE );
 
-        return url.getUrl(  );
+        return url.getUrl( );
     }
 
     /**
      * Get the {@link Quicklinks} removal message
-     * @param request The HTTP servlet request
+     * 
+     * @param request
+     *            The HTTP servlet request
      * @return The URL to redirect to
      */
-    public String doConfirmRemoveQuicklinks( HttpServletRequest request )
-        throws AccessDeniedException
+    public String doConfirmRemoveQuicklinks( HttpServletRequest request ) throws AccessDeniedException
     {
         Quicklinks quicklinks = getAuthorizedQuicklinks( request, QuicklinksResourceIdService.PERMISSION_DELETE );
 
         // Check if portlets are assigned to quicklinks
-        int nCountPortlets = QuicklinksPortletHome.getCountPortletByIdQuicklinks( quicklinks.getId(  ) );
+        int nCountPortlets = QuicklinksPortletHome.getCountPortletByIdQuicklinks( quicklinks.getId( ) );
 
         if ( ( nCountPortlets > 0 ) )
         {
-            return AdminMessageService.getMessageUrl( request, MESSAGE_STOP_CANNOT_REMOVE_QUICKLINKS,
-                new String[] { String.valueOf( nCountPortlets ) }, AdminMessage.TYPE_STOP );
+            return AdminMessageService.getMessageUrl( request, MESSAGE_STOP_CANNOT_REMOVE_QUICKLINKS, new String [ ] {
+                    String.valueOf( nCountPortlets )
+            }, AdminMessage.TYPE_STOP );
         }
 
-        HashMap<String, Object> model = new HashMap<String, Object>(  );
-        model.put( MARK_QUICKLINKS_ID, String.valueOf( quicklinks.getId(  ) ) );
+        HashMap<String, Object> model = new HashMap<String, Object>( );
+        model.put( MARK_QUICKLINKS_ID, String.valueOf( quicklinks.getId( ) ) );
 
-        return AdminMessageService.getMessageUrl( request, MESSAGE_CONFIRMATION_REMOVE_QUICKLINKS,
-            JSP_URL_PREFIX + JSP_URL_DELETE_QUICKLINKS, AdminMessage.TYPE_QUESTION, model );
+        return AdminMessageService.getMessageUrl( request, MESSAGE_CONFIRMATION_REMOVE_QUICKLINKS, JSP_URL_PREFIX + JSP_URL_DELETE_QUICKLINKS,
+                AdminMessage.TYPE_QUESTION, model );
     }
 
     /**
-     * Get the authorized Quicklinks,  filtered by workgroup
+     * Get the authorized Quicklinks, filtered by workgroup
      *
-     * @param request The {@link HttpServletRequest}
-     * @param strPermissionType The type of permission (see {@link QuicklinksResourceIdService} class)
+     * @param request
+     *            The {@link HttpServletRequest}
+     * @param strPermissionType
+     *            The type of permission (see {@link QuicklinksResourceIdService} class)
      * @return The quicklinks or null if user have no access
      */
-    private Quicklinks getAuthorizedQuicklinks( HttpServletRequest request, String strPermissionType )
-        throws AccessDeniedException
+    private Quicklinks getAuthorizedQuicklinks( HttpServletRequest request, String strPermissionType ) throws AccessDeniedException
     {
         String strIdQuicklinks = request.getParameter( PARAMETER_QUICKLINKS_ID );
 
         if ( ( strIdQuicklinks == null ) || !strIdQuicklinks.matches( REGEX_ID ) )
         {
-            throw new AccessDeniedException(  );
+            throw new AccessDeniedException( );
         }
 
         int nIdQuicklinks = Integer.parseInt( strIdQuicklinks );
-        Quicklinks quicklinks = QuicklinksHome.findByPrimaryKey( nIdQuicklinks, getPlugin(  ) );
+        Quicklinks quicklinks = QuicklinksHome.findByPrimaryKey( nIdQuicklinks, getPlugin( ) );
 
-        if ( ( quicklinks == null ) || !AdminWorkgroupService.isAuthorized( quicklinks, getUser(  ) ) ||
-                !RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE, String.valueOf( quicklinks.getId(  ) ),
-                    strPermissionType, getUser(  ) ) )
+        if ( ( quicklinks == null ) || !AdminWorkgroupService.isAuthorized( quicklinks, getUser( ) )
+                || !RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE, String.valueOf( quicklinks.getId( ) ), strPermissionType, getUser( ) ) )
         {
-            throw new AccessDeniedException(  );
+            throw new AccessDeniedException( );
         }
 
         return quicklinks;
@@ -576,111 +570,116 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
 
     /**
      * Move the entry down
-     * @param request The Http servlet request
+     * 
+     * @param request
+     *            The Http servlet request
      * @return The redirect url
      */
-    public String doGoDownEntry( HttpServletRequest request )
-        throws AccessDeniedException
+    public String doGoDownEntry( HttpServletRequest request ) throws AccessDeniedException
     {
         Quicklinks quicklinks = getAuthorizedQuicklinks( request, QuicklinksResourceIdService.PERMISSION_MODIFY );
 
         String strIdEntry = request.getParameter( PARAMETER_ENTRY_ID );
         int nIdEntry = Integer.parseInt( strIdEntry );
-        EntryHome.goDown( nIdEntry, getPlugin(  ) );
+        EntryHome.goDown( nIdEntry, getPlugin( ) );
 
         UrlItem url = new UrlItem( JSP_URL_MODIFY );
-        url.addParameter( PARAMETER_QUICKLINKS_ID, quicklinks.getId(  ) );
+        url.addParameter( PARAMETER_QUICKLINKS_ID, quicklinks.getId( ) );
         url.setAnchor( ANCHOR_NAME );
 
-        return url.getUrl(  );
+        return url.getUrl( );
     }
 
     /**
      * Move the entry up
-     * @param request The Http servlet request
+     * 
+     * @param request
+     *            The Http servlet request
      * @return The redirect url
      */
-    public String doGoUpEntry( HttpServletRequest request )
-        throws AccessDeniedException
+    public String doGoUpEntry( HttpServletRequest request ) throws AccessDeniedException
     {
         Quicklinks quicklinks = getAuthorizedQuicklinks( request, QuicklinksResourceIdService.PERMISSION_MODIFY );
 
         String strIdEntry = request.getParameter( PARAMETER_ENTRY_ID );
         int nIdEntry = Integer.parseInt( strIdEntry );
-        EntryHome.goUp( nIdEntry, getPlugin(  ) );
+        EntryHome.goUp( nIdEntry, getPlugin( ) );
 
         UrlItem url = new UrlItem( JSP_URL_MODIFY );
-        url.addParameter( PARAMETER_QUICKLINKS_ID, quicklinks.getId(  ) );
+        url.addParameter( PARAMETER_QUICKLINKS_ID, quicklinks.getId( ) );
         url.setAnchor( ANCHOR_NAME );
 
-        return url.getUrl(  );
+        return url.getUrl( );
     }
 
     /**
      * Move the entry in a parent entry
-     * @param request The Http servlet request
+     * 
+     * @param request
+     *            The Http servlet request
      * @return The redirect url
      */
-    public String doGoInEntry( HttpServletRequest request )
-        throws AccessDeniedException
+    public String doGoInEntry( HttpServletRequest request ) throws AccessDeniedException
     {
         Quicklinks quicklinks = getAuthorizedQuicklinks( request, QuicklinksResourceIdService.PERMISSION_MODIFY );
 
         UrlItem url = new UrlItem( JSP_URL_MODIFY );
-        url.addParameter( PARAMETER_QUICKLINKS_ID, quicklinks.getId(  ) );
+        url.addParameter( PARAMETER_QUICKLINKS_ID, quicklinks.getId( ) );
         url.setAnchor( ANCHOR_NAME );
 
         String strIdEntry = request.getParameter( PARAMETER_ENTRY_ID );
         int nIdEntry = Integer.parseInt( strIdEntry );
-        Entry entry = (Entry) EntryHome.findByPrimaryKey( nIdEntry, getPlugin(  ) );
+        Entry entry = (Entry) EntryHome.findByPrimaryKey( nIdEntry, getPlugin( ) );
 
         if ( entry == null )
         {
-            return url.getUrl(  );
+            return url.getUrl( );
         }
 
-        EntryHome.goIn( nIdEntry, getPlugin(  ) );
+        EntryHome.goIn( nIdEntry, getPlugin( ) );
 
-        return url.getUrl(  );
+        return url.getUrl( );
     }
 
     /**
      * Move the entry out a parent entry
-     * @param request The Http servlet request
+     * 
+     * @param request
+     *            The Http servlet request
      * @return The redirect url
      */
-    public String doGoOutEntry( HttpServletRequest request )
-        throws AccessDeniedException
+    public String doGoOutEntry( HttpServletRequest request ) throws AccessDeniedException
     {
         Quicklinks quicklinks = getAuthorizedQuicklinks( request, QuicklinksResourceIdService.PERMISSION_MODIFY );
 
         UrlItem url = new UrlItem( JSP_URL_MODIFY );
-        url.addParameter( PARAMETER_QUICKLINKS_ID, quicklinks.getId(  ) );
+        url.addParameter( PARAMETER_QUICKLINKS_ID, quicklinks.getId( ) );
         url.setAnchor( ANCHOR_NAME );
 
         String strIdEntry = request.getParameter( PARAMETER_ENTRY_ID );
         int nIdEntry = Integer.parseInt( strIdEntry );
-        EntryHome.goOut( nIdEntry, getPlugin(  ) );
+        EntryHome.goOut( nIdEntry, getPlugin( ) );
 
-        Entry entry = (Entry) EntryHome.findByPrimaryKey( nIdEntry, getPlugin(  ) );
+        Entry entry = (Entry) EntryHome.findByPrimaryKey( nIdEntry, getPlugin( ) );
 
         if ( entry == null )
         {
-            return url.getUrl(  );
+            return url.getUrl( );
         }
 
-        return url.getUrl(  );
+        return url.getUrl( );
     }
 
     /**
      * Get the {@link Entry} creation page
-     * @param request The HTTP servlet request
+     * 
+     * @param request
+     *            The HTTP servlet request
      * @return The HTML template
      */
-    public String getCreateEntry( HttpServletRequest request )
-        throws AccessDeniedException
+    public String getCreateEntry( HttpServletRequest request ) throws AccessDeniedException
     {
-        Plugin plugin = getPlugin(  );
+        Plugin plugin = getPlugin( );
         String strTitle = request.getParameter( PARAMETER_TITLE );
         String strIdType = request.getParameter( PARAMETER_TYPE_ID );
         Quicklinks quicklinks = getAuthorizedQuicklinks( request, QuicklinksResourceIdService.PERMISSION_MODIFY );
@@ -698,36 +697,37 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
             return AdminMessageService.getMessageUrl( request, Messages.MANDATORY_FIELDS, AdminMessage.TYPE_STOP );
         }
 
-        HashMap<String, Object> model = new HashMap<String, Object>(  );
+        HashMap<String, Object> model = new HashMap<String, Object>( );
         setPageTitleProperty( MESSAGE_PAGE_TITLE_CREATE_ENTRY );
 
         IEntry entry = EntryHome.getSpecificEntry( entryType, plugin );
         entry.setIdParent( DEFAULT_ENTRY_PARENT_ID );
-        entry.setIdQuicklinks( quicklinks.getId(  ) );
+        entry.setIdQuicklinks( quicklinks.getId( ) );
         entry.setTitle( strTitle );
         entry.setEntryType( entryType );
 
         model.put( MARK_WEBAPP_URL, AppPathService.getBaseUrl( request ) );
-        model.put( MARK_LOCALE, getLocale(  ) );
+        model.put( MARK_LOCALE, getLocale( ) );
         model.put( MARK_PLUGIN, plugin );
         model.put( MARK_ENTRY, entry );
         // Add the specifics markers into model
         entry.getSpecificParameters( request, model, plugin );
 
-        HtmlTemplate template = AppTemplateService.getTemplate( entryType.getTemplateCreate(  ), getLocale(  ), model );
+        HtmlTemplate template = AppTemplateService.getTemplate( entryType.getTemplateCreate( ), getLocale( ), model );
 
-        return getAdminPage( template.getHtml(  ) );
+        return getAdminPage( template.getHtml( ) );
     }
 
     /**
      * Processes the {@link Entry} creation
-     * @param request The HTTP servlet request
+     * 
+     * @param request
+     *            The HTTP servlet request
      * @return The URL to redirect to
      */
-    public String doCreateEntry( HttpServletRequest request )
-        throws AccessDeniedException
+    public String doCreateEntry( HttpServletRequest request ) throws AccessDeniedException
     {
-        Plugin plugin = getPlugin(  );
+        Plugin plugin = getPlugin( );
         String strTitle = request.getParameter( PARAMETER_TITLE );
         String strIdType = request.getParameter( PARAMETER_TYPE_ID );
         String strNextStep = request.getParameter( PARAMETER_NEXT_STEP );
@@ -742,8 +742,7 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
         int nIdType = Integer.parseInt( strIdType );
         EntryType entryType = EntryTypeHome.findByPrimaryKey( nIdType, plugin );
 
-        if ( ( quicklinks == null ) || ( entryType == null ) || ( strTitle == null ) ||
-                strTitle.equals( EMPTY_STRING ) )
+        if ( ( quicklinks == null ) || ( entryType == null ) || ( strTitle == null ) || strTitle.equals( EMPTY_STRING ) )
         {
             return AdminMessageService.getMessageUrl( request, Messages.MANDATORY_FIELDS, AdminMessage.TYPE_STOP );
         }
@@ -751,20 +750,19 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
         IEntry entry = EntryHome.getSpecificEntry( entryType, plugin );
         entry.setIdParent( DEFAULT_ENTRY_PARENT_ID );
         entry.setTitle( strTitle );
-        entry.setIdQuicklinks( quicklinks.getId(  ) );
+        entry.setIdQuicklinks( quicklinks.getId( ) );
         entry.setEntryType( entryType );
 
-        if ( AppPropertiesService.getProperty( PROPERTY_ENTRY_ORDER_DEFAULT_VALUE, DEFAULT_VALUE_ENTRY_ORDER )
-                                     .equals( DEFAULT_VALUE_ENTRY_ORDER ) )
+        if ( AppPropertiesService.getProperty( PROPERTY_ENTRY_ORDER_DEFAULT_VALUE, DEFAULT_VALUE_ENTRY_ORDER ).equals( DEFAULT_VALUE_ENTRY_ORDER ) )
         {
             entry.setIdOrder( EntryHome.FIRST_ORDER );
         }
         else
         {
-            EntryFilter entryFilter = new EntryFilter(  );
-            entryFilter.setIdQuicklinks( entry.getIdQuicklinks(  ) );
-            entryFilter.setIdParent( entry.getIdParent(  ) );
-            entry.setIdOrder( EntryHome.findByFilter( entryFilter, plugin ).size(  ) );
+            EntryFilter entryFilter = new EntryFilter( );
+            entryFilter.setIdQuicklinks( entry.getIdQuicklinks( ) );
+            entryFilter.setIdParent( entry.getIdParent( ) );
+            entry.setIdOrder( EntryHome.findByFilter( entryFilter, plugin ).size( ) );
         }
 
         String strErrorMessageSpecificParameters = entry.setSpecificParameters( request );
@@ -781,7 +779,7 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
         if ( ( strNextStep != null ) && strNextStep.equals( STEP_MODIFY ) )
         {
             url = new UrlItem( JSP_URL_MODIFY_ENTRY );
-            url.addParameter( PARAMETER_ENTRY_ID, entry.getId(  ) );
+            url.addParameter( PARAMETER_ENTRY_ID, entry.getId( ) );
         }
         else
         {
@@ -789,20 +787,21 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
             url.setAnchor( ANCHOR_NAME );
         }
 
-        url.addParameter( PARAMETER_QUICKLINKS_ID, entry.getIdQuicklinks(  ) );
+        url.addParameter( PARAMETER_QUICKLINKS_ID, entry.getIdQuicklinks( ) );
 
-        return url.getUrl(  );
+        return url.getUrl( );
     }
 
     /**
      * Get the {@link Entry} modification page
-     * @param request The HTTP servlet request
+     * 
+     * @param request
+     *            The HTTP servlet request
      * @return The HTML template
      */
-    public String getModifyEntry( HttpServletRequest request )
-        throws AccessDeniedException
+    public String getModifyEntry( HttpServletRequest request ) throws AccessDeniedException
     {
-        Plugin plugin = getPlugin(  );
+        Plugin plugin = getPlugin( );
         String strIdEntry = request.getParameter( PARAMETER_ENTRY_ID );
 
         if ( ( strIdEntry == null ) || !strIdEntry.matches( REGEX_ID ) )
@@ -818,37 +817,37 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
             return AdminMessageService.getMessageUrl( request, Messages.MANDATORY_FIELDS, AdminMessage.TYPE_STOP );
         }
 
-        if ( !RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE, String.valueOf( entry.getIdQuicklinks(  ) ),
-                    QuicklinksResourceIdService.PERMISSION_MODIFY, getUser(  ) ) )
+        if ( !RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE, String.valueOf( entry.getIdQuicklinks( ) ), QuicklinksResourceIdService.PERMISSION_MODIFY,
+                getUser( ) ) )
         {
-            throw new AccessDeniedException(  );
+            throw new AccessDeniedException( );
         }
 
-        HashMap<String, Object> model = new HashMap<String, Object>(  );
+        HashMap<String, Object> model = new HashMap<String, Object>( );
         setPageTitleProperty( MESSAGE_PAGE_TITLE_MODIFY_ENTRY );
 
         model.put( MARK_WEBAPP_URL, AppPathService.getBaseUrl( request ) );
-        model.put( MARK_LOCALE, getLocale(  ) );
+        model.put( MARK_LOCALE, getLocale( ) );
         model.put( MARK_PLUGIN, plugin );
         model.put( MARK_ENTRY, entry );
         // Add the specifics markers into model
         entry.getSpecificParameters( request, model, plugin );
 
-        HtmlTemplate template = AppTemplateService.getTemplate( entry.getEntryType(  ).getTemplateModify(  ),
-                getLocale(  ), model );
+        HtmlTemplate template = AppTemplateService.getTemplate( entry.getEntryType( ).getTemplateModify( ), getLocale( ), model );
 
-        return getAdminPage( template.getHtml(  ) );
+        return getAdminPage( template.getHtml( ) );
     }
 
     /**
      * Processes the {@link Entry} modification
-     * @param request The HTTP servlet request
+     * 
+     * @param request
+     *            The HTTP servlet request
      * @return The URL to redirect to
      */
-    public String doModifyEntry( HttpServletRequest request )
-        throws AccessDeniedException
+    public String doModifyEntry( HttpServletRequest request ) throws AccessDeniedException
     {
-        Plugin plugin = getPlugin(  );
+        Plugin plugin = getPlugin( );
         String strIdEntry = request.getParameter( PARAMETER_ENTRY_ID );
         String strTitle = request.getParameter( PARAMETER_TITLE );
 
@@ -865,10 +864,10 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
             return AdminMessageService.getMessageUrl( request, Messages.MANDATORY_FIELDS, AdminMessage.TYPE_STOP );
         }
 
-        if ( !RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE, String.valueOf( entry.getIdQuicklinks(  ) ),
-                    QuicklinksResourceIdService.PERMISSION_MODIFY, getUser(  ) ) )
+        if ( !RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE, String.valueOf( entry.getIdQuicklinks( ) ), QuicklinksResourceIdService.PERMISSION_MODIFY,
+                getUser( ) ) )
         {
-            throw new AccessDeniedException(  );
+            throw new AccessDeniedException( );
         }
 
         entry.setTitle( strTitle );
@@ -883,21 +882,22 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
         EntryHome.update( entry, plugin );
 
         UrlItem url = new UrlItem( JSP_URL_MODIFY );
-        url.addParameter( PARAMETER_QUICKLINKS_ID, entry.getIdQuicklinks(  ) );
+        url.addParameter( PARAMETER_QUICKLINKS_ID, entry.getIdQuicklinks( ) );
         url.setAnchor( ANCHOR_NAME );
 
-        return url.getUrl(  );
+        return url.getUrl( );
     }
 
     /**
      * Processes the {@link Entry} removal confirmation
-     * @param request The HTTP servlet request
+     * 
+     * @param request
+     *            The HTTP servlet request
      * @return The URL to redirect to
      */
-    public String doConfirmRemoveEntry( HttpServletRequest request )
-        throws AccessDeniedException
+    public String doConfirmRemoveEntry( HttpServletRequest request ) throws AccessDeniedException
     {
-        Plugin plugin = getPlugin(  );
+        Plugin plugin = getPlugin( );
         String strIdEntry = request.getParameter( PARAMETER_ENTRY_ID );
 
         if ( ( strIdEntry == null ) || !strIdEntry.matches( REGEX_ID ) )
@@ -913,28 +913,29 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
             return AdminMessageService.getMessageUrl( request, Messages.MANDATORY_FIELDS, AdminMessage.TYPE_STOP );
         }
 
-        if ( !RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE, String.valueOf( entry.getIdQuicklinks(  ) ),
-                    QuicklinksResourceIdService.PERMISSION_MODIFY, getUser(  ) ) )
+        if ( !RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE, String.valueOf( entry.getIdQuicklinks( ) ), QuicklinksResourceIdService.PERMISSION_MODIFY,
+                getUser( ) ) )
         {
-            throw new AccessDeniedException(  );
+            throw new AccessDeniedException( );
         }
 
-        HashMap<String, Object> model = new HashMap<String, Object>(  );
-        model.put( MARK_ENTRY_ID, String.valueOf( entry.getId(  ) ) );
+        HashMap<String, Object> model = new HashMap<String, Object>( );
+        model.put( MARK_ENTRY_ID, String.valueOf( entry.getId( ) ) );
 
-        return AdminMessageService.getMessageUrl( request, MESSAGE_CONFIRMATION_REMOVE_ENTRY,
-            JSP_URL_PREFIX + JSP_URL_DELETE_ENTRY, AdminMessage.TYPE_QUESTION, model );
+        return AdminMessageService.getMessageUrl( request, MESSAGE_CONFIRMATION_REMOVE_ENTRY, JSP_URL_PREFIX + JSP_URL_DELETE_ENTRY, AdminMessage.TYPE_QUESTION,
+                model );
     }
 
     /**
      * Processes the {@link Entry} removal
-     * @param request The HTTP servlet request
+     * 
+     * @param request
+     *            The HTTP servlet request
      * @return The URL to redirect to
      */
-    public String doRemoveEntry( HttpServletRequest request )
-        throws AccessDeniedException
+    public String doRemoveEntry( HttpServletRequest request ) throws AccessDeniedException
     {
-        Plugin plugin = getPlugin(  );
+        Plugin plugin = getPlugin( );
         String strIdEntry = request.getParameter( PARAMETER_ENTRY_ID );
 
         if ( ( strIdEntry == null ) || !strIdEntry.matches( REGEX_ID ) )
@@ -950,30 +951,31 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
             return AdminMessageService.getMessageUrl( request, Messages.MANDATORY_FIELDS, AdminMessage.TYPE_STOP );
         }
 
-        if ( !RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE, String.valueOf( entry.getIdQuicklinks(  ) ),
-                    QuicklinksResourceIdService.PERMISSION_MODIFY, getUser(  ) ) )
+        if ( !RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE, String.valueOf( entry.getIdQuicklinks( ) ), QuicklinksResourceIdService.PERMISSION_MODIFY,
+                getUser( ) ) )
         {
-            throw new AccessDeniedException(  );
+            throw new AccessDeniedException( );
         }
 
-        EntryHome.remove( entry.getId(  ), plugin );
+        EntryHome.remove( entry.getId( ), plugin );
 
         UrlItem url = new UrlItem( JSP_URL_MODIFY );
-        url.addParameter( PARAMETER_QUICKLINKS_ID, entry.getIdQuicklinks(  ) );
+        url.addParameter( PARAMETER_QUICKLINKS_ID, entry.getIdQuicklinks( ) );
         url.setAnchor( ANCHOR_NAME );
 
-        return url.getUrl(  );
+        return url.getUrl( );
     }
 
     /**
      * Processes the {@link Quicklinks} disable confirmation
-     * @param request The HTTP servlet request
+     * 
+     * @param request
+     *            The HTTP servlet request
      * @return The URL to redirect to
      */
-    public String doConfirmDisableQuicklinks( HttpServletRequest request )
-        throws AccessDeniedException
+    public String doConfirmDisableQuicklinks( HttpServletRequest request ) throws AccessDeniedException
     {
-        Plugin plugin = getPlugin(  );
+        Plugin plugin = getPlugin( );
         String strIdQuicklinks = request.getParameter( PARAMETER_QUICKLINKS_ID );
 
         if ( ( strIdQuicklinks == null ) || !strIdQuicklinks.matches( REGEX_ID ) )
@@ -989,28 +991,29 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
             return AdminMessageService.getMessageUrl( request, Messages.MANDATORY_FIELDS, AdminMessage.TYPE_STOP );
         }
 
-        if ( !RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE, String.valueOf( quicklinks.getId(  ) ),
-                    QuicklinksResourceIdService.PERMISSION_CHANGE_STATE, getUser(  ) ) )
+        if ( !RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE, String.valueOf( quicklinks.getId( ) ), QuicklinksResourceIdService.PERMISSION_CHANGE_STATE,
+                getUser( ) ) )
         {
-            throw new AccessDeniedException(  );
+            throw new AccessDeniedException( );
         }
 
-        HashMap<String, Object> model = new HashMap<String, Object>(  );
-        model.put( MARK_QUICKLINKS_ID, String.valueOf( quicklinks.getId(  ) ) );
+        HashMap<String, Object> model = new HashMap<String, Object>( );
+        model.put( MARK_QUICKLINKS_ID, String.valueOf( quicklinks.getId( ) ) );
 
-        return AdminMessageService.getMessageUrl( request, MESSAGE_CONFIRMATION_DISABLE_QUICKLINKS,
-            JSP_URL_PREFIX + JSP_URL_DISABLE_QUICKLINKS, AdminMessage.TYPE_QUESTION, model );
+        return AdminMessageService.getMessageUrl( request, MESSAGE_CONFIRMATION_DISABLE_QUICKLINKS, JSP_URL_PREFIX + JSP_URL_DISABLE_QUICKLINKS,
+                AdminMessage.TYPE_QUESTION, model );
     }
 
     /**
      * Processes the {@link Quicklinks} disable
-     * @param request The HTTP servlet request
+     * 
+     * @param request
+     *            The HTTP servlet request
      * @return The URL to redirect to
      */
-    public String doDisableQuicklinks( HttpServletRequest request )
-        throws AccessDeniedException
+    public String doDisableQuicklinks( HttpServletRequest request ) throws AccessDeniedException
     {
-        Plugin plugin = getPlugin(  );
+        Plugin plugin = getPlugin( );
         String strIdQuicklinks = request.getParameter( PARAMETER_QUICKLINKS_ID );
 
         if ( ( strIdQuicklinks == null ) || !strIdQuicklinks.matches( REGEX_ID ) )
@@ -1026,18 +1029,19 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
             return AdminMessageService.getMessageUrl( request, Messages.MANDATORY_FIELDS, AdminMessage.TYPE_STOP );
         }
 
-        if ( !RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE, String.valueOf( quicklinks.getId(  ) ),
-                    QuicklinksResourceIdService.PERMISSION_CHANGE_STATE, getUser(  ) ) )
+        if ( !RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE, String.valueOf( quicklinks.getId( ) ), QuicklinksResourceIdService.PERMISSION_CHANGE_STATE,
+                getUser( ) ) )
         {
-            throw new AccessDeniedException(  );
+            throw new AccessDeniedException( );
         }
 
-        int nCountPortlets = QuicklinksPortletHome.getCountPortletByIdQuicklinks( quicklinks.getId(  ) );
+        int nCountPortlets = QuicklinksPortletHome.getCountPortletByIdQuicklinks( quicklinks.getId( ) );
 
         if ( nCountPortlets > 0 )
         {
-            return AdminMessageService.getMessageUrl( request, MESSAGE_STOP_CANNOT_DISABLE_QUICKLINKS,
-                new String[] { String.valueOf( nCountPortlets ) }, AdminMessage.TYPE_STOP );
+            return AdminMessageService.getMessageUrl( request, MESSAGE_STOP_CANNOT_DISABLE_QUICKLINKS, new String [ ] {
+                    String.valueOf( nCountPortlets )
+            }, AdminMessage.TYPE_STOP );
         }
 
         quicklinks.setEnabled( false );
@@ -1045,18 +1049,19 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
 
         UrlItem url = new UrlItem( JSP_URL_MANAGE );
 
-        return url.getUrl(  );
+        return url.getUrl( );
     }
 
     /**
      * Processes the {@link Quicklinks} enable
-     * @param request The HTTP servlet request
+     * 
+     * @param request
+     *            The HTTP servlet request
      * @return The URL to redirect to
      */
-    public String doEnableQuicklinks( HttpServletRequest request )
-        throws AccessDeniedException
+    public String doEnableQuicklinks( HttpServletRequest request ) throws AccessDeniedException
     {
-        Plugin plugin = getPlugin(  );
+        Plugin plugin = getPlugin( );
         String strIdQuicklinks = request.getParameter( PARAMETER_QUICKLINKS_ID );
 
         if ( ( strIdQuicklinks == null ) || !strIdQuicklinks.matches( REGEX_ID ) )
@@ -1072,10 +1077,10 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
             return AdminMessageService.getMessageUrl( request, Messages.MANDATORY_FIELDS, AdminMessage.TYPE_STOP );
         }
 
-        if ( !RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE, String.valueOf( quicklinks.getId(  ) ),
-                    QuicklinksResourceIdService.PERMISSION_CHANGE_STATE, getUser(  ) ) )
+        if ( !RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE, String.valueOf( quicklinks.getId( ) ), QuicklinksResourceIdService.PERMISSION_CHANGE_STATE,
+                getUser( ) ) )
         {
-            throw new AccessDeniedException(  );
+            throw new AccessDeniedException( );
         }
 
         quicklinks.setEnabled( true );
@@ -1083,37 +1088,36 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
 
         UrlItem url = new UrlItem( JSP_URL_MANAGE );
 
-        return url.getUrl(  );
+        return url.getUrl( );
     }
 
     /**
      * Processes the {@link Quicklinks} copy
      *
-     * @param request The {@link HttpServletRequest}
+     * @param request
+     *            The {@link HttpServletRequest}
      * @return The Url to redirect to
      */
-    public String doCopyQuicklinks( HttpServletRequest request )
-        throws AccessDeniedException
+    public String doCopyQuicklinks( HttpServletRequest request ) throws AccessDeniedException
     {
         Quicklinks quicklinks = getAuthorizedQuicklinks( request, QuicklinksResourceIdService.PERMISSION_COPY );
-        quicklinks.copy( getPlugin(  ),
-            I18nService.getLocalizedString( MESSAGE_COPY, getLocale(  ) ) + quicklinks.getTitle(  ) );
+        quicklinks.copy( getPlugin( ), I18nService.getLocalizedString( MESSAGE_COPY, getLocale( ) ) + quicklinks.getTitle( ) );
 
         UrlItem url = new UrlItem( JSP_URL_MANAGE );
 
-        return url.getUrl(  );
+        return url.getUrl( );
     }
 
     /**
      * Processes the {@link Entry} copy
      *
-     * @param request The {@link HttpServletRequest}
+     * @param request
+     *            The {@link HttpServletRequest}
      * @return The Url to redirect to
      */
-    public String doCopyEntry( HttpServletRequest request )
-        throws AccessDeniedException
+    public String doCopyEntry( HttpServletRequest request ) throws AccessDeniedException
     {
-        Plugin plugin = getPlugin(  );
+        Plugin plugin = getPlugin( );
         String strIdEntry = request.getParameter( PARAMETER_ENTRY_ID );
 
         if ( ( strIdEntry == null ) || !strIdEntry.matches( REGEX_ID ) )
@@ -1129,21 +1133,20 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
             return AdminMessageService.getMessageUrl( request, Messages.MANDATORY_FIELDS, AdminMessage.TYPE_STOP );
         }
 
-        if ( !RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE, String.valueOf( entry.getIdQuicklinks(  ) ),
-                    QuicklinksResourceIdService.PERMISSION_MODIFY, getUser(  ) ) )
+        if ( !RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE, String.valueOf( entry.getIdQuicklinks( ) ), QuicklinksResourceIdService.PERMISSION_MODIFY,
+                getUser( ) ) )
         {
-            throw new AccessDeniedException(  );
+            throw new AccessDeniedException( );
         }
 
-        entry.copy( entry.getIdQuicklinks(  ), plugin,
-            I18nService.getLocalizedString( MESSAGE_COPY, getLocale(  ) ) + entry.getTitle(  ) );
+        entry.copy( entry.getIdQuicklinks( ), plugin, I18nService.getLocalizedString( MESSAGE_COPY, getLocale( ) ) + entry.getTitle( ) );
 
         UrlItem url = new UrlItem( JSP_URL_MODIFY );
-        url.addParameter( PARAMETER_QUICKLINKS_ID, entry.getIdQuicklinks(  ) );
+        url.addParameter( PARAMETER_QUICKLINKS_ID, entry.getIdQuicklinks( ) );
         url.setAnchor( ANCHOR_NAME );
 
-        return url.getUrl(  );
+        return url.getUrl( );
     }
 
-    //-------------------------- Private methods --------------------------
+    // -------------------------- Private methods --------------------------
 }

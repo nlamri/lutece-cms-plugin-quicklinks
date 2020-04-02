@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -36,7 +36,6 @@ package fr.paris.lutece.plugins.quicklinks.business;
 import fr.paris.lutece.portal.service.plugin.Plugin;
 import fr.paris.lutece.portal.service.spring.SpringContextService;
 
-
 /**
  *
  * class EntryInternalLinkHome
@@ -45,21 +44,22 @@ import fr.paris.lutece.portal.service.spring.SpringContextService;
 public final class EntryInternalLinkHome
 {
     // Static variable pointed at the DAO instance
-    private static IEntrySpecificDAO _dao = (IEntrySpecificDAO) SpringContextService.getPluginBean( "quicklinks",
-            "quicklinks.entryInternalLinkDAO" );
+    private static IEntrySpecificDAO _dao = (IEntrySpecificDAO) SpringContextService.getPluginBean( "quicklinks", "quicklinks.entryInternalLinkDAO" );
 
     /**
      * Private constructor - this class need not be instantiated
      */
-    private EntryInternalLinkHome(  )
+    private EntryInternalLinkHome( )
     {
     }
 
     /**
      * Returns an instance of a {@link EntryInternalLink} whose identifier is specified in parameter
      *
-     * @param entry The {@link EntryInternalLink} to load
-     * @param plugin the Plugin
+     * @param entry
+     *            The {@link EntryInternalLink} to load
+     * @param plugin
+     *            the Plugin
      * @return an instance of EntryInternalLink
      */
     public static IEntry load( IEntry entry, Plugin plugin )
@@ -70,8 +70,10 @@ public final class EntryInternalLinkHome
     /**
      * Insert a new record in the table.
      *
-     * @param entry The Instance of the object {@link EntryInternalLink}
-     * @param plugin The {@link Plugin} using this data access service
+     * @param entry
+     *            The Instance of the object {@link EntryInternalLink}
+     * @param plugin
+     *            The {@link Plugin} using this data access service
      * @return The {@link EntryInternalLink}
      */
     public static IEntry create( EntryInternalLink entry, Plugin plugin )
@@ -82,8 +84,10 @@ public final class EntryInternalLinkHome
     /**
      * Delete the {@link EntryInternalLink} specified by identifier
      *
-     * @param nId The identifier
-     * @param plugin The {@link Plugin} using this data access service
+     * @param nId
+     *            The identifier
+     * @param plugin
+     *            The {@link Plugin} using this data access service
      */
     public static void remove( int nId, Plugin plugin )
     {
@@ -93,8 +97,10 @@ public final class EntryInternalLinkHome
     /**
      * Update The {@link EntryInternalLink}
      *
-     * @param entry The {@link EntryInternalLink} to update
-     * @param plugin The {@link Plugin} using this data access service
+     * @param entry
+     *            The {@link EntryInternalLink} to update
+     * @param plugin
+     *            The {@link Plugin} using this data access service
      */
     public static void update( EntryInternalLink entry, Plugin plugin )
     {

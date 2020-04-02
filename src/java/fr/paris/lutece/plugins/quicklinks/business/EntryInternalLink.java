@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -44,7 +44,6 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
-
 /**
  * The class Entry Text
  *
@@ -70,15 +69,15 @@ public class EntryInternalLink extends Entry
     private String _strContent;
 
     @Override
-    public EntryInternalLink clone(  ) throws CloneNotSupportedException
+    public EntryInternalLink clone( ) throws CloneNotSupportedException
     {
-        EntryInternalLink entryInternalLink = new EntryInternalLink(  );
-        entryInternalLink.setContent( getContent(  ) );
-        entryInternalLink.setEntryType( getEntryType(  ) );
-        entryInternalLink.setIdOrder( getIdOrder(  ) );
-        entryInternalLink.setIdParent( getIdParent(  ) );
-        entryInternalLink.setIdQuicklinks( getIdQuicklinks(  ) );
-        entryInternalLink.setTitle( getTitle(  ) );
+        EntryInternalLink entryInternalLink = new EntryInternalLink( );
+        entryInternalLink.setContent( getContent( ) );
+        entryInternalLink.setEntryType( getEntryType( ) );
+        entryInternalLink.setIdOrder( getIdOrder( ) );
+        entryInternalLink.setIdParent( getIdParent( ) );
+        entryInternalLink.setIdQuicklinks( getIdQuicklinks( ) );
+        entryInternalLink.setTitle( getTitle( ) );
 
         return entryInternalLink;
     }
@@ -86,17 +85,17 @@ public class EntryInternalLink extends Entry
     @Override
     public String getHtml( Plugin plugin, Locale locale )
     {
-        HashMap<String, Object> model = new HashMap<String, Object>(  );
+        HashMap<String, Object> model = new HashMap<String, Object>( );
 
         model.put( MARK_ENTRY_INTERNAL_LINK, this );
 
         HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_DISPLAY, locale, model );
 
-        return template.getHtml(  );
+        return template.getHtml( );
     }
 
     @Override
-    public String getTitle(  )
+    public String getTitle( )
     {
         return _strTitle;
     }
@@ -130,7 +129,8 @@ public class EntryInternalLink extends Entry
     }
 
     /**
-     * @param strContent the _strContent to set
+     * @param strContent
+     *            the _strContent to set
      */
     public void setContent( String strContent )
     {
@@ -140,7 +140,7 @@ public class EntryInternalLink extends Entry
     /**
      * @return the _strContent
      */
-    public String getContent(  )
+    public String getContent( )
     {
         return _strContent;
     }
@@ -160,7 +160,7 @@ public class EntryInternalLink extends Entry
     @Override
     public void removeSpecificParameters( Plugin plugin )
     {
-        EntryInternalLinkHome.remove( getId(  ), plugin );
+        EntryInternalLinkHome.remove( getId( ), plugin );
     }
 
     @Override

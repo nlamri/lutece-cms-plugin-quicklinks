@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -49,7 +49,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Locale;
 
-
 /**
  *
  * This class represents a Quicklinks object.
@@ -81,15 +80,16 @@ public class Quicklinks implements AdminWorkgroupResource, RBACResource, Cloneab
     private String _strCssStyle;
 
     /**
-         * @return the _strCssStyle
-         */
-    public String getCssStyle(  )
+     * @return the _strCssStyle
+     */
+    public String getCssStyle( )
     {
         return _strCssStyle;
     }
 
     /**
-     * @param strCssStyle the _strCssStyle to set
+     * @param strCssStyle
+     *            the _strCssStyle to set
      */
     public void setCssStyle( String strCssStyle )
     {
@@ -97,28 +97,29 @@ public class Quicklinks implements AdminWorkgroupResource, RBACResource, Cloneab
     }
 
     /**
-    * Initialize the {@link Quicklinks}
-    */
-    public static void init(  )
+     * Initialize the {@link Quicklinks}
+     */
+    public static void init( )
     {
         // Create removal listeners and register them
         if ( _listenerWorkgroup == null )
         {
-            _listenerWorkgroup = new QuicklinksWorkgroupRemovalListener(  );
-            WorkgroupRemovalListenerService.getService(  ).registerListener( _listenerWorkgroup );
+            _listenerWorkgroup = new QuicklinksWorkgroupRemovalListener( );
+            WorkgroupRemovalListenerService.getService( ).registerListener( _listenerWorkgroup );
         }
     }
 
     /**
      * @return the idQuicklinks
      */
-    public int getId(  )
+    public int getId( )
     {
         return _nId;
     }
 
     /**
-     * @param nId the idQuicklinks to set
+     * @param nId
+     *            the idQuicklinks to set
      */
     public void setId( int nId )
     {
@@ -126,15 +127,16 @@ public class Quicklinks implements AdminWorkgroupResource, RBACResource, Cloneab
     }
 
     /**
-         * @return the _strTitle
-         */
-    public String getTitle(  )
+     * @return the _strTitle
+     */
+    public String getTitle( )
     {
         return _strTitle;
     }
 
     /**
-     * @param strTitle the _strTitle to set
+     * @param strTitle
+     *            the _strTitle to set
      */
     public void setTitle( String strTitle )
     {
@@ -144,13 +146,14 @@ public class Quicklinks implements AdminWorkgroupResource, RBACResource, Cloneab
     /**
      * @return the type
      */
-    public QuicklinksType getType(  )
+    public QuicklinksType getType( )
     {
         return _enumType;
     }
 
     /**
-     * @param enumType the type to set
+     * @param enumType
+     *            the type to set
      */
     public void setType( QuicklinksType enumType )
     {
@@ -160,13 +163,14 @@ public class Quicklinks implements AdminWorkgroupResource, RBACResource, Cloneab
     /**
      * @return the isEnabled
      */
-    public boolean isEnabled(  )
+    public boolean isEnabled( )
     {
         return _bIsEnabled;
     }
 
     /**
-     * @param bIsEnabled the isEnabled to set
+     * @param bIsEnabled
+     *            the isEnabled to set
      */
     public void setEnabled( boolean bIsEnabled )
     {
@@ -176,13 +180,14 @@ public class Quicklinks implements AdminWorkgroupResource, RBACResource, Cloneab
     /**
      * @return the roleKey
      */
-    public String getRoleKey(  )
+    public String getRoleKey( )
     {
         return _strRoleKey;
     }
 
     /**
-     * @param strRoleKey the roleKey to set
+     * @param strRoleKey
+     *            the roleKey to set
      */
     public void setRoleKey( String strRoleKey )
     {
@@ -190,7 +195,8 @@ public class Quicklinks implements AdminWorkgroupResource, RBACResource, Cloneab
     }
 
     /**
-     * @param strWorkgroupKey the workgroupKey to set
+     * @param strWorkgroupKey
+     *            the workgroupKey to set
      */
     public void setWorkgroup( String strWorkgroupKey )
     {
@@ -200,7 +206,7 @@ public class Quicklinks implements AdminWorkgroupResource, RBACResource, Cloneab
     /**
      * @return the workgroupKey
      */
-    public String getWorkgroup(  )
+    public String getWorkgroup( )
     {
         return _strWorkgroupKey;
     }
@@ -208,38 +214,41 @@ public class Quicklinks implements AdminWorkgroupResource, RBACResource, Cloneab
     /**
      * Get The resource Id
      */
-    public String getResourceId(  )
+    public String getResourceId( )
     {
-        return String.valueOf( getId(  ) );
+        return String.valueOf( getId( ) );
     }
 
     /**
      * Get the resource type code
      */
-    public String getResourceTypeCode(  )
+    public String getResourceTypeCode( )
     {
         return RESOURCE_TYPE;
     }
 
     /**
      * Get the XML code for {@link Quicklinks}
-     * @param plugin The {@link Plugin}
-     * @param locale The {@link Locale}
+     * 
+     * @param plugin
+     *            The {@link Plugin}
+     * @param locale
+     *            The {@link Locale}
      * @return The HTML code
      */
     public StringBuffer getXml( Plugin plugin, Locale locale )
     {
-        StringBuffer strXml = new StringBuffer(  );
-        HashMap<String, Object> model = new HashMap<String, Object>(  );
-        model.put( ATTRIBUTE_QUICKLINKS_ID, String.valueOf( getId(  ) ) );
-        model.put( ATTRIBUTE_QUICKLINKS_TITLE, getTitle(  ) );
-        model.put( ATTRIBUTE_QUICKLINKS_TYPE, getType(  ).getI18nKey(  ) );
-        model.put( ATTRIBUTE_QUICKLINKS_ROLE_KEY, getRoleKey(  ) );
-        model.put( ATTRIBUTE_QUICKLINKS_CSS_STYLE, getCssStyle(  ) );
+        StringBuffer strXml = new StringBuffer( );
+        HashMap<String, Object> model = new HashMap<String, Object>( );
+        model.put( ATTRIBUTE_QUICKLINKS_ID, String.valueOf( getId( ) ) );
+        model.put( ATTRIBUTE_QUICKLINKS_TITLE, getTitle( ) );
+        model.put( ATTRIBUTE_QUICKLINKS_TYPE, getType( ).getI18nKey( ) );
+        model.put( ATTRIBUTE_QUICKLINKS_ROLE_KEY, getRoleKey( ) );
+        model.put( ATTRIBUTE_QUICKLINKS_CSS_STYLE, getCssStyle( ) );
         XmlUtil.beginElement( strXml, TAG_QUICKLINKS, model );
 
-        EntryFilter filter = new EntryFilter(  );
-        filter.setIdQuicklinks( getId(  ) );
+        EntryFilter filter = new EntryFilter( );
+        filter.setIdQuicklinks( getId( ) );
         filter.setIdParent( EntryHome.ROOT_PARENT_ID );
 
         for ( IEntry entry : EntryHome.findByFilter( filter, plugin ) )
@@ -254,18 +263,23 @@ public class Quicklinks implements AdminWorkgroupResource, RBACResource, Cloneab
 
     /**
      * Get the Xml content for the specified entry
-     * @param strXml The XML buffer
-     * @param entry The {@link Entry}
-     * @param plugin The {@link Plugin}
-     * @param locale The {@link Locale}
+     * 
+     * @param strXml
+     *            The XML buffer
+     * @param entry
+     *            The {@link Entry}
+     * @param plugin
+     *            The {@link Plugin}
+     * @param locale
+     *            The {@link Locale}
      */
     private void getEntryXml( StringBuffer strXml, IEntry entry, Plugin plugin, Locale locale )
     {
-        HashMap<String, Object> model = new HashMap<String, Object>(  );
-        model.put( ATTRIBUTE_ENTRY_ID, String.valueOf( entry.getId(  ) ) );
-        model.put( ATTRIBUTE_ENTRY_TITLE, entry.getTitle(  ) );
-        model.put( ATTRIBUTE_ENTRY_TYPE, String.valueOf( entry.getEntryType(  ).getId(  ) ) );
-        model.put( ATTRIBUTE_ENTRY_ORDER, String.valueOf( entry.getIdOrder(  ) ) );
+        HashMap<String, Object> model = new HashMap<String, Object>( );
+        model.put( ATTRIBUTE_ENTRY_ID, String.valueOf( entry.getId( ) ) );
+        model.put( ATTRIBUTE_ENTRY_TITLE, entry.getTitle( ) );
+        model.put( ATTRIBUTE_ENTRY_TYPE, String.valueOf( entry.getEntryType( ).getId( ) ) );
+        model.put( ATTRIBUTE_ENTRY_ORDER, String.valueOf( entry.getIdOrder( ) ) );
         XmlUtil.beginElement( strXml, TAG_ENTRY, model );
 
         for ( IEntry entryChild : entry.getChilds( plugin ) )
@@ -277,18 +291,20 @@ public class Quicklinks implements AdminWorkgroupResource, RBACResource, Cloneab
         XmlUtil.endElement( strXml, TAG_ENTRY );
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#clone()
      */
     @Override
-    protected Quicklinks clone(  ) throws CloneNotSupportedException
+    protected Quicklinks clone( ) throws CloneNotSupportedException
     {
-        Quicklinks quicklinks = new Quicklinks(  );
-        quicklinks.setEnabled( isEnabled(  ) );
-        quicklinks.setRoleKey( getRoleKey(  ) );
-        quicklinks.setTitle( getTitle(  ) );
-        quicklinks.setType( getType(  ) );
-        quicklinks.setWorkgroup( getWorkgroup(  ) );
+        Quicklinks quicklinks = new Quicklinks( );
+        quicklinks.setEnabled( isEnabled( ) );
+        quicklinks.setRoleKey( getRoleKey( ) );
+        quicklinks.setTitle( getTitle( ) );
+        quicklinks.setType( getType( ) );
+        quicklinks.setWorkgroup( getWorkgroup( ) );
 
         return quicklinks;
     }
@@ -296,7 +312,8 @@ public class Quicklinks implements AdminWorkgroupResource, RBACResource, Cloneab
     /**
      * Copy a {@link Quicklinks}
      *
-     * @param plugin the {@link Plugin}
+     * @param plugin
+     *            the {@link Plugin}
      * @return The {@link Quicklinks} copy
      */
     public Quicklinks copy( Plugin plugin )
@@ -307,8 +324,10 @@ public class Quicklinks implements AdminWorkgroupResource, RBACResource, Cloneab
     /**
      * Copy a {@link Quicklinks}
      *
-     * @param plugin the {@link Plugin}
-     * @param strNewName The new name
+     * @param plugin
+     *            the {@link Plugin}
+     * @param strNewName
+     *            The new name
      * @return The {@link Quicklinks} copy
      */
     public Quicklinks copy( Plugin plugin, String strNewName )
@@ -317,9 +336,9 @@ public class Quicklinks implements AdminWorkgroupResource, RBACResource, Cloneab
 
         try
         {
-            copy = this.clone(  );
+            copy = this.clone( );
         }
-        catch ( CloneNotSupportedException e )
+        catch( CloneNotSupportedException e )
         {
             AppLogService.error( "Object Quicklinks does not support clone process." );
         }
@@ -328,13 +347,13 @@ public class Quicklinks implements AdminWorkgroupResource, RBACResource, Cloneab
         copy.setTitle( strNewName );
         copy = QuicklinksHome.create( copy, plugin );
 
-        EntryFilter filter = new EntryFilter(  );
-        filter.setIdQuicklinks( getId(  ) );
+        EntryFilter filter = new EntryFilter( );
+        filter.setIdQuicklinks( getId( ) );
         filter.setIdParent( EntryHome.ROOT_PARENT_ID );
 
         for ( IEntry entry : EntryHome.findByFilter( filter, plugin ) )
         {
-            entry.copy( copy.getId(  ), plugin );
+            entry.copy( copy.getId( ), plugin );
         }
 
         return copy;

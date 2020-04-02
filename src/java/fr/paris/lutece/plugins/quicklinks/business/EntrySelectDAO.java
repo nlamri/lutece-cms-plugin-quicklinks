@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -36,7 +36,6 @@ package fr.paris.lutece.plugins.quicklinks.business;
 import fr.paris.lutece.portal.service.plugin.Plugin;
 import fr.paris.lutece.util.sql.DAOUtil;
 
-
 /**
  *
  * Class EntryListboxDAO
@@ -52,8 +51,10 @@ public class EntrySelectDAO implements IEntrySpecificDAO
     /**
      * Load the data of the entry type from the table
      *
-     * @param entry The empty entry object
-     * @param plugin the plugin
+     * @param entry
+     *            The empty entry object
+     * @param plugin
+     *            the plugin
      * @return the instance of the EntryType
      */
     public IEntry load( IEntry entry, Plugin plugin )
@@ -75,16 +76,16 @@ public class EntrySelectDAO implements IEntrySpecificDAO
         }
 
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_FIND_BY_PRIMARY_KEY, plugin );
-        daoUtil.setInt( 1, entrySelect.getId(  ) );
-        daoUtil.executeQuery(  );
+        daoUtil.setInt( 1, entrySelect.getId( ) );
+        daoUtil.executeQuery( );
 
-        if ( daoUtil.next(  ) )
+        if ( daoUtil.next( ) )
         {
             entrySelect.setTitle( daoUtil.getString( 1 ) );
             entrySelect.setTarget( daoUtil.getString( 2 ) );
         }
 
-        daoUtil.free(  );
+        daoUtil.free( );
 
         return entrySelect;
     }
@@ -92,23 +93,27 @@ public class EntrySelectDAO implements IEntrySpecificDAO
     /**
      * Deletes the {@link Entry} whose identifier is specified in parameter
      *
-     * @param nEntryId The identifier of the {@link Entry}
-     * @param plugin The {@link Plugin}
+     * @param nEntryId
+     *            The identifier of the {@link Entry}
+     * @param plugin
+     *            The {@link Plugin}
      */
     public void delete( int nEntryId, Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_DELETE, plugin );
         daoUtil.setInt( 1, nEntryId );
 
-        daoUtil.executeUpdate(  );
-        daoUtil.free(  );
+        daoUtil.executeUpdate( );
+        daoUtil.free( );
     }
 
     /**
      * Insert the Entry
      *
-     * @param entry The {@link Entry} object
-     * @param plugin The {@link Plugin}
+     * @param entry
+     *            The {@link Entry} object
+     * @param plugin
+     *            The {@link Plugin}
      * @return The {@link Entry}
      */
     public IEntry insert( IEntry entry, Plugin plugin )
@@ -131,12 +136,12 @@ public class EntrySelectDAO implements IEntrySpecificDAO
 
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_INSERT, plugin );
         int nParam = 1;
-        daoUtil.setInt( nParam++, entrySelect.getId(  ) );
-        daoUtil.setString( nParam++, entrySelect.getTitle(  ) );
-        daoUtil.setString( nParam++, entrySelect.getTarget(  ) );
+        daoUtil.setInt( nParam++, entrySelect.getId( ) );
+        daoUtil.setString( nParam++, entrySelect.getTitle( ) );
+        daoUtil.setString( nParam++, entrySelect.getTarget( ) );
 
-        daoUtil.executeUpdate(  );
-        daoUtil.free(  );
+        daoUtil.executeUpdate( );
+        daoUtil.free( );
 
         return entry;
     }
@@ -144,8 +149,10 @@ public class EntrySelectDAO implements IEntrySpecificDAO
     /**
      * Update the {@link Entry}
      *
-     * @param entry The {@link Entry} object
-     * @param plugin The {@link Plugin}
+     * @param entry
+     *            The {@link Entry} object
+     * @param plugin
+     *            The {@link Plugin}
      */
     public void store( IEntry entry, Plugin plugin )
     {
@@ -168,10 +175,10 @@ public class EntrySelectDAO implements IEntrySpecificDAO
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_UPDATE, plugin );
 
         int nParam = 1;
-        daoUtil.setString( nParam++, entrySelect.getTitle(  ) );
-        daoUtil.setString( nParam++, entrySelect.getTarget(  ) );
-        daoUtil.setInt( nParam++, entrySelect.getId(  ) );
-        daoUtil.executeUpdate(  );
-        daoUtil.free(  );
+        daoUtil.setString( nParam++, entrySelect.getTitle( ) );
+        daoUtil.setString( nParam++, entrySelect.getTarget( ) );
+        daoUtil.setInt( nParam++, entrySelect.getId( ) );
+        daoUtil.executeUpdate( );
+        daoUtil.free( );
     }
 }

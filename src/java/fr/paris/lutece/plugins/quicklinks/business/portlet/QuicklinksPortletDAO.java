@@ -1,15 +1,15 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
- * Redistribution and use in source and binary quicklinkss, with or without
+ * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
  *
  *  1. Redistributions of source code must retain the above copyright notice
  *     and the following disclaimer.
  *
- *  2. Redistributions in binary quicklinks must reproduce the above copyright notice
+ *  2. Redistributions in binary form must reproduce the above copyright notice
  *     and the following disclaimer in the documentation and/or other materials
  *     provided with the distribution.
  *
@@ -36,7 +36,6 @@ package fr.paris.lutece.plugins.quicklinks.business.portlet;
 import fr.paris.lutece.portal.business.portlet.Portlet;
 import fr.paris.lutece.util.sql.DAOUtil;
 
-
 /**
  * This class provides Data Access methods for QuicklinksPortlet objects
  */
@@ -44,75 +43,80 @@ public final class QuicklinksPortletDAO implements IQuicklinksPortletDAO
 {
     private static final String SQL_QUERY_INSERT = "INSERT INTO quicklinks_portlet ( id_portlet , id_quicklinks ) VALUES ( ? , ? )";
     private static final String SQL_QUERY_SELECT = "SELECT id_portlet , id_quicklinks FROM quicklinks_portlet WHERE id_portlet = ? ";
-    private static final String SQL_QUERY_SELECT_COUNT_PORTLET_BY_ID_QUICKLINKS = "SELECT COUNT(id_portlet) " +
-        "FROM quicklinks_portlet WHERE id_quicklinks = ? ";
+    private static final String SQL_QUERY_SELECT_COUNT_PORTLET_BY_ID_QUICKLINKS = "SELECT COUNT(id_portlet) "
+            + "FROM quicklinks_portlet WHERE id_quicklinks = ? ";
     private static final String SQL_QUERY_UPDATE = "UPDATE quicklinks_portlet SET id_portlet = ?, id_quicklinks = ? WHERE id_portlet = ? ";
     private static final String SQL_QUERY_DELETE = "DELETE FROM quicklinks_portlet WHERE id_portlet= ? ";
 
     ///////////////////////////////////////////////////////////////////////////////////////
-    //Access methods to data
+    // Access methods to data
 
     /**
      * Insert a new record in the table quicklinks_portlet
      *
      *
-     * @param portlet the instance of the Portlet object to insert
+     * @param portlet
+     *            the instance of the Portlet object to insert
      */
     public void insert( Portlet portlet )
     {
         QuicklinksPortlet p = (QuicklinksPortlet) portlet;
 
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_INSERT );
-        daoUtil.setInt( 1, p.getId(  ) );
-        daoUtil.setInt( 2, p.getQuicklinksId(  ) );
+        daoUtil.setInt( 1, p.getId( ) );
+        daoUtil.setInt( 2, p.getQuicklinksId( ) );
 
-        daoUtil.executeUpdate(  );
-        daoUtil.free(  );
+        daoUtil.executeUpdate( );
+        daoUtil.free( );
     }
 
     /**
      * Deletes records for a portlet identifier in the table quicklinks_portlet
      *
      *
-     * @param nPortletId the portlet identifier
+     * @param nPortletId
+     *            the portlet identifier
      */
     public void delete( int nPortletId )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_DELETE );
         daoUtil.setInt( 1, nPortletId );
-        daoUtil.executeUpdate(  );
-        daoUtil.free(  );
+        daoUtil.executeUpdate( );
+        daoUtil.free( );
     }
 
     /**
      * Loads the data of Quicklinks Portlet whose identifier is specified in parameter
      *
      *
-     * @param nPortletId The Portlet identifier
+     * @param nPortletId
+     *            The Portlet identifier
      * @return theDocumentListPortlet object
      */
     public Portlet load( int nPortletId )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT );
         daoUtil.setInt( 1, nPortletId );
-        daoUtil.executeQuery(  );
+        daoUtil.executeQuery( );
 
-        QuicklinksPortlet portlet = new QuicklinksPortlet(  );
+        QuicklinksPortlet portlet = new QuicklinksPortlet( );
 
-        if ( daoUtil.next(  ) )
+        if ( daoUtil.next( ) )
         {
             portlet.setId( daoUtil.getInt( 1 ) );
             portlet.setQuicklinksId( daoUtil.getInt( 2 ) );
         }
 
-        daoUtil.free(  );
+        daoUtil.free( );
 
         return portlet;
     }
 
     /**
      * return number of quicklinks portlet who are associate to the id quicklinks
-     * @param nIdQuicklinks the id of the quicklinks
+     * 
+     * @param nIdQuicklinks
+     *            the id of the quicklinks
      * @return number of quicklinks portlet who are associate to the id quicklinks
      */
     public int selectCountPortletByIdQuicklinks( int nIdQuicklinks )
@@ -120,14 +124,14 @@ public final class QuicklinksPortletDAO implements IQuicklinksPortletDAO
         int nCountPortlet = 0;
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT_COUNT_PORTLET_BY_ID_QUICKLINKS );
         daoUtil.setInt( 1, nIdQuicklinks );
-        daoUtil.executeQuery(  );
+        daoUtil.executeQuery( );
 
-        if ( daoUtil.next(  ) )
+        if ( daoUtil.next( ) )
         {
             nCountPortlet = daoUtil.getInt( 1 );
         }
 
-        daoUtil.free(  );
+        daoUtil.free( );
 
         return nCountPortlet;
     }
@@ -136,16 +140,17 @@ public final class QuicklinksPortletDAO implements IQuicklinksPortletDAO
      * Update the record in the table
      *
      *
-     * @param portlet A portlet
+     * @param portlet
+     *            A portlet
      */
     public void store( Portlet portlet )
     {
         QuicklinksPortlet p = (QuicklinksPortlet) portlet;
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_UPDATE );
-        daoUtil.setInt( 1, p.getId(  ) );
-        daoUtil.setInt( 2, p.getQuicklinksId(  ) );
-        daoUtil.setInt( 3, p.getId(  ) );
-        daoUtil.executeUpdate(  );
-        daoUtil.free(  );
+        daoUtil.setInt( 1, p.getId( ) );
+        daoUtil.setInt( 2, p.getQuicklinksId( ) );
+        daoUtil.setInt( 3, p.getId( ) );
+        daoUtil.executeUpdate( );
+        daoUtil.free( );
     }
 }

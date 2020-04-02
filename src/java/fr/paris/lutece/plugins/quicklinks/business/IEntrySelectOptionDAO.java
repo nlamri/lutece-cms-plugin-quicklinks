@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -37,59 +37,73 @@ import fr.paris.lutece.portal.service.plugin.Plugin;
 
 import java.util.Collection;
 
-
 /**
-*  Interface IEntrySelectOptionDAO
-*/
+ * Interface IEntrySelectOptionDAO
+ */
 public interface IEntrySelectOptionDAO
 {
     /**
-    * Insert the {@link EntrySelectOption}
-    *
-    * @param option The {@link EntrySelectOption} to insert
-    * @param plugin The {@link Plugin}
-    * @return The {@link EntrySelectOption}
-    */
+     * Insert the {@link EntrySelectOption}
+     *
+     * @param option
+     *            The {@link EntrySelectOption} to insert
+     * @param plugin
+     *            The {@link Plugin}
+     * @return The {@link EntrySelectOption}
+     */
     EntrySelectOption insert( EntrySelectOption option, Plugin plugin );
 
     /**
      * Delete the {@link EntrySelectOption} whose identifier is specified in parameter
      *
-     * @param nId The identifier of the {@link EntrySelectOption}
-     * @param nIdEntry The Entry identifier
-     * @param plugin The {@link Plugin}
+     * @param nId
+     *            The identifier of the {@link EntrySelectOption}
+     * @param nIdEntry
+     *            The Entry identifier
+     * @param plugin
+     *            The {@link Plugin}
      */
     void delete( int nId, int nIdEntry, Plugin plugin );
 
     /**
      * Update the {@link EntrySelectOption}
      *
-     * @param option The {@link EntrySelectOption} object
-     * @param plugin The {@link Plugin}
+     * @param option
+     *            The {@link EntrySelectOption} object
+     * @param plugin
+     *            The {@link Plugin}
      */
     void store( EntrySelectOption option, Plugin plugin );
 
     /**
      * Load the data of the {@link EntrySelectOption} from the table
      *
-     * @param nId The identifier of the entry select option
-     * @param nIdEntry The Entry identifier
-     * @param plugin the plugin
+     * @param nId
+     *            The identifier of the entry select option
+     * @param nIdEntry
+     *            The Entry identifier
+     * @param plugin
+     *            the plugin
      * @return the instance of the {@link EntrySelectOption}
      */
     EntrySelectOption load( int nId, int nIdEntry, Plugin plugin );
 
     /**
-         * Load the data of all  entry type returns them in a  list
-     * @param plugin the plugin
+     * Load the data of all entry type returns them in a list
+     * 
+     * @param plugin
+     *            the plugin
      * @return the {@link Collection} of entry type
      */
     Collection<EntrySelectOption> select( Plugin plugin );
 
     /**
      * Load the option list for an entrySelect
-     * @param nIdEntry The entry Id
-     * @param plugin the plugin
+     * 
+     * @param nIdEntry
+     *            The entry Id
+     * @param plugin
+     *            the plugin
      * @return the {@link Collection} of {@link EntrySelectOption}
      */
     Collection<EntrySelectOption> selectByEntry( int nIdEntry, Plugin plugin );

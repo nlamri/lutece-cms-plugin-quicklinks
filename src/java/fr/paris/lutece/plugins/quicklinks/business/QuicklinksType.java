@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -42,15 +42,17 @@ import java.util.Collection;
  *
  */
 public enum QuicklinksType
-{PORTLET( 1, "quicklinks.quicklinksType.portlet.name" ),
-    INCLUDE( 2, "quicklinks.quicklinksType.include.name" );
+{
+    PORTLET( 1, "quicklinks.quicklinksType.portlet.name" ), INCLUDE( 2, "quicklinks.quicklinksType.include.name" );
 
     private final int _nValue;
     private final String _strI18nKey;
 
     /**
      * Constructor : associate a value to enum
-     * @param nValue The value
+     * 
+     * @param nValue
+     *            The value
      */
     private QuicklinksType( int nValue, String strI18nKey )
     {
@@ -60,32 +62,36 @@ public enum QuicklinksType
 
     /**
      * Return the enum value
+     * 
      * @return The enum value
      */
-    public int getValue(  )
+    public int getValue( )
     {
         return this._nValue;
     }
 
     /**
      * Return the enum i18n key
+     * 
      * @return The enum i18n key
      */
-    public String getI18nKey(  )
+    public String getI18nKey( )
     {
         return this._strI18nKey;
     }
 
     /**
-    * Get the {@link QuicklinksType} by value
-    * @param nValue The value
-    * @return The {@link QuicklinksType}
-    */
+     * Get the {@link QuicklinksType} by value
+     * 
+     * @param nValue
+     *            The value
+     * @return The {@link QuicklinksType}
+     */
     public static QuicklinksType getByValue( int nValue )
     {
-        for ( QuicklinksType e : QuicklinksType.values(  ) )
+        for ( QuicklinksType e : QuicklinksType.values( ) )
         {
-            if ( e.getValue(  ) == nValue )
+            if ( e.getValue( ) == nValue )
             {
                 return e;
             }
@@ -96,15 +102,16 @@ public enum QuicklinksType
 
     /**
      * Get the {@link ReferenceList}
+     * 
      * @return The {@link ReferenceList}
      */
-    public static ReferenceList getReferenceList(  )
+    public static ReferenceList getReferenceList( )
     {
-        ReferenceList referenceList = new ReferenceList(  );
+        ReferenceList referenceList = new ReferenceList( );
 
-        for ( QuicklinksType e : QuicklinksType.values(  ) )
+        for ( QuicklinksType e : QuicklinksType.values( ) )
         {
-            referenceList.addItem( e.getValue(  ), e.getI18nKey(  ) );
+            referenceList.addItem( e.getValue( ), e.getI18nKey( ) );
         }
 
         return referenceList;

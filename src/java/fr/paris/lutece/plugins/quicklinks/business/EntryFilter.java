@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,7 +33,6 @@
  */
 package fr.paris.lutece.plugins.quicklinks.business;
 
-
 /**
  * This class represent the Entry filter
  *
@@ -50,7 +49,7 @@ public class EntryFilter
     /**
      * Constructor : initialize the filter attributes with the unused attribute value
      */
-    public EntryFilter(  )
+    public EntryFilter( )
     {
         setId( UNUSED_ATTRIBUTE_VALUE );
         setIdQuicklinks( UNUSED_ATTRIBUTE_VALUE );
@@ -60,15 +59,16 @@ public class EntryFilter
     }
 
     /**
-    * @return the id
-    */
-    public int getId(  )
+     * @return the id
+     */
+    public int getId( )
     {
         return _nId;
     }
 
     /**
-     * @param nId the id to set
+     * @param nId
+     *            the id to set
      */
     public void setId( int nId )
     {
@@ -78,13 +78,14 @@ public class EntryFilter
     /**
      * @return the idQuicklinks
      */
-    public int getIdQuicklinks(  )
+    public int getIdQuicklinks( )
     {
         return _nIdQuicklinks;
     }
 
     /**
-     * @param nIdQuicklinks the idQuicklinks to set
+     * @param nIdQuicklinks
+     *            the idQuicklinks to set
      */
     public void setIdQuicklinks( int nIdQuicklinks )
     {
@@ -94,13 +95,14 @@ public class EntryFilter
     /**
      * @return the idType
      */
-    public int getIdType(  )
+    public int getIdType( )
     {
         return _nIdType;
     }
 
     /**
-     * @param nIdType the idType to set
+     * @param nIdType
+     *            the idType to set
      */
     public void setIdType( int nIdType )
     {
@@ -110,13 +112,14 @@ public class EntryFilter
     /**
      * @return the idOrder
      */
-    public int getIdOrder(  )
+    public int getIdOrder( )
     {
         return _nIdOrder;
     }
 
     /**
-     * @param nIdOrder the idOrder to set
+     * @param nIdOrder
+     *            the idOrder to set
      */
     public void setIdOrder( int nIdOrder )
     {
@@ -126,13 +129,14 @@ public class EntryFilter
     /**
      * @return the idParent
      */
-    public int getIdParent(  )
+    public int getIdParent( )
     {
         return _nIdParent;
     }
 
     /**
-     * @param idParent the idParent to set
+     * @param idParent
+     *            the idParent to set
      */
     public void setIdParent( int idParent )
     {

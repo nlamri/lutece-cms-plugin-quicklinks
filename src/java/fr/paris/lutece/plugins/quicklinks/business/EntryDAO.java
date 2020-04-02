@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -40,7 +40,6 @@ import fr.paris.lutece.util.sql.DAOUtil;
 import java.util.ArrayList;
 import java.util.Collection;
 
-
 /**
  *
  * Class EntryDAO
@@ -49,15 +48,14 @@ import java.util.Collection;
 public class EntryDAO implements IEntryDAO
 {
     private static final String SQL_QUERY_NEW_PK = " SELECT max( id_entry ) FROM quicklinks_entry";
-    private static final String SQL_QUERY_FIND_BY_PRIMARY_KEY = "SELECT id_entry,id_quicklinks,id_type,id_order,id_parent " +
-        "FROM quicklinks_entry WHERE id_entry = ? ";
-    private static final String SQL_QUERY_INSERT = " INSERT INTO quicklinks_entry ( id_entry, id_quicklinks, id_type, " +
-        "id_order,id_parent ) VALUES ( ?, ?, ?, ?, ? )";
+    private static final String SQL_QUERY_FIND_BY_PRIMARY_KEY = "SELECT id_entry,id_quicklinks,id_type,id_order,id_parent "
+            + "FROM quicklinks_entry WHERE id_entry = ? ";
+    private static final String SQL_QUERY_INSERT = " INSERT INTO quicklinks_entry ( id_entry, id_quicklinks, id_type, "
+            + "id_order,id_parent ) VALUES ( ?, ?, ?, ?, ? )";
     private static final String SQL_QUERY_DELETE = " DELETE FROM quicklinks_entry WHERE id_entry = ?";
-    private static final String SQL_QUERY_UPDATE = " UPDATE quicklinks_entry SET id_quicklinks = ?, id_type = ?, " +
-        "id_order = ?, id_parent = ? WHERE id_entry = ?";
-    private static final String SQL_QUERY_SELECT_BY_FILTER_SELECT = " SELECT id_entry, id_quicklinks, id_type, " +
-        "id_order, id_parent FROM quicklinks_entry ";
+    private static final String SQL_QUERY_UPDATE = " UPDATE quicklinks_entry SET id_quicklinks = ?, id_type = ?, "
+            + "id_order = ?, id_parent = ? WHERE id_entry = ?";
+    private static final String SQL_QUERY_SELECT_BY_FILTER_SELECT = " SELECT id_entry, id_quicklinks, id_type, " + "id_order, id_parent FROM quicklinks_entry ";
     private static final String SQL_QUERY_SELECT_BY_FILTER_WHERE = " WHERE ";
     private static final String SQL_QUERY_SELECT_BY_FILTER_AND = " AND ";
     private static final String SQL_QUERY_SELECT_BY_FILTER_ID = " id_entry = ? ";
@@ -70,17 +68,19 @@ public class EntryDAO implements IEntryDAO
 
     /**
      * Calculate a new primary key to add a new {@link Entry}
-     * @param plugin The {@link Plugin} using this data access service
+     * 
+     * @param plugin
+     *            The {@link Plugin} using this data access service
      * @return The new key.
      */
     public int newPrimaryKey( Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_NEW_PK, plugin );
-        daoUtil.executeQuery(  );
+        daoUtil.executeQuery( );
 
         int nKey;
 
-        if ( !daoUtil.next(  ) )
+        if ( !daoUtil.next( ) )
         {
             // if the table is empty
             nKey = 1;
@@ -88,7 +88,7 @@ public class EntryDAO implements IEntryDAO
 
         nKey = daoUtil.getInt( 1 ) + 1;
 
-        daoUtil.free(  );
+        daoUtil.free( );
 
         return nKey;
     }
@@ -96,31 +96,33 @@ public class EntryDAO implements IEntryDAO
     /**
      * Load the data of the entry type from the table
      *
-     * @param entry The empty entry object
-     * @param plugin the plugin
+     * @param entry
+     *            The empty entry object
+     * @param plugin
+     *            the plugin
      * @return the instance of the EntryType
      */
     public IEntry load( int nId, Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_FIND_BY_PRIMARY_KEY, plugin );
         daoUtil.setInt( 1, nId );
-        daoUtil.executeQuery(  );
+        daoUtil.executeQuery( );
 
-        IEntry entry = new Entry(  );
+        IEntry entry = new Entry( );
 
-        if ( daoUtil.next(  ) )
+        if ( daoUtil.next( ) )
         {
             entry.setId( daoUtil.getInt( 1 ) );
             entry.setIdQuicklinks( daoUtil.getInt( 2 ) );
 
-            EntryType entryType = new EntryType(  );
+            EntryType entryType = new EntryType( );
             entryType.setId( daoUtil.getInt( 3 ) );
             entry.setEntryType( entryType );
             entry.setIdOrder( daoUtil.getInt( 4 ) );
             entry.setIdParent( daoUtil.getInt( 5 ) );
         }
 
-        daoUtil.free(  );
+        daoUtil.free( );
 
         return entry;
     }
@@ -128,37 +130,41 @@ public class EntryDAO implements IEntryDAO
     /**
      * Deletes the {@link Entry} whose identifier is specified in parameter
      *
-     * @param nId The identifier of the  {@link Entry}
-     * @param plugin The {@link Plugin}
+     * @param nId
+     *            The identifier of the {@link Entry}
+     * @param plugin
+     *            The {@link Plugin}
      */
     public void delete( int nId, Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_DELETE, plugin );
         daoUtil.setInt( 1, nId );
 
-        daoUtil.executeUpdate(  );
-        daoUtil.free(  );
+        daoUtil.executeUpdate( );
+        daoUtil.free( );
     }
 
     /**
      * Insert the Entry
      *
-     * @param entry The {@link Entry} object
-     * @param plugin The {@link Plugin}
+     * @param entry
+     *            The {@link Entry} object
+     * @param plugin
+     *            The {@link Plugin}
      */
     public IEntry insert( IEntry entry, Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_INSERT, plugin );
         entry.setId( newPrimaryKey( plugin ) );
 
-        daoUtil.setInt( 1, entry.getId(  ) );
-        daoUtil.setInt( 2, entry.getIdQuicklinks(  ) );
-        daoUtil.setInt( 3, entry.getEntryType(  ).getId(  ) );
-        daoUtil.setInt( 4, entry.getIdOrder(  ) );
-        daoUtil.setInt( 5, entry.getIdParent(  ) );
+        daoUtil.setInt( 1, entry.getId( ) );
+        daoUtil.setInt( 2, entry.getIdQuicklinks( ) );
+        daoUtil.setInt( 3, entry.getEntryType( ).getId( ) );
+        daoUtil.setInt( 4, entry.getIdOrder( ) );
+        daoUtil.setInt( 5, entry.getIdParent( ) );
 
-        daoUtil.executeUpdate(  );
-        daoUtil.free(  );
+        daoUtil.executeUpdate( );
+        daoUtil.free( );
 
         return entry;
     }
@@ -166,45 +172,49 @@ public class EntryDAO implements IEntryDAO
     /**
      * Update the {@link Entry}
      *
-     * @param entry The {@link Entry} object
-     * @param plugin The {@link Plugin}
+     * @param entry
+     *            The {@link Entry} object
+     * @param plugin
+     *            The {@link Plugin}
      */
     public void store( IEntry entry, Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_UPDATE, plugin );
 
         int nParam = 1;
-        daoUtil.setInt( nParam++, entry.getIdQuicklinks(  ) );
-        daoUtil.setInt( nParam++, entry.getEntryType(  ).getId(  ) );
-        daoUtil.setInt( nParam++, entry.getIdOrder(  ) );
-        daoUtil.setInt( nParam++, entry.getIdParent(  ) );
+        daoUtil.setInt( nParam++, entry.getIdQuicklinks( ) );
+        daoUtil.setInt( nParam++, entry.getEntryType( ).getId( ) );
+        daoUtil.setInt( nParam++, entry.getIdOrder( ) );
+        daoUtil.setInt( nParam++, entry.getIdParent( ) );
 
-        daoUtil.setInt( nParam++, entry.getId(  ) );
-        daoUtil.executeUpdate(  );
-        daoUtil.free(  );
+        daoUtil.setInt( nParam++, entry.getId( ) );
+        daoUtil.executeUpdate( );
+        daoUtil.free( );
     }
 
     /**
      * Find all {@link Entry} specified by filter
      *
-     * @param entryFilter The {@link EntryFilter} object
-     * @param plugin the {@link Plugin}
+     * @param entryFilter
+     *            The {@link EntryFilter} object
+     * @param plugin
+     *            the {@link Plugin}
      * @return the instance of the EntryType
      */
     public Collection<IEntry> findByFilter( EntryFilter entryFilter, Plugin plugin )
     {
-        Collection<IEntry> listQuicklinks = new ArrayList<IEntry>(  );
+        Collection<IEntry> listQuicklinks = new ArrayList<IEntry>( );
         DAOUtil daoUtil = getDaoFromFilter( SQL_QUERY_SELECT_BY_FILTER_SELECT, entryFilter, plugin );
-        daoUtil.executeQuery(  );
+        daoUtil.executeQuery( );
 
-        while ( daoUtil.next(  ) )
+        while ( daoUtil.next( ) )
         {
             Entry entry = null;
-            entry = new Entry(  );
+            entry = new Entry( );
             entry.setId( daoUtil.getInt( 1 ) );
             entry.setIdQuicklinks( daoUtil.getInt( 2 ) );
 
-            EntryType entryType = new EntryType(  );
+            EntryType entryType = new EntryType( );
             entryType.setId( daoUtil.getInt( 3 ) );
             entry.setEntryType( entryType );
             entry.setIdOrder( daoUtil.getInt( 4 ) );
@@ -212,50 +222,48 @@ public class EntryDAO implements IEntryDAO
             listQuicklinks.add( entry );
         }
 
-        daoUtil.free(  );
+        daoUtil.free( );
 
         return listQuicklinks;
     }
 
     /**
-    * Return a DAO initialized with the specified filter
-    * @param strQuerySelect the query
-    * @param filter the {@link EntryFilter} object
-    * @return the DaoUtil
-    */
+     * Return a DAO initialized with the specified filter
+     * 
+     * @param strQuerySelect
+     *            the query
+     * @param filter
+     *            the {@link EntryFilter} object
+     * @return the DaoUtil
+     */
     private DAOUtil getDaoFromFilter( String strQuerySelect, EntryFilter filter, Plugin plugin )
     {
         String strSQL = strQuerySelect;
         String strWhere = EMPTY_STRING;
 
-        if ( filter.getId(  ) != EntryFilter.UNUSED_ATTRIBUTE_VALUE )
+        if ( filter.getId( ) != EntryFilter.UNUSED_ATTRIBUTE_VALUE )
         {
-            strWhere += ( ( ( !strWhere.equals( EMPTY_STRING ) ) ? SQL_QUERY_SELECT_BY_FILTER_AND : EMPTY_STRING ) +
-            SQL_QUERY_SELECT_BY_FILTER_ID );
+            strWhere += ( ( ( !strWhere.equals( EMPTY_STRING ) ) ? SQL_QUERY_SELECT_BY_FILTER_AND : EMPTY_STRING ) + SQL_QUERY_SELECT_BY_FILTER_ID );
         }
 
-        if ( filter.getIdQuicklinks(  ) != EntryFilter.UNUSED_ATTRIBUTE_VALUE )
+        if ( filter.getIdQuicklinks( ) != EntryFilter.UNUSED_ATTRIBUTE_VALUE )
         {
-            strWhere += ( ( ( !strWhere.equals( EMPTY_STRING ) ) ? SQL_QUERY_SELECT_BY_FILTER_AND : EMPTY_STRING ) +
-            SQL_QUERY_SELECT_BY_FILTER_ID_QUICKLINKS );
+            strWhere += ( ( ( !strWhere.equals( EMPTY_STRING ) ) ? SQL_QUERY_SELECT_BY_FILTER_AND : EMPTY_STRING ) + SQL_QUERY_SELECT_BY_FILTER_ID_QUICKLINKS );
         }
 
-        if ( filter.getIdType(  ) != EntryFilter.UNUSED_ATTRIBUTE_VALUE )
+        if ( filter.getIdType( ) != EntryFilter.UNUSED_ATTRIBUTE_VALUE )
         {
-            strWhere += ( ( ( !strWhere.equals( EMPTY_STRING ) ) ? SQL_QUERY_SELECT_BY_FILTER_AND : EMPTY_STRING ) +
-            SQL_QUERY_SELECT_BY_FILTER_TYPE );
+            strWhere += ( ( ( !strWhere.equals( EMPTY_STRING ) ) ? SQL_QUERY_SELECT_BY_FILTER_AND : EMPTY_STRING ) + SQL_QUERY_SELECT_BY_FILTER_TYPE );
         }
 
-        if ( filter.getIdOrder(  ) != EntryFilter.UNUSED_ATTRIBUTE_VALUE )
+        if ( filter.getIdOrder( ) != EntryFilter.UNUSED_ATTRIBUTE_VALUE )
         {
-            strWhere += ( ( ( !strWhere.equals( EMPTY_STRING ) ) ? SQL_QUERY_SELECT_BY_FILTER_AND : EMPTY_STRING ) +
-            SQL_QUERY_SELECT_BY_FILTER_ORDER );
+            strWhere += ( ( ( !strWhere.equals( EMPTY_STRING ) ) ? SQL_QUERY_SELECT_BY_FILTER_AND : EMPTY_STRING ) + SQL_QUERY_SELECT_BY_FILTER_ORDER );
         }
 
-        if ( filter.getIdParent(  ) != EntryFilter.UNUSED_ATTRIBUTE_VALUE )
+        if ( filter.getIdParent( ) != EntryFilter.UNUSED_ATTRIBUTE_VALUE )
         {
-            strWhere += ( ( ( !strWhere.equals( EMPTY_STRING ) ) ? SQL_QUERY_SELECT_BY_FILTER_AND : EMPTY_STRING ) +
-            SQL_QUERY_SELECT_BY_FILTER_PARENT );
+            strWhere += ( ( ( !strWhere.equals( EMPTY_STRING ) ) ? SQL_QUERY_SELECT_BY_FILTER_AND : EMPTY_STRING ) + SQL_QUERY_SELECT_BY_FILTER_PARENT );
         }
 
         if ( !strWhere.equals( EMPTY_STRING ) )
@@ -270,38 +278,38 @@ public class EntryDAO implements IEntryDAO
         DAOUtil daoUtil = new DAOUtil( strSQL, plugin );
         int nIndex = 1;
 
-        if ( filter.getId(  ) != EntryFilter.UNUSED_ATTRIBUTE_VALUE )
+        if ( filter.getId( ) != EntryFilter.UNUSED_ATTRIBUTE_VALUE )
         {
-            daoUtil.setInt( nIndex, filter.getId(  ) );
-            AppLogService.debug( "Param" + nIndex + " (getId) = " + filter.getId(  ) );
+            daoUtil.setInt( nIndex, filter.getId( ) );
+            AppLogService.debug( "Param" + nIndex + " (getId) = " + filter.getId( ) );
             nIndex++;
         }
 
-        if ( filter.getIdQuicklinks(  ) != EntryFilter.UNUSED_ATTRIBUTE_VALUE )
+        if ( filter.getIdQuicklinks( ) != EntryFilter.UNUSED_ATTRIBUTE_VALUE )
         {
-            daoUtil.setInt( nIndex, filter.getIdQuicklinks(  ) );
-            AppLogService.debug( "Param" + nIndex + " (getIdQuicklinks) = " + filter.getIdQuicklinks(  ) );
+            daoUtil.setInt( nIndex, filter.getIdQuicklinks( ) );
+            AppLogService.debug( "Param" + nIndex + " (getIdQuicklinks) = " + filter.getIdQuicklinks( ) );
             nIndex++;
         }
 
-        if ( filter.getIdType(  ) != EntryFilter.UNUSED_ATTRIBUTE_VALUE )
+        if ( filter.getIdType( ) != EntryFilter.UNUSED_ATTRIBUTE_VALUE )
         {
-            daoUtil.setInt( nIndex, filter.getIdType(  ) );
-            AppLogService.debug( "Param" + nIndex + " (getIdType) = " + filter.getIdType(  ) );
+            daoUtil.setInt( nIndex, filter.getIdType( ) );
+            AppLogService.debug( "Param" + nIndex + " (getIdType) = " + filter.getIdType( ) );
             nIndex++;
         }
 
-        if ( filter.getIdOrder(  ) != EntryFilter.UNUSED_ATTRIBUTE_VALUE )
+        if ( filter.getIdOrder( ) != EntryFilter.UNUSED_ATTRIBUTE_VALUE )
         {
-            daoUtil.setInt( nIndex, filter.getIdOrder(  ) );
-            AppLogService.debug( "Param" + nIndex + " (getIdOrder) = " + filter.getIdOrder(  ) );
+            daoUtil.setInt( nIndex, filter.getIdOrder( ) );
+            AppLogService.debug( "Param" + nIndex + " (getIdOrder) = " + filter.getIdOrder( ) );
             nIndex++;
         }
 
-        if ( filter.getIdParent(  ) != EntryFilter.UNUSED_ATTRIBUTE_VALUE )
+        if ( filter.getIdParent( ) != EntryFilter.UNUSED_ATTRIBUTE_VALUE )
         {
-            daoUtil.setInt( nIndex, filter.getIdParent(  ) );
-            AppLogService.debug( "Param" + nIndex + " (getIdParent) = " + filter.getIdParent(  ) );
+            daoUtil.setInt( nIndex, filter.getIdParent( ) );
+            AppLogService.debug( "Param" + nIndex + " (getIdParent) = " + filter.getIdParent( ) );
             nIndex++;
         }
 

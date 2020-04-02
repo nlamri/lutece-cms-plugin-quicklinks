@@ -1,15 +1,15 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2020, City of Paris
  * All rights reserved.
  *
- * Redistribution and use in source and binary quicklinkss, with or without
+ * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
  *
  *  1. Redistributions of source code must retain the above copyright notice
  *     and the following disclaimer.
  *
- *  2. Redistributions in binary quicklinks must reproduce the above copyright notice
+ *  2. Redistributions in binary form must reproduce the above copyright notice
  *     and the following disclaimer in the documentation and/or other materials
  *     provided with the distribution.
  *
@@ -45,7 +45,6 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
-
 /**
  * This class represents business objects Quicklinks Portlet
  */
@@ -66,38 +65,39 @@ public class QuicklinksPortlet extends Portlet
     /**
      * Sets the identifier of the portlet type to the value specified in the ArticlesListPortletHome class
      */
-    public QuicklinksPortlet(  )
+    public QuicklinksPortlet( )
     {
     }
 
     /**
      * Returns the Xml code of the quicklinks portlet without XML heading
      *
-     * @param request The HTTP Servlet request
+     * @param request
+     *            The HTTP Servlet request
      * @return the Xml code of the quicklinks portlet content
      */
     public String getXml( HttpServletRequest request )
     {
-        Plugin plugin = PluginService.getPlugin( this.getPluginName(  ) );
+        Plugin plugin = PluginService.getPlugin( this.getPluginName( ) );
         Locale locale;
 
         if ( request != null )
         {
-            locale = request.getLocale(  );
+            locale = request.getLocale( );
         }
         else
         {
-            locale = I18nService.getDefaultLocale(  );
+            locale = I18nService.getDefaultLocale( );
         }
 
-        StringBuffer strXml = new StringBuffer(  );
+        StringBuffer strXml = new StringBuffer( );
         XmlUtil.beginElement( strXml, TAG_QUICKLINKS_PORTLET );
 
-        Quicklinks quicklinks = QuicklinksHome.findByPrimaryKey( getQuicklinksId(  ), plugin );
+        Quicklinks quicklinks = QuicklinksHome.findByPrimaryKey( getQuicklinksId( ), plugin );
 
-        if ( quicklinks.isEnabled(  ) )
+        if ( quicklinks.isEnabled( ) )
         {
-            XmlUtil.addElement( strXml, TAG_QUICKLINKS_PORTLET_CONTENT, quicklinks.getXml( plugin, locale ).toString(  ) );
+            XmlUtil.addElement( strXml, TAG_QUICKLINKS_PORTLET_CONTENT, quicklinks.getXml( plugin, locale ).toString( ) );
         }
 
         XmlUtil.endElement( strXml, TAG_QUICKLINKS_PORTLET );
@@ -110,28 +110,29 @@ public class QuicklinksPortlet extends Portlet
     /**
      * Returns the Xml code of the quicklinks portlet with XML heading
      *
-     * @param request The HTTP Servlet Request
+     * @param request
+     *            The HTTP Servlet Request
      * @return the Xml code of the Articles List portlet
      */
     public String getXmlDocument( HttpServletRequest request )
     {
-        return XmlUtil.getXmlHeader(  ) + getXml( request );
+        return XmlUtil.getXmlHeader( ) + getXml( request );
     }
 
     /**
      * Updates the current instance of the quicklinks portlet object
      */
-    public void update(  )
+    public void update( )
     {
-        QuicklinksPortletHome.getInstance(  ).update( this );
+        QuicklinksPortletHome.getInstance( ).update( this );
     }
 
     /**
-     * Removes the current instance of the  the quicklinks portlet  object
+     * Removes the current instance of the the quicklinks portlet object
      */
-    public void remove(  )
+    public void remove( )
     {
-        QuicklinksPortletHome.getInstance(  ).remove( this );
+        QuicklinksPortletHome.getInstance( ).remove( this );
     }
 
     /**
@@ -139,7 +140,7 @@ public class QuicklinksPortlet extends Portlet
      *
      * @return The nPortletId
      */
-    public int getPortletId(  )
+    public int getPortletId( )
     {
         return _nPortletId;
     }
@@ -147,7 +148,8 @@ public class QuicklinksPortlet extends Portlet
     /**
      * Sets the IdPortlet
      *
-     * @param nPortletId The nPortletId
+     * @param nPortletId
+     *            The nPortletId
      */
     public void setPortletId( int nPortletId )
     {
@@ -159,7 +161,7 @@ public class QuicklinksPortlet extends Portlet
      *
      * @return The QuicklinksId
      */
-    public int getQuicklinksId(  )
+    public int getQuicklinksId( )
     {
         return _nQuicklinksId;
     }
@@ -167,7 +169,8 @@ public class QuicklinksPortlet extends Portlet
     /**
      * Sets the QuicklinksId
      *
-     * @param nQuicklinksId The nQuicklinksId
+     * @param nQuicklinksId
+     *            The nQuicklinksId
      */
     public void setQuicklinksId( int nQuicklinksId )
     {
@@ -179,7 +182,7 @@ public class QuicklinksPortlet extends Portlet
      *
      * @return The Status
      */
-    public int getStatus(  )
+    public int getStatus( )
     {
         return _nStatus;
     }
@@ -187,7 +190,8 @@ public class QuicklinksPortlet extends Portlet
     /**
      * Sets the Status
      *
-     * @param nStatus The Status
+     * @param nStatus
+     *            The Status
      */
     public void setStatus( int nStatus )
     {
