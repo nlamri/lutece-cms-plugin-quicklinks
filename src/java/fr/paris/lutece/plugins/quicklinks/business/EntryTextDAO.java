@@ -95,7 +95,7 @@ public class EntryTextDAO implements IEntrySpecificDAO
     /**
      * Deletes the {@link Entry} whose identifier is specified in parameter
      *
-     * @param nEntryId The identifier of the {@link Entry}
+     * @param entryId The identifier of the {@link Entry}
      * @param plugin   The {@link Plugin}
      */
     public void delete( int entryId, Plugin plugin )

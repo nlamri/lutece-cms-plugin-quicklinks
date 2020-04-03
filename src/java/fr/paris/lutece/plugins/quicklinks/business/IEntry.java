@@ -113,7 +113,7 @@ public interface IEntry
     public abstract EntryType getEntryType( );
 
     /**
-     * @param nType
+     * @param entryType
      *            the entryType to set
      */
     public abstract void setEntryType( EntryType entryType );
@@ -163,8 +163,8 @@ public interface IEntry
 
     /**
      *
-     * @return
-     * @throws CloneNotSupportedException
+     * @return new entry
+     * @throws CloneNotSupportedException exception
      */
     public IEntry clone( ) throws CloneNotSupportedException;
 

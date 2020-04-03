@@ -63,6 +63,7 @@ public class EntrySelectOptionDAO implements IEntrySelectOptionDAO
     /**
      * Calculate a new primary key to add a new {@link Entry}
      * 
+     * @param nIdEntry identry
      * @param plugin The {@link Plugin} using this data access service
      * @return The new key.
      */
@@ -136,7 +137,7 @@ public class EntrySelectOptionDAO implements IEntrySelectOptionDAO
     /**
      * Insert the {@link EntrySelectOption}
      *
-     * @param option The {@link EntrySelectOption} to insert
+     * @param entrySelectOption The {@link EntrySelectOption} to insert
      * @param plugin The {@link Plugin}
      * @return The {@link EntrySelectOption}
      */
@@ -161,7 +162,7 @@ public class EntrySelectOptionDAO implements IEntrySelectOptionDAO
     /**
      * Update the {@link EntrySelectOption}
      *
-     * @param option The {@link EntrySelectOption} object
+     * @param entrySelectOption The {@link EntrySelectOption} object
      * @param plugin The {@link Plugin}
      */
     public void store( EntrySelectOption entrySelectOption, Plugin plugin )

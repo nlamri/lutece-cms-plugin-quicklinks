@@ -83,7 +83,7 @@ public class EntrySelectOption
     /**
      * Copy an {@link EntrySelectOption}
      *
-     * @param nIdQuicklinks
+     * @param nIdEntry
      *            The {@link Entry} identifier
      * @param plugin
      *            The {@link Plugin}
@@ -97,7 +97,7 @@ public class EntrySelectOption
     /**
      * Copy an {@link EntrySelectOption}
      *
-     * @param nIdQuicklinks
+     * @param nIdEntry
      *            The {@link Entry} identifier
      * @param plugin
      *            The {@link Plugin}
@@ -143,7 +143,7 @@ public class EntrySelectOption
     /**
      * Set the title
      * 
-     * @param strTitle
+     * @param strTitle the title to set
      */
     public void setTitle( String strTitle )
     {

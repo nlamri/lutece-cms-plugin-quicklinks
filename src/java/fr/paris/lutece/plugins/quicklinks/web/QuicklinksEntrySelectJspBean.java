@@ -153,6 +153,7 @@ public class QuicklinksEntrySelectJspBean extends PluginAdminPageJspBean
      * @param request
      *            The Http servlet request
      * @return The redirect url
+     * @throws AccessDeniedException if unauthorized
      */
     public String doGoDownSelectOption( HttpServletRequest request ) throws AccessDeniedException
     {
@@ -173,6 +174,7 @@ public class QuicklinksEntrySelectJspBean extends PluginAdminPageJspBean
      * @param request
      *            The Http servlet request
      * @return The redirect url
+     * @throws AccessDeniedException if unauthorized
      */
     public String doGoUpSelectOption( HttpServletRequest request ) throws AccessDeniedException
     {
@@ -193,6 +195,7 @@ public class QuicklinksEntrySelectJspBean extends PluginAdminPageJspBean
      * @param request
      *            The HTTP servlet request
      * @return The HTML template
+     * @throws AccessDeniedException if unauthorized
      */
     public String getCreateSelectOption( HttpServletRequest request ) throws AccessDeniedException
     {
@@ -235,6 +238,7 @@ public class QuicklinksEntrySelectJspBean extends PluginAdminPageJspBean
      * @param request
      *            The HTTP servlet request
      * @return The URL to redirect to
+     * @throws AccessDeniedException if unauthorized
      */
     public String doCreateSelectOption( HttpServletRequest request ) throws AccessDeniedException
     {
@@ -291,6 +295,7 @@ public class QuicklinksEntrySelectJspBean extends PluginAdminPageJspBean
      * @param request
      *            The HTTP servlet request
      * @return The HTML template
+     * @throws AccessDeniedException if unauthorized
      */
     public String getModifySelectOption( HttpServletRequest request ) throws AccessDeniedException
     {
@@ -316,6 +321,7 @@ public class QuicklinksEntrySelectJspBean extends PluginAdminPageJspBean
      * @param request
      *            The HTTP servlet request
      * @return The URL to redirect to
+     * @throws AccessDeniedException if unauthorized
      */
     public String doModifySelectOption( HttpServletRequest request ) throws AccessDeniedException
     {
@@ -350,6 +356,7 @@ public class QuicklinksEntrySelectJspBean extends PluginAdminPageJspBean
      * @param request
      *            The HTTP servlet request
      * @return The URL to redirect to
+     * @throws AccessDeniedException if unauthorized
      */
     public String doConfirmRemoveSelectOption( HttpServletRequest request ) throws AccessDeniedException
     {
@@ -369,6 +376,7 @@ public class QuicklinksEntrySelectJspBean extends PluginAdminPageJspBean
      * @param request
      *            The HTTP servlet request
      * @return The URL to redirect to
+     * @throws AccessDeniedException if unauthorized
      */
     public String doRemoveSelectOption( HttpServletRequest request ) throws AccessDeniedException
     {
@@ -389,6 +397,7 @@ public class QuicklinksEntrySelectJspBean extends PluginAdminPageJspBean
      * @param request
      *            The {@link HttpServletRequest}
      * @return The Url to redirect to
+     * @throws AccessDeniedException if unauthorized
      */
     public String doCopyEntrySelectOption( HttpServletRequest request ) throws AccessDeniedException
     {

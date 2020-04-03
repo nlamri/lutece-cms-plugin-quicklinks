@@ -251,7 +251,7 @@ public final class EntrySelectOptionHome
     /**
      * Returns an instance of a EntrySelectOption whose identifier is specified in parameter
      *
-     * @param nKey
+     * @param nId
      *            The EntrySelectOption primary key
      * @param nIdEntry
      *            The Entry identifier

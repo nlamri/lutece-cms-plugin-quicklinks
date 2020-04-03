@@ -56,7 +56,7 @@ public class QuicklinksFilter
      * Define a filter on role key array. Filter {@link Quicklinks} list with this filter will return {@link Quicklinks} who matches with one of the role key
      * list
      * 
-     * @param strRoleKeys
+     * @param arrayRoleKey
      *            the roleKey array to set
      */
     public void setRoleKeys( String [ ] arrayRoleKey )

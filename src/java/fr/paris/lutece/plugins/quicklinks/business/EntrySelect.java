@@ -168,7 +168,7 @@ public class EntrySelect extends Entry
     /**
      * Set the target
      * 
-     * @param strTarget
+     * @param strTarget the target to set
      */
     public void setTarget( String strTarget )
     {

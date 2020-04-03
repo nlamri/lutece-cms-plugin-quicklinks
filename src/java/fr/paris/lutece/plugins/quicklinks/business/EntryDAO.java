@@ -95,7 +95,7 @@ public class EntryDAO implements IEntryDAO
     /**
      * Load the data of the entry type from the table
      *
-     * @param entry  The empty entry object
+     * @param nId the id of the entry
      * @param plugin the plugin
      * @return the instance of the EntryType
      */

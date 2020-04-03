@@ -65,8 +65,8 @@ public interface IEntrySpecificDAO
     /**
      * Load the data of the entry type from the table
      *
-     * @param nId
-     *            The {@link Entry} identifier
+     * @param entry
+     *            The {@link Entry}
      * @param plugin
      *            the plugin
      * @return the instance of the EntryType

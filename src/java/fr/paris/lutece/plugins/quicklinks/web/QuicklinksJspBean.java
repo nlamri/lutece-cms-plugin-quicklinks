@@ -244,6 +244,7 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
      * @param request
      *            The HTTP servlet request
      * @return The HTML template
+     * @throws AccessDeniedException if unauthorized
      */
     public String getCreateQuicklinks( HttpServletRequest request ) throws AccessDeniedException
     {
@@ -289,6 +290,7 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
      * @param request
      *            The HTTP servlet request
      * @return The URL to redirect to
+     * @throws AccessDeniedException if unauthorized
      */
     public String doCreateQuicklinks( HttpServletRequest request ) throws AccessDeniedException
     {
@@ -339,6 +341,7 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
      * @param request
      *            The HTTP servlet request
      * @return The HTML template
+     * @throws AccessDeniedException if unauthorized
      */
     public String getModifyQuicklinks( HttpServletRequest request ) throws AccessDeniedException
     {
@@ -403,6 +406,7 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
      * @param request
      *            The HTTP servlet request
      * @return The URL to redirect to
+     * @throws AccessDeniedException if unauthorized
      */
     public String doModifyQuicklinks( HttpServletRequest request ) throws AccessDeniedException
     {
@@ -481,6 +485,7 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
      * @param request
      *            The HTTP servlet request
      * @return The URL to redirect to
+     * @throws AccessDeniedException if unauthorized
      */
     public String doRemoveQuicklinks( HttpServletRequest request ) throws AccessDeniedException
     {
@@ -509,6 +514,7 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
      * @param request
      *            The HTTP servlet request
      * @return The URL to redirect to
+     * @throws AccessDeniedException if unauthorized
      */
     public String doConfirmRemoveQuicklinks( HttpServletRequest request ) throws AccessDeniedException
     {
@@ -539,6 +545,7 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
      * @param strPermissionType
      *            The type of permission (see {@link QuicklinksResourceIdService} class)
      * @return The quicklinks or null if user have no access
+     * @throws AccessDeniedException if unauthorized
      */
     private Quicklinks getAuthorizedQuicklinks( HttpServletRequest request, String strPermissionType ) throws AccessDeniedException
     {
@@ -567,6 +574,7 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
      * @param request
      *            The Http servlet request
      * @return The redirect url
+     * @throws AccessDeniedException if unauthorized
      */
     public String doGoDownEntry( HttpServletRequest request ) throws AccessDeniedException
     {
@@ -589,6 +597,7 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
      * @param request
      *            The Http servlet request
      * @return The redirect url
+     * @throws AccessDeniedException if unauthorized
      */
     public String doGoUpEntry( HttpServletRequest request ) throws AccessDeniedException
     {
@@ -611,6 +620,7 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
      * @param request
      *            The Http servlet request
      * @return The redirect url
+     * @throws AccessDeniedException if unauthorized
      */
     public String doGoInEntry( HttpServletRequest request ) throws AccessDeniedException
     {
@@ -640,6 +650,7 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
      * @param request
      *            The Http servlet request
      * @return The redirect url
+     * @throws AccessDeniedException if unauthorized
      */
     public String doGoOutEntry( HttpServletRequest request ) throws AccessDeniedException
     {
@@ -669,6 +680,7 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
      * @param request
      *            The HTTP servlet request
      * @return The HTML template
+     * @throws AccessDeniedException if unauthorized
      */
     public String getCreateEntry( HttpServletRequest request ) throws AccessDeniedException
     {
@@ -717,6 +729,7 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
      * @param request
      *            The HTTP servlet request
      * @return The URL to redirect to
+     * @throws AccessDeniedException if unauthorized
      */
     public String doCreateEntry( HttpServletRequest request ) throws AccessDeniedException
     {
@@ -791,6 +804,7 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
      * @param request
      *            The HTTP servlet request
      * @return The HTML template
+     * @throws AccessDeniedException if unauthorized
      */
     public String getModifyEntry( HttpServletRequest request ) throws AccessDeniedException
     {
@@ -837,6 +851,7 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
      * @param request
      *            The HTTP servlet request
      * @return The URL to redirect to
+     * @throws AccessDeniedException if unauthorized
      */
     public String doModifyEntry( HttpServletRequest request ) throws AccessDeniedException
     {
@@ -887,6 +902,7 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
      * @param request
      *            The HTTP servlet request
      * @return The URL to redirect to
+     * @throws AccessDeniedException if unauthorized
      */
     public String doConfirmRemoveEntry( HttpServletRequest request ) throws AccessDeniedException
     {
@@ -925,6 +941,7 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
      * @param request
      *            The HTTP servlet request
      * @return The URL to redirect to
+     * @throws AccessDeniedException if unauthorized
      */
     public String doRemoveEntry( HttpServletRequest request ) throws AccessDeniedException
     {
@@ -965,6 +982,7 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
      * @param request
      *            The HTTP servlet request
      * @return The URL to redirect to
+     * @throws AccessDeniedException if unauthorized
      */
     public String doConfirmDisableQuicklinks( HttpServletRequest request ) throws AccessDeniedException
     {
@@ -1003,6 +1021,7 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
      * @param request
      *            The HTTP servlet request
      * @return The URL to redirect to
+     * @throws AccessDeniedException if unauthorized
      */
     public String doDisableQuicklinks( HttpServletRequest request ) throws AccessDeniedException
     {
@@ -1051,6 +1070,7 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
      * @param request
      *            The HTTP servlet request
      * @return The URL to redirect to
+     * @throws AccessDeniedException if unauthorized
      */
     public String doEnableQuicklinks( HttpServletRequest request ) throws AccessDeniedException
     {
@@ -1090,6 +1110,7 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
      * @param request
      *            The {@link HttpServletRequest}
      * @return The Url to redirect to
+     * @throws AccessDeniedException if unauthorized
      */
     public String doCopyQuicklinks( HttpServletRequest request ) throws AccessDeniedException
     {
@@ -1107,6 +1128,7 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
      * @param request
      *            The {@link HttpServletRequest}
      * @return The Url to redirect to
+     * @throws AccessDeniedException if unauthorized
      */
     public String doCopyEntry( HttpServletRequest request ) throws AccessDeniedException
     {

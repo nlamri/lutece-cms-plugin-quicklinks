@@ -78,10 +78,10 @@ public class EntryUrlService implements ImageResourceProvider
      *            The resource identifier
      * @return The Resource Image
      */
-    public ImageResource getImageResource( int arg0 )
+    public ImageResource getImageResource( int nIdResource )
     {
         Plugin plugin = PluginService.getPlugin( QuicklinksPlugin.PLUGIN_NAME );
-        IEntry entry = EntryHome.findByPrimaryKey( arg0, plugin );
+        IEntry entry = EntryHome.findByPrimaryKey( nIdResource, plugin );
 
         if ( entry instanceof EntryUrl )
         {
