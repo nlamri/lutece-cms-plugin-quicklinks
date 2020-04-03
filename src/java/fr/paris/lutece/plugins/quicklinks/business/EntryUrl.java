@@ -33,6 +33,15 @@
  */
 package fr.paris.lutece.plugins.quicklinks.business;
 
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.lang.StringUtils;
+
 import fr.paris.lutece.plugins.quicklinks.service.EntryUrlService;
 import fr.paris.lutece.portal.service.image.ImageResource;
 import fr.paris.lutece.portal.service.plugin.Plugin;
@@ -41,13 +50,6 @@ import fr.paris.lutece.portal.service.util.AppPropertiesService;
 import fr.paris.lutece.portal.web.constants.Messages;
 import fr.paris.lutece.portal.web.upload.MultipartHttpServletRequest;
 import fr.paris.lutece.util.html.HtmlTemplate;
-
-import java.util.HashMap;
-import java.util.Locale;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.fileupload.FileItem;
 
 /**
  * The class Entry Text
@@ -86,9 +88,6 @@ public class EntryUrl extends Entry
     private static final String PARAMETER_IMAGE = "image";
     private static final String PARAMETER_DISPLAY_PROPERTIES = "display_properties";
     private static final String PARAMETER_LINK_PROPERTIES = "link_properties";
-
-    // I18n messages
-    private static final String MESSAGE_ERROR_IN_URL = "quicklinks.entryUrl.message.errorInUrl";
 
     // Attributes
     private String _strTitle;
@@ -225,7 +224,7 @@ public class EntryUrl extends Entry
     @Override
     public String getHtml( Plugin plugin, Locale locale )
     {
-        HashMap<String, Object> model = new HashMap<String, Object>( );
+        HashMap<String, Object> model = new HashMap<>( );
 
         model.put( MARK_ENTRY_URL, this );
 
@@ -279,10 +278,10 @@ public class EntryUrl extends Entry
         String strLinkProperties = request.getParameter( PARAMETER_LINK_PROPERTIES );
         strLinkProperties = ( strLinkProperties == null ) ? EMPTY_STRING : strLinkProperties;
 
-        boolean bUpdateImage = ( ( strUpdateImage != null ) && !strUpdateImage.equals( EMPTY_STRING ) ) ? true : false;
+        boolean bUpdateImage = StringUtils.isNotEmpty( strUpdateImage );
 
         // Check Target
-        if ( ( strTarget == null ) || ( strTarget.equals( EMPTY_STRING ) && ( ( strTargetFramename == null ) || strTargetFramename.equals( "" ) ) ) )
+        if ( StringUtils.isEmpty( strTarget ) && StringUtils.isEmpty( strTargetFramename ) )
         {
             return Messages.MANDATORY_FIELDS;
         }
@@ -297,24 +296,19 @@ public class EntryUrl extends Entry
         }
 
         // Check description
-        if ( ( strDescription != null ) && !strDescription.equals( EMPTY_STRING ) )
+        if ( StringUtils.isNotEmpty( strDescription ) )
         {
             this.setDescription( strDescription );
         }
 
-        if ( ( strUrl == null ) || strUrl.equals( EMPTY_STRING ) || ( strDisplayProperties == null ) || !strDisplayProperties.matches( REGEX_ID )
-                || ( strLinkProperties == null ) || !strLinkProperties.matches( REGEX_ID ) )
+        if ( StringUtils.isEmpty( strUrl ) || ( strDisplayProperties == null ) || !strDisplayProperties.matches( REGEX_ID )
+                || !strLinkProperties.matches( REGEX_ID ) )
         {
             return Messages.MANDATORY_FIELDS;
         }
 
         int nDisplayProperties = Integer.parseInt( strDisplayProperties );
         int nLinkProperties = Integer.parseInt( strLinkProperties );
-
-        if ( !checkUrl( request, strUrl ) )
-        {
-            return MESSAGE_ERROR_IN_URL;
-        }
 
         setUrl( strUrl );
 
@@ -344,23 +338,8 @@ public class EntryUrl extends Entry
         return null;
     }
 
-    /**
-     * Check the url
-     * 
-     * @param requet
-     *            The {@link HttpServletRequest}
-     * @param strUrl
-     *            The url in String format
-     * @return true if url is valid, false else
-     */
-    private boolean checkUrl( HttpServletRequest requet, String strUrl )
-    {
-        // The url is not checked
-        return true;
-    }
-
     @Override
-    public void getSpecificParameters( HttpServletRequest request, HashMap<String, Object> model, Plugin plugin )
+    public void getSpecificParameters( HttpServletRequest request, Map<String, Object> model, Plugin plugin )
     {
         int nDisplayPropertiesDefaultValue = AppPropertiesService.getPropertyInt( PROPERTY_DISPLAY_PROPERTIES_DEFAULT_VALUE, DISPLAY_PROPERTIES_DEFAULT_VALUE );
         int nLinkPropertiesDefaultValue = AppPropertiesService.getPropertyInt( PROPERTY_LINK_PROPERTIES_DEFAULT_VALUE, LINK_PROPERTIES_DEFAULT_VALUE );

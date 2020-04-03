@@ -33,6 +33,11 @@
  */
 package fr.paris.lutece.plugins.quicklinks.web.portlet;
 
+import java.util.Collection;
+import java.util.HashMap;
+
+import javax.servlet.http.HttpServletRequest;
+
 import fr.paris.lutece.plugins.quicklinks.business.Quicklinks;
 import fr.paris.lutece.plugins.quicklinks.business.QuicklinksFilter;
 import fr.paris.lutece.plugins.quicklinks.business.QuicklinksHome;
@@ -53,17 +58,13 @@ import fr.paris.lutece.portal.web.portlet.PortletJspBean;
 import fr.paris.lutece.util.ReferenceList;
 import fr.paris.lutece.util.html.HtmlTemplate;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * This class provides the user interface to manage quicklinks Portlet
  */
 public class QuicklinksPortletJspBean extends PortletJspBean
 {
+    private static final long serialVersionUID = -1659013399553752236L;
+
     ////////////////////////////////////////////////////////////////////////////
     // Constants
     public static final String RIGHT_MANAGE_QUICKLINKS = "QUICKLINKS_MANAGEMENT";
@@ -87,7 +88,7 @@ public class QuicklinksPortletJspBean extends PortletJspBean
      */
     public String getCreate( HttpServletRequest request )
     {
-        HashMap<String, Object> model = new HashMap<String, Object>( );
+        HashMap<String, Object> model = new HashMap<>( );
         String strIdPage = request.getParameter( PARAMETER_PAGE_ID );
         String strIdPortletType = request.getParameter( PARAMETER_PORTLET_TYPE_ID );
         PortletType portletType = PortletTypeHome.findByPrimaryKey( strIdPortletType );
@@ -99,7 +100,7 @@ public class QuicklinksPortletJspBean extends PortletJspBean
         filter.setEnabled( true );
 
         Collection<Quicklinks> listQuicklinks = QuicklinksHome.findbyFilter( filter, plugin );
-        listQuicklinks = (List) AdminWorkgroupService.getAuthorizedCollection( listQuicklinks, getUser( ) );
+        listQuicklinks = AdminWorkgroupService.getAuthorizedCollection( listQuicklinks, getUser( ) );
 
         ReferenceList referenceListQuicklinks = new ReferenceList( );
 
@@ -125,7 +126,7 @@ public class QuicklinksPortletJspBean extends PortletJspBean
     public String getModify( HttpServletRequest request )
     {
         Quicklinks quicklinks;
-        HashMap<String, Object> model = new HashMap<String, Object>( );
+        HashMap<String, Object> model = new HashMap<>( );
         String strPortletId = request.getParameter( PARAMETER_PORTLET_ID );
         int nPortletId = -1;
 
@@ -148,7 +149,7 @@ public class QuicklinksPortletJspBean extends PortletJspBean
         filter.setEnabled( true );
 
         Collection<Quicklinks> listQuicklinks = QuicklinksHome.findbyFilter( filter, plugin );
-        listQuicklinks = (List) AdminWorkgroupService.getAuthorizedCollection( listQuicklinks, getUser( ) );
+        listQuicklinks = AdminWorkgroupService.getAuthorizedCollection( listQuicklinks, getUser( ) );
 
         ReferenceList referenceListQuicklinks = new ReferenceList( );
 
