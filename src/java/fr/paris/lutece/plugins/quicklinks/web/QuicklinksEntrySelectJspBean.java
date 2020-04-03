@@ -64,6 +64,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class QuicklinksEntrySelectJspBean extends PluginAdminPageJspBean
 {
+    private static final long serialVersionUID = -3970588972565885665L;
+
     // Rights
     public static final String RIGHT_MANAGE_QUICKLINKS = "QUICKLINKS_MANAGEMENT";
 
@@ -107,6 +109,7 @@ public class QuicklinksEntrySelectJspBean extends PluginAdminPageJspBean
     private static final String DEFAULT_VALUE_OPTION_ORDER = "first";
     private static final String REGEX_ID = "^[\\d]+$";
     private static final String EMPTY_STRING = "";
+    private static final String UNAUTHORIZED = "Unauthorized";
 
     /*
      * (non-Javadoc)
@@ -135,7 +138,7 @@ public class QuicklinksEntrySelectJspBean extends PluginAdminPageJspBean
 
         if ( ( strIdEntrySelectOption == null ) || !strIdEntrySelectOption.matches( REGEX_ID ) )
         {
-            throw new AccessDeniedException( );
+            throw new AccessDeniedException( UNAUTHORIZED );
         }
 
         int nIdEntrySelectOption = Integer.parseInt( strIdEntrySelectOption );
@@ -147,7 +150,7 @@ public class QuicklinksEntrySelectJspBean extends PluginAdminPageJspBean
         if ( ( entry == null ) || !AdminWorkgroupService.isAuthorized( quicklinks, getUser( ) )
                 || !RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE, String.valueOf( entry.getId( ) ), strPermissionType, getUser( ) ) )
         {
-            throw new AccessDeniedException( );
+            throw new AccessDeniedException( UNAUTHORIZED );
         }
 
         return entrySelectOption;
@@ -220,7 +223,7 @@ public class QuicklinksEntrySelectJspBean extends PluginAdminPageJspBean
         if ( !RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE, String.valueOf( entry.getIdQuicklinks( ) ), QuicklinksResourceIdService.PERMISSION_MODIFY,
                 getUser( ) ) )
         {
-            throw new AccessDeniedException( );
+            throw new AccessDeniedException( UNAUTHORIZED );
         }
 
         HashMap<String, Object> model = new HashMap<String, Object>( );
@@ -265,7 +268,7 @@ public class QuicklinksEntrySelectJspBean extends PluginAdminPageJspBean
         if ( !RBACService.isAuthorized( Quicklinks.RESOURCE_TYPE, String.valueOf( entry.getIdQuicklinks( ) ), QuicklinksResourceIdService.PERMISSION_MODIFY,
                 getUser( ) ) )
         {
-            throw new AccessDeniedException( );
+            throw new AccessDeniedException( UNAUTHORIZED );
         }
 
         EntrySelectOption option = new EntrySelectOption( );
@@ -364,7 +367,7 @@ public class QuicklinksEntrySelectJspBean extends PluginAdminPageJspBean
 
         if ( ( entrySelectOption == null ) )
         {
-            throw new AccessDeniedException( );
+            throw new AccessDeniedException( UNAUTHORIZED );
         }
 
         HashMap<String, Object> model = new HashMap<String, Object>( );
