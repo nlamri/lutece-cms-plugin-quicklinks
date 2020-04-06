@@ -41,7 +41,7 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import fr.paris.lutece.plugins.quicklinks.business.Entry;
 import fr.paris.lutece.plugins.quicklinks.business.EntryFilter;
@@ -75,7 +75,6 @@ import fr.paris.lutece.util.ReferenceList;
 import fr.paris.lutece.util.html.AbstractPaginator;
 import fr.paris.lutece.util.html.HtmlTemplate;
 import fr.paris.lutece.util.html.Paginator;
-import fr.paris.lutece.util.string.StringUtil;
 import fr.paris.lutece.util.url.UrlItem;
 
 /**
@@ -307,8 +306,7 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
         String strCssStyle = request.getParameter( PARAMETER_CSS_STYLE );
 
         // Check mandatory fields
-        
-        if ( StringUtil.isAnyEmpty( strTitle, strWorkgroupKey, strRoleKey, strState ) || ( strType == null ) || !strType.matches( REGEX_ID ) )
+        if ( StringUtils.isAnyEmpty( strTitle, strWorkgroupKey, strRoleKey, strState ) || ( strType == null ) || !strType.matches( REGEX_ID ) )
         {
             return AdminMessageService.getMessageUrl( request, Messages.MANDATORY_FIELDS, AdminMessage.TYPE_STOP );
         }
@@ -424,7 +422,7 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
         String strCssStyle = request.getParameter( PARAMETER_CSS_STYLE );
 
         // Check mandatory fields
-        if ( StringUtil.isAnyEmpty( strTitle, strWorkgroupKey, strRoleKey, strState ) || ( strType == null ) || !strType.matches( REGEX_ID ) )
+        if ( StringUtils.isAnyEmpty( strTitle, strWorkgroupKey, strRoleKey, strState ) || ( strType == null ) || !strType.matches( REGEX_ID ) )
         {
             return AdminMessageService.getMessageUrl( request, Messages.MANDATORY_FIELDS, AdminMessage.TYPE_STOP );
         }
@@ -1162,6 +1160,6 @@ public class QuicklinksJspBean extends PluginAdminPageJspBean
 
         return url.getUrl( );
     }
-
+    
     // -------------------------- Private methods --------------------------
 }
