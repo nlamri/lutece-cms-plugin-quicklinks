@@ -1,114 +1,107 @@
-<div class="row">
-	<div class="col-xs-12 col-sm-12 col-md-12">
-		<div class="box box-primary">
-			<div class="box-header">
-				<h3 class="box-title">#i18n{quicklinks.modify_entry_url.adminTitle}</h3>
-				</div>
-			<div class="box-body">
-				<form class="form-horizontal" method="post" enctype="multipart/form-data" name="modify_entry_url" action="jsp/admin/plugins/quicklinks/DoModifyEntry.jsp">
-					<input type="hidden" name="entry_id" id="entry_id" value="${entry.id}" />
-					<div class="form-group">
-						<label class="control-label col-xs-12 col-sm-2 col-md-2" for="title">#i18n{quicklinks.modify_entry_url.labelTitle} * </label>
-						<div class="col-xs-12 col-sm-4 col-md-4">
-							<input type="text" name="title" id="title" tabindex="1" size="50" maxlength="255" value="${entry.title}" class="form-control" required>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-xs-12 col-sm-2 col-md-2" for="target">#i18n{quicklinks.modify_entry_url.labelTarget} * </label>
-						<#assign targetChecked = false />
-						<div class="col-xs-12 col-sm-10 col-md-10">
-							<label class="radio-inline">
-								<input type="radio" name="target" id="target1" value="_blank" <#if entry.target = "_blank"><#assign targetChecked = true /> checked="checked"</#if> /> #i18n{quicklinks.modify_entry_url.target.blank}
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="target" id="target2" value="_self" <#if entry.target = "_self"><#assign targetChecked = true /> checked="checked"</#if> /> #i18n{quicklinks.modify_entry_url.target.self}
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="target" id="target3" value="_parent" <#if entry.target = "_parent"><#assign targetChecked = true /> checked="checked"</#if>/> #i18n{quicklinks.modify_entry_url.target.parent}
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="target" id="target4" value="_top" <#if entry.target = "_top"><#assign targetChecked = true /> checked="checked"</#if> /> #i18n{quicklinks.modify_entry_url.target.top}
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="target" id="target5" value="" <#if !targetChecked> checked="checked"</#if> /> #i18n{quicklinks.modify_entry_url.target.other}
-							</label>
-							<label class="radio-inline">
-								<input type="text" name="target_framename" id="target_framename" tabindex="2" placeholder="#i18n{quicklinks.modify_entry_url.labelTarget} *" title="#i18n{quicklinks.modify_entry_url.labelTarget} *" class="input-sm form-control" onchange="javascript:document.getElementById('target5').checked = true;"maxlength="255" value="<#if !targetChecked>${entry.target}</#if>" />
-							</label>
-							 
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-xs-12 col-sm-2 col-md-2" for="description">#i18n{quicklinks.modify_entry_url.labelDescription}</label>
-							<div class="col-xs-12 col-sm-4 col-md-4">
-								<input type="text" name="description" id="description" tabindex="2" size="50" maxlength="255" value="${entry.description!}" class="form-control">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-xs-12 col-sm-2 col-md-2" for="url">#i18n{quicklinks.modify_entry_url.labelUrl} *</label>
-							<div class="col-xs-12 col-sm-4 col-md-4">
-								<input type="text" name="url" id="url" tabindex="3" size="50" maxlength="255" value="${entry.url}" class="form-control" required>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-xs-12 col-sm-2 col-md-2" for="image">#i18n{quicklinks.modify_entry_url.labelImage}</label>
-						<div class="col-xs-12 col-sm-4 col-md-4">
-							<input type="file" name="image" id="image" tabindex="4">
-							<div class="checkbox">
-								<label class="checkbox">
-									<input type="checkbox" name="update_image" id="update_image" tabindex="5" value="true" />#i18n{quicklinks.modify_entry_url.labelUpdateImage}
-								</label>
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-xs-12 col-sm-2 col-md-2" for="display_properties">#i18n{quicklinks.modify_entry_url.labelDisplayProperties} *</label>
-						<div class="col-xs-12 col-sm-10 col-md-10">
-						<#list display_properties_list as item>
-							<label class="radio-inline">
-								<input type="radio" tabindex="6" <#if item.code="${entry.entryUrlDisplayProperties.value}">checked="checked"</#if> name="display_properties" value="${item.code}" />#i18n{${item.name}}
-							</label>
-						</#list>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-xs-12 col-sm-2 col-md-2" for="link_properties">#i18n{quicklinks.modify_entry_url.labelLinkProperties} * :</label>
-						<div class="col-xs-12 col-sm-10 col-md-10">
-						<#list link_properties_list as item>
-							<label class="radio-inline">
-								<input type="radio" tabindex="7" <#if item.code="${entry.entryUrlLinkProperties.value}">checked="checked"</#if> name="link_properties" value="${item.code}" />#i18n{${item.name}}
-							</label>
-						</#list>
-						</div> 	
-					</div> 	
-					<div class="form-group">	
-						<div class="col-xs-12 col-sm-offset-2 col-sm-10 col-md-offset-2 col-md-10">
-							<button class="btn btn-primary btn-flat" type="submit" >
-								<i class="fa fa-check"></i>&nbsp;#i18n{quicklinks.modify_entry_url.buttonLabelModify}
-							</button>
-							<a class="btn btn-default btn-flat" href="jsp/admin/plugins/quicklinks/ModifyQuicklinks.jsp?&quicklinks_id=${entry.idQuicklinks}">
-								<i class="fa fa-close"></i>&nbsp;#i18n{portal.admin.message.buttonCancel}
-							</a>
-						</div> 
-					</div> 
-				</form>
-			</div>
-		</div>
-	</div>
-</div>
-<script language="javascript">
-$(document).ready( function(){
-	if( $("#target_framename").val() =="" ){
-		$("#target_framename").attr("disabled","disabled");
+<@pageContainer>
+    <@pageColumn >
+        <@pageHeader title='#i18n{quicklinks.modify_entry_url.adminTitle}' />
+		<@tform enctype='multipart/form-data' name='modify_entry_url' action='jsp/admin/plugins/quicklinks/DoModifyEntry.jsp' boxed=true>
+		<@input type='hidden' name='entry_id' id='entry_id' value=entry.id />
+		<@row>
+			<@columns sm=3>
+				<@formGroup labelKey='#i18n{quicklinks.modify_entry_url.labelTitle}' labelFor='title' mandatory=true>
+					<@input name='title' id='title' maxlength=255 value=entry.title! />
+				</@formGroup>
+				<@formGroup labelKey='#i18n{quicklinks.modify_entry_url.labelUrl}' labelFor='url' mandatory=true>
+					<@inputGroup>
+						<@inputGroupItem>
+							<@icon style='link' />
+						</@inputGroupItem>
+						<@input type='url' name='url' id='url' maxlength=255 value=entry.url! />
+					</@inputGroup>
+				</@formGroup>
+				<@formGroup labelKey='#i18n{quicklinks.modify_entry_url.labelDescription}' labelFor='description'>
+					<@input name='description' id='description' maxlength=255 value=entry.description! />
+				</@formGroup>
+			</@columns>
+			<@columns sm=3>
+				<@formGroup labelKey='#i18n{quicklinks.modify_entry_url.labelImage}' labelFor='image'>
+					<@input type='file' name='image' id='image' />
+					<@input type='hidden' name='update_image' id='update_image' value='true' />
+				</@formGroup>
+				<@formGroup labelKey='#i18n{quicklinks.modify_entry_url.labelDisplayProperties}' labelFor='display_properties' mandatory=true>
+				<#list display_properties_list as item>
+					<#assign isTargetChecked='false' />
+					<#if item.code=entry.entryUrlDisplayProperties.value?string><#assign isTargetChecked='true' /></#if> 
+					<@radioButton name='display_properties' id='display_properties_${item.code}' labelKey='#i18n{${item.name}}' orientation='' value='${item.code}' checked=isTargetChecked?boolean />
+				</#list>
+				</@formGroup>
+				<@formGroup labelKey='#i18n{quicklinks.modify_entry_url.labelLinkProperties}' labelFor='link_properties' mandatory=true>
+				<#list link_properties_list as item>
+					<#assign isTargetChecked='false' />
+					<#if item.code=entry.entryUrlLinkProperties.value?string><#assign isTargetChecked='true' /></#if> 
+					<@radioButton name='link_properties' id='link_properties_${item.code}' labelKey='#i18n{${item.name}}' orientation='' value='${item.code}' checked=isTargetChecked?boolean />
+				</#list>
+				</@formGroup>
+			</@columns>
+			<@columns sm=2>
+				<@fieldSet legend='#i18n{quicklinks.modify_entry_url.labelTarget}'>
+					<#assign isBlank = false />
+					<#assign isSelf = false />
+					<#assign isTop = false />
+					<#assign isParent = false />
+					<#assign isOther = true />
+					<#switch entry.target>
+						<#case '_blank'>
+							<#assign isBlank = true />
+							<#assign isOther = false />
+							<#break>
+						<#case '_self'>
+							<#assign isSelf = true />
+							<#assign isOther = false />
+							<#break>
+						<#case '_parent'>
+							<#assign isParent = true />
+							<#assign isOther = false />
+							<#break>
+						<#case '_top'>
+							<#assign isTop = true />
+							<#assign isOther = false />
+							<#break>
+					</#switch>
+					<@radioButton name='target' id='blank' class='form-radio-target' labelKey='#i18n{quicklinks.modify_entry_url.target.blank}' orientation='' value='_blank' checked=isBlank />
+					<@radioButton name='target' id='self' class='form-radio-target' labelKey='#i18n{quicklinks.modify_entry_url.target.self}' orientation='' value='_self' checked=isSelf />
+					<@radioButton name='target' id='parent' class='form-radio-target' labelKey='#i18n{quicklinks.modify_entry_url.target.parent}' orientation='' value='_parent' checked=isParent />
+					<@radioButton name='target' id='top' class='form-radio-target' labelKey='#i18n{quicklinks.modify_entry_url.target.top}' orientation='' value='_top' checked=isTop />
+					<@radioButton name='target' id='other' class='form-radio-target' labelKey='#i18n{quicklinks.modify_entry_url.target.other}' orientation='' value='' checked=isOther />
+					<#if isOther><#assign targetVal = entry.target /></#if>
+					<@formGroup labelKey='#i18n{quicklinks.modify_entry_url.labelTarget}' hideLabel=['all']>
+						<@input name='target' id='target_framename' placeholder='#i18n{quicklinks.modify_entry_url.labelTarget}' maxlength=255 value=targetVal! />
+					</@formGroup>
+				</@fieldSet>
+			</@columns>
+			<@columns sm=3 class='d-flex align-items-center justify-content-around'>
+				<@formGroup>
+					<@button color='primary' type='submit' buttonIcon='check' title='#i18n{quicklinks.modify_entry_url.buttonLabelModify}' />
+					<@aButton color='default' href="jsp/admin/plugins/quicklinks/ModifyQuicklinks.jsp?&quicklinks_id=${entry.idQuicklinks}" buttonIcon='x' title='#i18n{portal.admin.message.buttonCancel}' />
+				</@formGroup>
+			</@columns>
+			</@row>
+		</@tform>
+	</@pageColumn>
+</@pageContainer>
+<script>
+document.addEventListener( "DOMContentLoaded", function(){
+	const tgFrame = document.getElementById('target_framename'), radioList = document.querySelectorAll('.form-radio-target')
+	if( tgFrame.value =="" ){
+		tgFrame.setAttribute( 'disabled', 'disabled' )
 	}
 	
-	$('input[type="radio"]').click( function(){
-		if( $(this).attr("id") =="target5" ){
-			$("#target_framename").removeAttr("disabled");
-		} else {
-			$("#target_framename").val("");
-			$("#target_framename").attr("disabled","disabled");
-		}
-	});
+	radioList.forEach( element => {
+		element.addEventListener( 'click', ( event ) => {
+			if( event.currentTarget.getAttribute('id' ) === 'other' ){
+				tgFrame.removeAttribute( 'disabled' )
+			} else {
+				tgFrame.value='';
+				tgFrame.setAttribute( 'disabled', 'disabled' )
+			}
+		})
+	})
 });
 </script>

@@ -1,8 +1,4 @@
-<div class="form-group">
-	<label for="quicklinks_id">#i18n{quicklinks.list_quicklinks.labelQuicklinks} *</label>
-	<#if quicklinks_id?has_content>
-		<@comboWithParams name="quicklinks_id" default_value=quicklinks_id?string additionalParameters="class=\"form-control\"" items=quicklinks_list />
-	<#else>
-		<@comboWithParams name="quicklinks_id" default_value="-1" additionalParameters="class=\"form-control\"" items=quicklinks_list />
-	</#if>
-</div>
+<@formGroup labelFor="quicklinks_id" labelKey='#i18n{quicklinks.list_quicklinks.labelQuicklinks}' mandatory=true>
+<#assign quicklinksDefault><#if quicklinks_id??>quicklinks_id?string<#else>-1</#if></#assign>
+<@select id='quicklinks_id' name='quicklinks_id' default_value=quicklinksDefault items=quicklinks_list />
+</@formGroup>

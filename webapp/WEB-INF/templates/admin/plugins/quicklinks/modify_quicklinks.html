@@ -1,120 +1,81 @@
 <#include "macro_quicklinks.html" />
-<div class="row">
-	<div class="col-xs-12 col-sm-4 col-md-4">
-		<div class="box box-primary">
-			<div class="box-header">
-				<h3 class="box-title">#i18n{quicklinks.modify_quicklinks.adminTitle}</h3>
-			</div>
-			<div class="box-body">
-				<form class="form-horizontal" role="form" method="post" name="modify_quicklinks" action="jsp/admin/plugins/quicklinks/DoModifyQuicklinks.jsp">
-				<input type="hidden" name="quicklinks_id" value="${quicklinks.id}">
-				<div class="form-group">
-					<label class="control-label col-xs-12 col-sm-3 col-md-3" for="title">#i18n{quicklinks.modify_quicklinks.labelTitle} *</label>
-					<div class="col-xs-12 col-sm-9 col-md-9">
-						<input type="text" name="title" id="title" tabindex="1" class="form-control"  maxlength="255"  value="${quicklinks.title}"/>
-						<span class="help-block">#i18n{quicklinks.modify_quicklinks.descriptionTitle}</span>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-xs-12 col-sm-3 col-md-3" for="type">#i18n{quicklinks.modify_quicklinks.labelType} *</label>
-					<div class="col-xs-12 col-sm-9 col-md-9">
-						<@comboWithParams name="type" default_value="${quicklinks.type.value}" additionalParameters="class=\"form-control\"" items=type_list />
-						<span class="help-block">#i18n{quicklinks.modify_quicklinks.descriptionType}</span>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-xs-12 col-sm-3 col-md-3" for="workgroup_key">#i18n{quicklinks.modify_quicklinks.labelWorkgroupKey} *</label>
-					<div class="col-xs-12 col-sm-9 col-md-9">
-						<@comboWithParams name="workgroup_key" default_value="${quicklinks.workgroup}" additionalParameters="class=\"form-control\"" items=workgroup_key_list />
-						<span class="help-block">#i18n{quicklinks.modify_quicklinks.descriptionWorkgroupKey}</span>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-xs-12 col-sm-3 col-md-3" for="role_key">#i18n{quicklinks.modify_quicklinks.labelRoleKey} *</label>
-					<div class="col-xs-12 col-sm-9 col-md-9">
-						<@comboWithParams name="role_key" default_value="${quicklinks.roleKey}" additionalParameters="class=\"form-control\"" items=role_key_list />
-						<span class="help-block">#i18n{quicklinks.modify_quicklinks.descriptionRoleKey}</span>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-xs-12 col-sm-3 col-md-3" for="css_style">#i18n{quicklinks.modify_quicklinks.labelCssStyle}</label>
-					<div class="col-xs-12 col-sm-9 col-md-9">
-						<input type="text" name="css_style" id="css_style"  class="form-control" tabindex="5" maxlength="50"  value="${quicklinks.cssStyle?if_exists}"/>
-						<span class="help-block">#i18n{quicklinks.modify_quicklinks.descriptionCssStyle}</span>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-xs-12 col-sm-3 col-md-3" for="state">#i18n{quicklinks.modify_quicklinks.labelState} *</label>
-					<div class="col-xs-12 col-sm-9 col-md-9">
-						<@comboWithParams name="state" default_value="${quicklinks.enabled?string}" additionalParameters="class=\"form-control\"" items=state_list />
-						<span class="help-block">#i18n{quicklinks.modify_quicklinks.descriptionState}</span>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-xs-12 col-sm-offset-3 col-sm-9 col-md-offset-3 col-md-9">
-					<button class="btn btn-primary btn-flat" type="submit" name="save" >
-						<i class="fa fa-check"></i>&nbsp;#i18n{quicklinks.modify_quicklinks.buttonLabelModify}
-					</button>
-					<button class="btn btn-primary btn-flat" type="submit" name="apply">
-						<i class="fa fa-check-circle"></i>&nbsp;#i18n{quicklinks.modify_quicklinks.buttonLabelApply}
-					</button>
-					<a class="btn btn-default btn-flat" href="jsp/admin/plugins/quicklinks/ManageQuicklinks.jsp">
-						<i class="fa fa-close"></i>&nbsp;#i18n{portal.admin.message.buttonCancel}
-					</a>
-					</div>
-				</div>
-				</form>
-			
-			</div>
-		</div>
-	</div>
-	<div class="col-xs-12 col-sm-8 col-md-8">
-		<div class="box box-primary">
-			<div class="box-header">
-				<h3 class="box-title">#i18n{quicklinks.modify_quicklinks.entry_list.adminTitle}</h3>
-			</div>
-			<div class="box-body">
-				<a name="entry_list"></a>
-					<#if entry_type_list?has_content>
-						<form class="form-inline" name="create_entry" method="post" action="jsp/admin/plugins/quicklinks/CreateEntry.jsp" >
-						<input type="hidden" name="quicklinks_id" value="${quicklinks.id}">
-						<label for="title">#i18n{quicklinks.modify_quicklinks.create_entry.labelEntryTitle}</label>
-						<input type="text" name="title" id="title" class="form-control" maxlength="255">
-						<label for="entry_type_id">#i18n{quicklinks.modify_quicklinks.create_entry.labelEntryType} *</label>
-						<select name="entry_type_id" id="entry_type_id" class="form-control">
-							<#list entry_type_list as entryType>
-								<option value="${entryType.id}">#i18n{${entryType.titleI18nKey}}</option>
-							</#list>
-						</select>
-						<button class="btn btn-primary btn-xs btn-flat" type="submit" >
-							<i class="fa fa-plus"></i>&nbsp;<span class="hidden-phone">#i18n{quicklinks.modify_quicklinks.create_entry.buttonLabelCreate}</span>
-						</button>
-						</form>
-					</#if>
-			</div>
-		</div>
-		<#if entry_list?has_content>
-			<div class="box box-primary">
-				<div class="box-header"></div>
-				<div class="box-body table-responsive">
-					<@paginationAdmin paginator=paginator combo=1/>
-					<table class="table table-hover table-condensed">
-						<tr>
-							<th>#i18n{quicklinks.modify_quicklinks.entry_list.labelTitle}</th>
-							<th>#i18n{quicklinks.modify_quicklinks.entry_list.labelType}</th>
-							<th>#i18n{quicklinks.modify_quicklinks.entry_list.labelActions}</th>
-						</tr>
-							<@commonListTable items=entry_list depth=0 jspRef="Entry" paramId="entry_id" />
-						</table>
-				</div>
-			</div>
-		<#else>
-			<div class="callout callout-warning">
-				<span class="fa fa-warning"></span>
-				<b>#i18n{portal.util.labelNoItem}</b>
-			</div>
-		</#if>
-	</div>
-</div>
-
-
+<@pageContainer>
+    <@pageColumn id='edit_quicklinks'>
+        <@pageHeader title='#i18n{quicklinks.modify_quicklinks.adminTitle}' >
+			<#if entry_type_list?has_content>
+				<@tform  name='create_entry' action='jsp/admin/plugins/quicklinks/CreateEntry.jsp' >
+					<@input type="hidden" name="quicklinks_id" value="${quicklinks.id}" />
+					<@formGroup rows=2 mandatory=true>
+						<@inputGroup>
+						<@inputGroupItem>
+							<@formLabel labelFor="entry_type_id" labelKey='#i18n{quicklinks.modify_quicklinks.create_entry.labelEntryType}' />
+						</@inputGroupItem>
+						<@select name="entry_type_id" id="entry_type_id">
+						<#list entry_type_list as entryType>
+							<@option value='${entryType.id}' label='#i18n{${entryType.titleI18nKey}}' />
+						</#list>
+						</@select>
+						<@inputGroupItem type='btn'>
+							<@button color='primary' type='submit' buttonIcon='plus' title='#i18n{quicklinks.modify_quicklinks.create_entry.buttonLabelCreate}' />
+						</@inputGroupItem>
+						</@inputGroup>
+					</@formGroup>
+				</@tform>
+			</#if>
+		</@pageHeader>
+		<@row>
+			<@columns sm=3>
+				<@box title='#i18n{quicklinks.modify_quicklinks.adminTitle}'>
+				<@boxBody>
+				<@tform method='post' action='jsp/admin/plugins/quicklinks/DoModifyQuicklinks.jsp' name='modify_quicklinks' id='modify_quicklinks'>
+					<@input type='hidden' name='quicklinks_id' value=quicklinks.id />
+					<@formGroup labelKey='#i18n{quicklinks.modify_quicklinks.labelTitle}' labelFor='title' helpKey='#i18n{quicklinks.modify_quicklinks.descriptionTitle}' mandatory=true>
+						<@input type='text' id='title' name='title' maxlength=255 value=quicklinks.title />
+					</@formGroup>
+					<@formGroup labelKey='#i18n{quicklinks.modify_quicklinks.labelType}' labelFor='type' helpKey='#i18n{quicklinks.modify_quicklinks.descriptionType}' mandatory=true>
+						<@select name='type' default_value=quicklinks.type.value?string items=type_list sort=true />
+					</@formGroup>
+					<@formGroup labelKey='#i18n{quicklinks.modify_quicklinks.labelWorkgroupKey}' labelFor='workgroup_key' helpKey='#i18n{quicklinks.modify_quicklinks.descriptionWorkgroupKey}'>
+						<@select name='workgroup_key' default_value=quicklinks.workgroup?string items=workgroup_key_list sort=true />
+					</@formGroup>
+					<@formGroup labelKey='#i18n{quicklinks.modify_quicklinks.labelRoleKey}' labelFor='role_key' helpKey='#i18n{quicklinks.modify_quicklinks.descriptionRoleKey}'>
+						<@select name='role_key' default_value=quicklinks.roleKey?string items=role_key_list sort=true />
+					</@formGroup>
+					<@formGroup labelKey='#i18n{quicklinks.modify_quicklinks.labelCssStyle}' labelFor='css_style' helpKey='#i18n{quicklinks.modify_quicklinks.descriptionCssStyle}' >
+						<@input type='text' id='css_style' name='css_style' maxlength=50 value=quicklinks.cssStyle! />
+					</@formGroup>
+					<@formGroup labelKey='#i18n{quicklinks.modify_quicklinks.labelState}' labelFor='state' helpKey='#i18n{quicklinks.modify_quicklinks.descriptionState}' mandatory=true>
+						<@select name='state' default_value=quicklinks.enabled?string items=state_list sort=true />
+					</@formGroup>
+					<@formGroup>
+						<@button type='submit' buttonIcon='check' title='#i18n{quicklinks.modify_quicklinks.buttonLabelModify}' color='primary' size='sm' />
+						<@button type='submit' name='apply' buttonIcon='save' title='#i18n{quicklinks.modify_quicklinks.buttonLabelApply}' color='primary' size='sm' />
+						<@aButton href='jsp/admin/plugins/quicklinks/ManageQuicklinks.jsp' buttonIcon='times' color='danger' size='sm' title='#i18n{portal.admin.message.buttonCancel}' />
+					</@formGroup>
+				</@tform>
+				</@boxBody>
+				</@box>
+			</@columns>
+			<@columns sm=9>
+				<@box title='#i18n{quicklinks.modify_quicklinks.entry_list.adminTitle}'>
+				<@boxBody>
+				<#if entry_list?has_content>
+					<@table headBody=true>
+						<@tr>
+							<@th>#i18n{quicklinks.modify_quicklinks.entry_list.labelTitle}</@th>
+							<@th>#i18n{quicklinks.modify_quicklinks.entry_list.labelType}</@th>
+							<@th>#i18n{quicklinks.modify_quicklinks.entry_list.labelActions}</@th>
+						</@tr>
+						<@tableHeadBodySeparator />
+						<@commonListTable items=entry_list depth=0 jspRef="Entry" paramId="entry_id" />
+					</@table>
+					<@paginationAdmin paginator=paginator combo=1 showcount=0 />
+				<#else>
+					<@empty />
+				</#if>
+				</@boxBody>
+				</@box>
+			</@columns>
+		</@row>
+	</@pageColumn>
+</@pageContainer>

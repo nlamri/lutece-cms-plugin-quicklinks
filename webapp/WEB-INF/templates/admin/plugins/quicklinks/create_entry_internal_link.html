@@ -1,78 +1,77 @@
-<div class="row">
-	<div class="col-xs-12 col-sm-12 col-md-12">
-		<div class="box box-primary">
-			<div class="box-header">
-				<h3 class="box-title">#i18n{quicklinks.create_entry_internal_link.adminTitle}</h3>
-			</div>
-			<div class="box-body">
-				<form class="form-horizontal" method="post" name="create_entry_internal_link" action="jsp/admin/plugins/quicklinks/DoCreateEntry.jsp">
-					<input type="hidden" name="entry_type_id" id="entry_type_id" value="${entry.entryType.id}">
-					<input type="hidden" name="quicklinks_id" id="quicklinks_id" value="${entry.idQuicklinks}">
-					<div class="form-group">
-						<label class="control-label col-xs-12 col-sm-2 col-md-2" for="title">#i18n{quicklinks.create_entry_internal_link.labelTitle} *</label>
-						<div class="col-xs-12 col-sm-5 col-md-5">
-							<input type="text" name="title" id="title" tabindex="1" maxlength="255" value="" class="form-control" required>
-							<span class="help-text">#i18n{quicklinks.create_entry_internal_link.descriptionTitle}</span>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-xs-12 col-sm-2 col-md-2" > #i18n{quicklinks.create_entry_internal_link.labelContent} *</label>
-						<div class="col-xs-12 col-sm-5 col-md-5">
-							<textarea id="content" name="content" rows="5" class="form-control" ></textarea>
-						</div>
-						<div class="col-xs-12 col-sm-4 col-md-4" id="show_preview" >
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-xs-12 col-sm-2 col-md-2 sr-only" ></label>
-						<div class="col-xs-12 col-sm-5 col-md-5">
-							<a class="btn btn-default btn-flat btn-sm" id="img_linkservice" title="#i18n{quicklinks.create_entry_internal_link.labelLinkService} #i18n{quicklinks.create_entry_internal_link.descriptionContent}">
-								<i class="icon-lutece-logo"></i>
-							</a>
-							<button id="trash" class="btn btn-danger btn-flat btn-sm"type="button" title="#i18n{portal.util.labelDelete}">
-								<i class="fa fa-trash"></i>
-							</button>
-							<a id="btn-preview" class="btn btn-primary btn-small" >
-								<i class="fa fa-play-circle-o"></i> #i18n{quicklinks.create_entry_internal_link.buttonShowPreview}
-							</a>
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="col-xs-12 col-sm-offset-2 col-sm-10 col-md-offset-2 col-md-10">
-							<button class="btn btn-primary btn-flat" type="submit" >
-								<i class="fa fa-check"></i>&nbsp;#i18n{quicklinks.create_entry_internal_link.buttonLabelCreate}
-							</button>
-							<a class="btn btn-default btn-flat" href="jsp/admin/plugins/quicklinks/ModifyQuicklinks.jsp?&quicklinks_id=${entry.idQuicklinks}">
-								<i class="fa fa-close"></i>&nbsp;#i18n{portal.admin.message.buttonCancel}
-							</a>
-						</div>  	
-					</div>  	
-				</form>
-			</div>
-		</div>
-	</div>
-</div>
+<@pageContainer>
+    <@pageColumn >
+        <@pageHeader title='#i18n{quicklinks.create_entry_internal_link.adminTitle}' />
+		<@tform name='create_entry_internal_link' action='jsp/admin/plugins/quicklinks/DoCreateEntry.jsp' boxed=true >
+		<@input type='hidden' name='entry_type_id' id='entry_type_id' value='${entry.entryType.id}' />
+		<@input type='hidden' name='quicklinks_id' id='quicklinks_id' value='${entry.idQuicklinks}' />
+		<@formGroup labelKey='#i18n{quicklinks.create_entry_internal_link.labelTitle}' mandatory=true>
+			<@input name='title' maxlength=255 value='' />
+		</@formGroup>
+		<@row>
+			<@columns>
+				<@formGroup labelKey='#i18n{quicklinks.create_entry_text.labelDescription}' mandatory=true >
+				<@inputGroup>
+					<@input type='textarea' richtext=true name='content' id='content' value='' />
+					<@inputGroupItem>
+						<@btnGroup>
+							<@button id='img-linkservice' color='default' buttonIcon='link' title='#i18n{quicklinks.create_entry_internal_link.labelLinkService}' params='data-bs-toggle="modal" data-bs-target="#insertServiceModal"' />
+							<@button id='trash' color='danger' buttonIcon='trash' title='#i18n{portal.util.labelDelete}' />
+							<@button id='btn-preview' color='primary' buttonIcon='play' title='#i18n{quicklinks.create_entry_internal_link.buttonShowPreview}' />
+						</@btnGroup>
+					</@inputGroupItem>
+				</@inputGroup>
+				</@formGroup>
+				<@formGroup>
+					<@button color='primary' type='submit' buttonIcon='check' title='#i18n{quicklinks.create_entry_internal_link.buttonLabelCreate}' />
+					<@aButton color='default' href="jsp/admin/plugins/quicklinks/ModifyQuicklinks.jsp?&quicklinks_id=${entry.idQuicklinks}" buttonIcon='x' title='#i18n{portal.admin.message.buttonCancel}' />
+				</@formGroup>
+			</@columns>
+			<@columns>
+				<@div id='show-preview' class='w-100 p-5 bg-light'></@div>
+			</@columns>
+		</@row>
+		</@tform>
+	</@pageColumn>
+</@pageContainer>
 <script>
-$(document).ready( function () {
-	$("#show_preview").toggle();
-	
-	$("#btn-preview").click( function(){ 
-		$("#show_preview").toggle().html( $("#content").val() ).addClass("callout callout-info");
-		return false;
-	});
-	
-	$("#trash").click( function(){ 
-		$("#content").val("");
-	});
-	
-	$("#img_linkservice").click( function(){
-		linkservice()
-	});
-});
-
 function linkservice(){
-	$("#show_preview").html("");
-	fen=window.open("${base_url}/jsp/admin/insert/GetAvailableInsertServices.jsp?input=content&selected_text=","#i18n{quicklinks.create_entry_internal_link.labelLinkService}","toolbar=no, scrollbars=yes, status=yes, location=no, directories=no, menubar=no, width=550, height=450");
+	const showPreview = document.getElementById('show-preview') 
+	showPreview.innerHTML='';
+	fen=window.open("${base_url}/jsp/admin/insert/GetAvailableInsertServices.jsp?input=content&selected_text=","#i18n{quicklinks.create_entry_internal_link.labelLinkService}","toolbar=no, scrollbars=yes, status=yes, location=no, directories=no, menubar=no, left=500, top=200, width=800, height=600");
 	fen.focus();
 }
+
+document.addEventListener( "DOMContentLoaded", function(){
+	const showPreview = document.getElementById('show-preview'), 
+		btnPreview = document.getElementById('btn-preview'),
+		content = document.getElementById('content'),
+		imgLinkservice = document.getElementById('img-linkservice'),
+		trash = document.getElementById('trash');
+
+	trash.classList.add( 'd-none' );
+	btnPreview.classList.add( 'd-none' );
+	showPreview.classList.add( 'd-none' );
+	
+	btnPreview.addEventListener( 'click', ( event ) => {
+		showPreview.innerHTML = content.value
+		showPreview.classList.remove( 'd-none' );
+		showPreview.classList.add( 'alert alert-info' );
+		return false;
+	});
+
+	trash.addEventListener( 'click', ( event ) => {
+		content.value = ''
+		showPreview.textContent=''
+		showPreview.classList.remove( 'd-none' );
+		trash.classList.add( 'd-none' );
+		btnPreview.classList.add( 'd-none' );
+		showPreview.classList.add( 'd-none' );
+	});
+	
+	imgLinkservice.addEventListener( 'click', ( event ) => {
+		linkservice()
+		trash.classList.remove( 'd-none' );
+		btnPreview.classList.remove( 'd-none' );
+	});
+});
 </script>
