@@ -1,5 +1,5 @@
 <#if option_list?has_content>
-<select class="quicklinks_entry_select quicklinks_entry_select_${entry_select.idQuicklinks}" name="${entry_select.title}" onchange="javascript:window.open(this.options[this.selectedIndex].value, '${entry_select.target}');" id="${entry_select.title}">
+<select class="${(quicklinks.@cssStyle)?if_exists}" id="quicklinks_${entry_url.idQuicklinks}" name="${entry_select.title}" onchange="javascript:window.open(this.options[this.selectedIndex].value, '${entry_select.target}');" id="${entry_select.title}">
 	<#list option_list as option>
 		<option value="${option.url}">${option.title}</option>
 	</#list>

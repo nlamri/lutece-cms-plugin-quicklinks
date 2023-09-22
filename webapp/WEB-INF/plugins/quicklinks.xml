@@ -11,7 +11,7 @@
     <user-guide/>
     <provider>quicklinks.plugin.provider</provider>
     <provider-url>http://lutece.paris.fr</provider-url>
-    <icon-url>images/admin/skin/plugins/quicklinks/quicklinks.png</icon-url>
+    <icon-url>themes/admin/shared/plugins/quicklinks/images/quicklinks.png</icon-url>
     <copyright>Copyright 2001-2009 Mairie de Paris</copyright>
     <core-version-dependency>
         <min-core-version>2.3.1</min-core-version>
@@ -20,17 +20,8 @@
     <db-pool-required>1</db-pool-required>
 
     <!-- Specific plugin CSS stylesheet -->
-    <css-stylesheets>
-        <css-stylesheets-scope>portal</css-stylesheets-scope>
-        <css-stylesheet>quicklinks/superfish/superfish.css</css-stylesheet>
-        <css-stylesheet>quicklinks/superfish/superfish-vertical.css</css-stylesheet>
-    </css-stylesheets>
-    <javascript-files>
-        <javascript-files-scope>portal</javascript-files-scope>
-        <javascript-file>quicklinks/superfish/hoverIntent.js</javascript-file>
-        <javascript-file>quicklinks/superfish/superfish.js</javascript-file>
-        <javascript-file>quicklinks/superfish/supersubs.js</javascript-file>
-    </javascript-files>
+    <css-stylesheets></css-stylesheets>
+    <javascript-files></javascript-files>
 
     <!-- Page Include Service -->
     <page-include-services>
