@@ -59,7 +59,7 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * This class provides the user interface to manage {@link Quicklinks} features ( manage, create, modify, remove)
