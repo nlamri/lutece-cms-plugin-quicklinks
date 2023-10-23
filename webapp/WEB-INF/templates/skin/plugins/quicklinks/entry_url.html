@@ -1,10 +1,10 @@
 <#if entry_url.entryUrlDisplayProperties.value != 1>
-	<#if entry_url.entryUrlLinkProperties.value!=2><a class="${(quicklinks.@cssStyle)?if_exists}" id="quicklinks_${entry_url.idQuicklinks}" target="${entry_url.target}" href="${entry_url.url}" title="${entry_url.description!}"></#if>
+	<#if entry_url.entryUrlLinkProperties.value!=2><a class="${(quicklinks.@cssStyle)?if_exists}" id="quicklinks_${entry_url.idQuicklinks}_1" target="${entry_url.target}" href="${entry_url.url}" title="${entry_url.description!}"></#if>
 	<img class="quicklinks_entry_url quicklinks_entry_url_${entry_url.idQuicklinks}" src="${entry_url.imageUrl}" alt="${entry_url.title}" />
 	<#if entry_url.entryUrlLinkProperties.value!=2></a></#if>
 </#if>
 <#if entry_url.entryUrlDisplayProperties.value != 3>
-	<#if entry_url.entryUrlLinkProperties.value!=3><a class="${(quicklinks.@cssStyle)?if_exists}" id="quicklinks_${entry_url.idQuicklinks}" target="${entry_url.target}" href="${entry_url.url}" title="${entry_url.description!}"></#if>
+	<#if entry_url.entryUrlLinkProperties.value!=3><a class="${(quicklinks.@cssStyle)?if_exists}" id="quicklinks_${entry_url.idQuicklinks}_2" target="${entry_url.target}" href="${entry_url.url}" title="${entry_url.description!}"></#if>
 	${entry_url.title}
 	<#if entry_url.entryUrlLinkProperties.value!=3></a></#if>
 </#if>
